@@ -1,0 +1,728 @@
+IP Upgrade report for DE10_NANO_SOC_FB
+Sun Oct  7 09:49:23 2018
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. IP Upgrade Summary
+  3. Successfully Upgraded IP Components
+  4. Failed Upgrade IP Components
+  5. IP Upgrade Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------+
+; IP Upgrade Summary                                                         ;
++------------------------------+---------------------------------------------+
+; IP Components Upgrade Status ; Passed - Sun Oct  7 09:49:23 2018           ;
+; Quartus Prime Version        ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name                ; DE10_NANO_SOC_FB                            ;
+; Top-level Entity Name        ; DE10_NANO_SOC_FB                            ;
+; Family                       ; Cyclone V                                   ;
++------------------------------+---------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Successfully Upgraded IP Components                                                                                                                                   ;
++-------------+------------------------------+---------+----------------------------------+--------------------------------+----------------------------------+---------+
+; Entity Name ; Component Name               ; Version ; Original Source File             ; Generation File Path           ; New Source File                  ; Message ;
++-------------+------------------------------+---------+----------------------------------+--------------------------------+----------------------------------+---------+
+; vga_pll     ; altera_pll                   ; 16.0    ; ip/vga_pll/vga_pll.qip           ; ip/vga_pll/vga_pll.v           ; ip/vga_pll/vga_pll.qip           ;         ;
+; hps_reset   ; In-System Sources and Probes ; 16.0    ; ip/altsource_probe/hps_reset.qip ; ip/altsource_probe/hps_reset.v ; ip/altsource_probe/hps_reset.qip ;         ;
++-------------+------------------------------+---------+----------------------------------+--------------------------------+----------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Failed Upgrade IP Components                                                                                                                                                     ;
++-------------+----------------+---------+-------------------------------------+----------------------+-----------------+----------------------------------------------------------+
+; Entity Name ; Component Name ; Version ; Original Source File                ; Generation File Path ; New Source File ; Message                                                  ;
++-------------+----------------+---------+-------------------------------------+----------------------+-----------------+----------------------------------------------------------+
+; soc_system  ; Qsys           ; 16.0    ; soc_system/synthesis/soc_system.qip ; soc_system.qsys      ;                 ; Error upgrading Platform Designer file "soc_system.qsys" ;
++-------------+----------------+---------+-------------------------------------+----------------------+-----------------+----------------------------------------------------------+
+
+
++---------------------+
+; IP Upgrade Messages ;
++---------------------+
+Info (11902): Backing up file "soc_system.qsys" to "soc_system.BAK.qsys"
+Info (11902): Backing up file "soc_system/synthesis/soc_system.v" to "soc_system.BAK.v"
+Info (11837): Started upgrading IP component Qsys with file "soc_system.qsys"
+Info: 2018.10.07.09:46:05 Info: Starting to upgrade the IP cores in the Platform Designer system
+Info: 2018.10.07.09:46:05 Info: Finished upgrading the ip cores
+Info: 2018.10.07.09:46:23 Info: Saving generation log to /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system
+Info: 2018.10.07.09:46:23 Info: Starting: Create simulation model
+Info: 2018.10.07.09:46:23 Info: Loading DE10_NANO_SoC_FB
+Info: 2018.10.07.09:46:23 Info: Reading input file
+Info: 2018.10.07.09:46:23 Info: Adding ILC [interrupt_latency_counter 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module ILC
+Info: 2018.10.07.09:46:23 Info: Adding alt_vip_itc_0 [alt_vip_itc 14.0]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module alt_vip_itc_0
+Info: 2018.10.07.09:46:23 Info: Adding alt_vip_vfr_hdmi [alt_vip_vfr 14.0]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module alt_vip_vfr_hdmi
+Info: 2018.10.07.09:46:23 Info: Adding button_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module button_pio
+Info: 2018.10.07.09:46:23 Info: Adding clk_0 [clock_source 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module clk_0
+Info: 2018.10.07.09:46:23 Info: Adding clock_bridge_0 [altera_clock_bridge 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module clock_bridge_0
+Info: 2018.10.07.09:46:23 Info: Adding dipsw_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module dipsw_pio
+Info: 2018.10.07.09:46:23 Info: Adding f2sdram_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module f2sdram_only_master
+Info: 2018.10.07.09:46:23 Info: Adding fpga_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module fpga_only_master
+Info: 2018.10.07.09:46:23 Info: Adding hps_0 [altera_hps 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module hps_0
+Info: 2018.10.07.09:46:23 Info: Adding hps_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module hps_only_master
+Info: 2018.10.07.09:46:23 Info: Adding jtag_uart [altera_avalon_jtag_uart 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module jtag_uart
+Info: 2018.10.07.09:46:23 Info: Adding led_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module led_pio
+Info: 2018.10.07.09:46:23 Info: Adding mm_bridge_0 [altera_avalon_mm_bridge 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module mm_bridge_0
+Info: 2018.10.07.09:46:23 Info: Adding sysid_qsys [altera_avalon_sysid_qsys 18.1]
+Info: 2018.10.07.09:46:23 Info: Parameterizing module sysid_qsys
+Info: 2018.10.07.09:46:23 Info: Building connections
+Info: 2018.10.07.09:46:23 Info: Parameterizing connections
+Info: 2018.10.07.09:46:23 Info: Validating
+Info: 2018.10.07.09:46:29 Info: Done reading input file
+Warning: 2018.10.07.09:46:31 Warning: soc_system.alt_vip_vfr_hdmi: The module properties SIMULATION_MODEL_IN_VERILOG and SIMULATION_MODEL_IN_VHDL can not both be set when using the SIMULATION file property: src_hdl/alt_vipvfr131_vfr.v, src_hdl/alt_vipvfr131_vfr_controller.v, src_hdl/alt_vipvfr131_vfr_control_packet_encoder.v, src_hdl/alt_vipvfr131_prc.v, src_hdl/alt_vipvfr131_prc_core.v, src_hdl/alt_vipvfr131_prc_read_master.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_package.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_master.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_unpack_data.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_slave.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_stream_output.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_pulling_width_adapter.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_general_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_fifo_usedw_calculator.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_gray_clock_crosser.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_std_logic_vector_delay.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_one_bit_delay.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_logic_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl
+Info: 2018.10.07.09:46:31 Info: soc_system.button_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: 2018.10.07.09:46:31 Info: soc_system.dipsw_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: 2018.10.07.09:46:31 Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2018.10.07.09:46:31 Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2018.10.07.09:46:31 Info: soc_system.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: 2018.10.07.09:46:31 Info: soc_system.sysid_qsys: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: 2018.10.07.09:46:31 Info: soc_system.sysid_qsys: Time stamp will be automatically updated when this component is generated.
+Warning: 2018.10.07.09:46:31 Warning: soc_system.alt_vip_vfr_hdmi: Interrupt sender alt_vip_vfr_hdmi.interrupt_sender is not connected to an interrupt receiver
+Info: 2018.10.07.09:46:32 Info: soc_system: Generating soc_system "soc_system" for SIM_VERILOG
+Info: 2018.10.07.09:46:36 Info: Interconnect is inserted between master hps_0.h2f_lw_axi_master and slave mm_bridge_0.s0 because the master is of type axi and the slave is of type avalon.
+Info: 2018.10.07.09:46:37 Info: Inserting clock-crossing logic between cmd_demux.src2 and cmd_mux_002.sink0
+Info: 2018.10.07.09:46:37 Info: Inserting clock-crossing logic between rsp_demux_002.src0 and rsp_mux.sink2
+Info: 2018.10.07.09:46:38 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has address signal 32 bit wide, but the slave is 27 bit wide.
+Info: 2018.10.07.09:46:38 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has readdata signal 32 bit wide, but the slave is 256 bit wide.
+Info: 2018.10.07.09:46:38 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has writedata signal 32 bit wide, but the slave is 256 bit wide.
+Info: 2018.10.07.09:46:38 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has byteenable signal 4 bit wide, but the slave is 32 bit wide.
+Warning: 2018.10.07.09:46:38 Warning: hps_0.f2h_irq0: Cannot connect clock for irq_mapper_001.sender
+Warning: 2018.10.07.09:46:38 Warning: hps_0.f2h_irq0: Cannot connect reset for irq_mapper_001.sender
+Warning: 2018.10.07.09:46:38 Warning: hps_0.f2h_irq1: Cannot connect clock for irq_mapper_002.sender
+Warning: 2018.10.07.09:46:38 Warning: hps_0.f2h_irq1: Cannot connect reset for irq_mapper_002.sender
+Info: 2018.10.07.09:46:41 Info: ILC: "soc_system" instantiated interrupt_latency_counter "ILC"
+Info: 2018.10.07.09:46:46 Info: alt_vip_itc_0: "soc_system" instantiated alt_vip_itc "alt_vip_itc_0"
+Info: 2018.10.07.09:46:49 Info: alt_vip_vfr_hdmi: Generating Verilog simulation model
+Warning: 2018.10.07.09:47:05 Warning: Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Warning: 2018.10.07.09:47:05 Warning: Verilog Module Declaration warning at alt_vipvfr131_prc_read_master.v(47): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "alt_vipvfr131_prc_read_master" File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL Implicit Net warning at alt_vipvfr131_prc.v(142): created implicit net for "master_clock" File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL Implicit Net warning at alt_vipvfr131_prc.v(143): created implicit net for "master_reset" File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL Subtype or Type Declaration warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(178): subtype or type has null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL Subtype or Type Declaration warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(181): subtype or type has null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL Subtype or Type Declaration warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(261): subtype or type has null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL Subtype or Type Declaration warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(262): subtype or type has null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(178): object "wdata_fifo_wrusedw" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(179): object "wdata_fifo_full" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(180): object "wdata_fifo_almost_full" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(182): object "wdata_fifo_empty" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(183): object "wdata_fifo_almost_empty" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(184): object "wdata_fifo_wrreq" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(185): object "wdata_fifo_data" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(186): object "wdata_fifo_rdreq" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(187): object "wdata_fifo_q" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(189): object "wdata_fifo_empty_next" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(193): object "rdata_fifo_full" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(194): object "rdata_fifo_almost_full" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(195): object "rdata_fifo_rdusedw" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(197): object "rdata_fifo_almost_empty" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(212): object "cmd_fifo_wrusedw" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(214): object "cmd_fifo_almost_full" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(215): object "cmd_fifo_rdusedw" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(217): object "cmd_fifo_almost_empty" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(229): object "writing" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(229): object "reading" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(239): object "wdata_en" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL Signal Declaration warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(260): used implicit default value for signal "byte_enable_next" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(424): ignored assignment of value to null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(425): ignored assignment of value to null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(437): ignored assignment of value to null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL Process Statement warning at alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd(641): inferring latch(es) for signal or variable "byte_enable", which holds its previous value in one or more paths through the process File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_general_fifo.vhd(230): object "ram_fifo_empty" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_ram_fifo.vhd(129): object "port_a_q" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_general_fifo.vhd(264): object "logic_fifo_full" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: VHDL Subtype or Type Declaration warning at alt_vipvfr131_common_gray_clock_crosser.vhd(70): subtype or type has null range File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL or VHDL warning at alt_vipvfr131_common_ram_fifo.vhd(129): object "port_a_q" assigned a value but never read File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL Always Construct warning at alt_vipvfr131_common_avalon_mm_slave.v(45): inferring latch(es) for variable "interrupt_register", which holds its previous value in one or more paths through the always construct File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL assignment warning at alt_vipvfr131_common_avalon_mm_slave.v(72): truncated value with size 35 to match size of target (32) File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL Always Construct warning at alt_vipvfr131_common_avalon_mm_slave.v(45): inferring latch(es) for variable "interrupt_register", which holds its previous value in one or more paths through the always construct File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL assignment warning at alt_vipvfr131_common_avalon_mm_slave.v(72): truncated value with size 49 to match size of target (32) File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL Always Construct warning at alt_vipvfr131_vfr_control_packet_encoder.v(62): inferring latch(es) for variable "control_data", which holds its previous value in one or more paths through the always construct File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Verilog HDL assignment warning at alt_vipvfr131_vfr_control_packet_encoder.v(82): truncated value with size 32 to match size of target (4) File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Net "control_header_state[7..5]" at alt_vipvfr131_vfr_control_packet_encoder.v(58) has no driver or initial value, using a default initial value '0' File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Net "control_header_state[3..1]" at alt_vipvfr131_vfr_control_packet_encoder.v(58) has no driver or initial value, using a default initial value '0' File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Net "control_header_data[7..5]" at alt_vipvfr131_vfr_control_packet_encoder.v(59) has no driver or initial value, using a default initial value '0' File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Warning: 2018.10.07.09:47:05 Warning: Net "control_header_data[3..1]" at alt_vipvfr131_vfr_control_packet_encoder.v(59) has no driver or initial value, using a default initial value '0' File: /tmp/alt7811_7094804545658569799.dir/0008_sopcqmap
+Info: 2018.10.07.09:47:05 Info: alt_vip_vfr_hdmi: Generated simulation model soc_system_alt_vip_vfr_hdmi.vo
+Info: 2018.10.07.09:47:05 Info: alt_vip_vfr_hdmi: "soc_system" instantiated alt_vip_vfr "alt_vip_vfr_hdmi"
+Info: 2018.10.07.09:47:05 Info: button_pio: Starting RTL generation for module 'soc_system_button_pio'
+Info: 2018.10.07.09:47:05 Info: button_pio:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_button_pio --dir=/tmp/alt7811_7094804545658569799.dir/0010_button_pio_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0010_button_pio_gen//soc_system_button_pio_component_configuration.pl  --do_build_sim=1    --sim_dir=/tmp/alt7811_7094804545658569799.dir/0010_button_pio_gen
+Info: 2018.10.07.09:47:05 Info: button_pio: Done RTL generation for module 'soc_system_button_pio'
+Info: 2018.10.07.09:47:05 Info: button_pio: "soc_system" instantiated altera_avalon_pio "button_pio"
+Info: 2018.10.07.09:47:05 Info: dipsw_pio: Starting RTL generation for module 'soc_system_dipsw_pio'
+Info: 2018.10.07.09:47:05 Info: dipsw_pio:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_dipsw_pio --dir=/tmp/alt7811_7094804545658569799.dir/0011_dipsw_pio_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0011_dipsw_pio_gen//soc_system_dipsw_pio_component_configuration.pl  --do_build_sim=1    --sim_dir=/tmp/alt7811_7094804545658569799.dir/0011_dipsw_pio_gen
+Info: 2018.10.07.09:47:05 Info: dipsw_pio: Done RTL generation for module 'soc_system_dipsw_pio'
+Info: 2018.10.07.09:47:05 Info: dipsw_pio: "soc_system" instantiated altera_avalon_pio "dipsw_pio"
+Info: 2018.10.07.09:47:05 Info: f2sdram_only_master: "soc_system" instantiated altera_jtag_avalon_master "f2sdram_only_master"
+Info: 2018.10.07.09:47:05 Info: hps_0: "Running  for module: hps_0"
+Info: 2018.10.07.09:47:06 Info: hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2018.10.07.09:47:06 Info: hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2018.10.07.09:47:07 Info: hps_0: "soc_system" instantiated altera_hps "hps_0"
+Info: 2018.10.07.09:47:07 Info: jtag_uart: Starting RTL generation for module 'soc_system_jtag_uart'
+Info: 2018.10.07.09:47:07 Info: jtag_uart:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=soc_system_jtag_uart --dir=/tmp/alt7811_7094804545658569799.dir/0012_jtag_uart_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0012_jtag_uart_gen//soc_system_jtag_uart_component_configuration.pl  --do_build_sim=1    --sim_dir=/tmp/alt7811_7094804545658569799.dir/0012_jtag_uart_gen
+Info: 2018.10.07.09:47:08 Info: jtag_uart: Done RTL generation for module 'soc_system_jtag_uart'
+Info: 2018.10.07.09:47:08 Info: jtag_uart: "soc_system" instantiated altera_avalon_jtag_uart "jtag_uart"
+Info: 2018.10.07.09:47:08 Info: led_pio: Starting RTL generation for module 'soc_system_led_pio'
+Info: 2018.10.07.09:47:08 Info: led_pio:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_led_pio --dir=/tmp/alt7811_7094804545658569799.dir/0013_led_pio_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0013_led_pio_gen//soc_system_led_pio_component_configuration.pl  --do_build_sim=1    --sim_dir=/tmp/alt7811_7094804545658569799.dir/0013_led_pio_gen
+Info: 2018.10.07.09:47:08 Info: led_pio: Done RTL generation for module 'soc_system_led_pio'
+Info: 2018.10.07.09:47:08 Info: led_pio: "soc_system" instantiated altera_avalon_pio "led_pio"
+Info: 2018.10.07.09:47:08 Info: mm_bridge_0: "soc_system" instantiated altera_avalon_mm_bridge "mm_bridge_0"
+Info: 2018.10.07.09:47:08 Info: sysid_qsys: "soc_system" instantiated altera_avalon_sysid_qsys "sysid_qsys"
+Info: 2018.10.07.09:47:08 Info: mm_interconnect_0: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: 2018.10.07.09:47:08 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:08 Info: mm_interconnect_1: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_1"
+Info: 2018.10.07.09:47:09 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:09 Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:09 Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:09 Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:09 Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:09 Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:09 Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:09 Info: mm_interconnect_2: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_2"
+Info: 2018.10.07.09:47:10 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:47:10 Info: mm_interconnect_3: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_3"
+Info: 2018.10.07.09:47:10 Info: irq_mapper: "soc_system" instantiated altera_irq_mapper "irq_mapper"
+Info: 2018.10.07.09:47:10 Info: irq_mapper_001: "soc_system" instantiated altera_irq_mapper "irq_mapper_001"
+Info: 2018.10.07.09:47:10 Info: irq_mapper_002: "soc_system" instantiated altera_irq_mapper "irq_mapper_002"
+Info: 2018.10.07.09:47:10 Info: rst_controller: "soc_system" instantiated altera_reset_controller "rst_controller"
+Info: 2018.10.07.09:47:10 Info: jtag_phy_embedded_in_jtag_master: "f2sdram_only_master" instantiated altera_jtag_dc_streaming "jtag_phy_embedded_in_jtag_master"
+Info: 2018.10.07.09:47:10 Info: timing_adt: "f2sdram_only_master" instantiated timing_adapter "timing_adt"
+Info: 2018.10.07.09:47:10 Info: fifo: "f2sdram_only_master" instantiated altera_avalon_sc_fifo "fifo"
+Info: 2018.10.07.09:47:10 Info: b2p: "f2sdram_only_master" instantiated altera_avalon_st_bytes_to_packets "b2p"
+Info: 2018.10.07.09:47:10 Info: p2b: "f2sdram_only_master" instantiated altera_avalon_st_packets_to_bytes "p2b"
+Info: 2018.10.07.09:47:10 Info: transacto: "f2sdram_only_master" instantiated altera_avalon_packets_to_master "transacto"
+Info: 2018.10.07.09:47:10 Info: b2p_adapter: "f2sdram_only_master" instantiated channel_adapter "b2p_adapter"
+Info: 2018.10.07.09:47:10 Info: p2b_adapter: "f2sdram_only_master" instantiated channel_adapter "p2b_adapter"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/bin/uniphy_mcc -ac_code sequencer_mc/ac_rom.s -inst_code sequencer_mc/inst_rom.s -ac_rom ../hps_AC_ROM.hex -inst_rom ../hps_inst_ROM.hex -header sequencer/sequencer_auto.h -vheader ../sequencer_auto_h.sv -ac_rom_init sequencer/sequencer_auto_ac_init.c -inst_rom_init sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: UniPHY Sequencer Microcode Compiler
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Copyright (C) 2018  Intel Corporation. All rights reserved.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Reading sequencer_mc
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Reading sequencer_mc
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Writing ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Writing ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Writing ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Microcode compilation successful
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../nios2eds/sdk2/bin
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-bsp: Using /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/nios2eds/sdk2/bin
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-bsp: Updating existing BSP because sequencer_bsp
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-bsp: Using SOPC design file ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Updating BSP settings...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: nios2-bsp-update-settings --settings sequencer_bsp/settings.bsp --bsp-dir sequencer_bsp --sopc ../hps.sopcinfo --script /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/nios2eds/sdk2/bin
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Initializing BSP components...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Finished initializing BSP components. Total time taken = 2 seconds
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Searching for BSP components with category: os_software_element
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Initializing SOPC project local software IP
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/0006_s0_gen
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/0006_s0_gen/*
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/0006_s0_gen/ip/**
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/ip/**
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Finished initializing SOPC project local software IP. Total time taken = 2 seconds
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Searching for BSP components with category: driver_element
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Searching for BSP components with category: software_package_element
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Loading drivers from ensemble report.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Finished loading drivers from ensemble report.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Tcl message: "No STDIO character device"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Tcl message: "No system timer device"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Tcl message: "Default linker sections mapped to sequencer_mem"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Default memory regions will not be persisted in BSP Settings File.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: BSP settings updated
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Generating BSP files...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Default memory regions will not be persisted in BSP Settings File.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Finished generating BSP files. Total time taken = 2 seconds
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: nios2-app-generate-makefile --bsp-dir sequencer_bsp --app-dir sequencer --elf-name sequencer.elf --set OBJDUMP_INCLUDE_SOURCE 1 --set APP_CFLAGS_DEFINED_SYMBOLS -DSTACK_POINTER=0x17ff0 --set APP_CFLAGS_OPTIMIZATION -Os --param max-inline-insns-single=1000 -fno-zero-initialized-in-bss --set APP_CFLAGS_WARNINGS -Winline -Wall --src-files sequencer.c sequencer.h tclrpt.c tclrpt.h sequencer_auto_ac_init.c sequencer_auto_inst_init.c
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Generating application makefile
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: INFO: Application makefile generated
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make -C sequencer_bsp clean altera_nios2_qsys_hal_driver_ASM_LIB_SRCS=HAL/src/crt0.S  hal_C_LIB_SRCS=HAL/src/alt_main.c hal_C_LIB_SRCS+=HAL/src/alt_load.c  altera_nios2_qsys_hal_driver_C_LIB_SRCS=HAL/src/altera_nios2_qsys_irq.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src/alt_icache_flush_all.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make[1]: Entering directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: [BSP clean complete]
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make[1]: Leaving directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make -C sequencer clean all altera_nios2_qsys_hal_driver_ASM_LIB_SRCS=HAL/src/crt0.S  hal_C_LIB_SRCS=HAL/src/alt_main.c hal_C_LIB_SRCS+=HAL/src/alt_load.c  altera_nios2_qsys_hal_driver_C_LIB_SRCS=HAL/src/altera_nios2_qsys_irq.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src/alt_icache_flush_all.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make[1]: Entering directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: [sequencer clean complete]
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Building ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make --no-print-directory -C ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Compiling alt_dcache_flush_all.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_dcache_flush_all.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Compiling alt_icache_flush_all.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_icache_flush_all.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Compiling alt_load.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_load.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Compiling alt_main.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_main.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Compiling altera_nios2_qsys_irq.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/altera_nios2_qsys_irq.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Compiling crt0.S...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-gcc -MP -MMD -c   -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global    -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED  -Wa,-gdwarf2  -o obj/HAL/src/crt0.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Compiling alt_sys_init.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Creating libhal_bsp.a...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: rm -f -f libhal_bsp.a
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: nios2-elf-ar -src libhal_bsp.a obj/HAL/src/alt_dcache_flush_all.o obj/HAL/src/alt_icache_flush_all.o obj/HAL/src/alt_load.o obj/HAL/src/alt_main.o obj/HAL/src/altera_nios2_qsys_irq.o obj/HAL/src/crt0.o obj
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: [BSP build complete]
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Info: Compiling sequencer.c to obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: gcc -MP -MMD -c -I../sequencer_bsp/HAL/inc -I../sequencer_bsp -I../sequencer_bsp/drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED  -DSTACK_POINTER=0x17ff0  -Os --param max-inline-insns-single=1000 -fno-zero-initialized-in-bss -g -Winline -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Makefile:781: recipe for target 'obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make[1]: Leaving directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: Makefile:12: recipe for target 'elf' failed
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: WARNING: The BSP persisted OS version "9.1" is not available. The default latest BSP version will be used instead.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: WARNING: The BSP being loaded used OS version "9.1". The BSP version "18.1" will be used instead.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: gcc: error: unrecognized command line option ‘-mno-hw-div’; did you mean ‘-fno-wrapv’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: gcc: error: unrecognized command line option ‘-mno-hw-mul’; did you mean ‘-mno-pclmul’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: gcc: error: unrecognized command line option ‘-mno-hw-mulx’; did you mean ‘-mno-pclmul’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: gcc: error: unrecognized command line option ‘-mgpopt=global’; did you mean ‘-Wshadow=global’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make[1]: *** [obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: make: *** [elf] Error 2
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: s0: add_fileset_file: No such file /tmp/alt7811_3290383731762955120.dir/0006_s0_gen
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Error during execution of script generate_hps_sdram.tcl: Generation stopped, 10 or more modules remaining
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Execution of script generate_hps_sdram.tcl failed
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:10 Info:
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: ********************************************************************************************************************
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces:
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Use qsys-generate for a simpler command-line interface for generating IP.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces:
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: Run ip-generate with switch --remove-qsys-generate-warning to prevent this notice from appearing in subsequent runs.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces:
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: ********************************************************************************************************************
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:15 Warning: Ignored parameter assignment device=5CSEBA6U23I7
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:15 Warning: Ignored parameter assignment extended_family_support=true
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Warning: hps_sdram: 'Quick' simulation modes are NOT timing accurate. Some simulation memory models may issue warnings or errors
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram.pll_ref_clk: Elaborate: altera_clock_source
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram.pll_ref_clk:            $Revision: #1 $
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram.pll_ref_clk:            $Date: 2018/07
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram.global_reset: Elaborate: altera_reset_source
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram.global_reset:            $Revision: #1 $
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram.global_reset:            $Date: 2018/07
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram.global_reset: Reset is negatively asserted.
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Warning: hps_sdram.p0: p0.oct_sharing must be exported, or connected to a matching conduit.
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Warning: hps_sdram.p0: p0.io_int must be exported, or connected to a matching conduit.
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Warning: hps_sdram.sequencer_mem: sequencer_mem.clken1 must be exported, or connected to a matching conduit.
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Warning: hps_sdram.oct: oct.oct must be exported, or connected to a matching conduit.
+Warning: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Warning: hps_sdram.oct: oct.oct_sharing must be exported, or connected to a matching conduit.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:21 Info: hps_sdram: Generating altera_mem_if_hps_emif "hps_sdram" for SIM_VERILOG
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:23 Info: Interconnect is inserted between master s0.mmr_avl and slave c0.csr because the master has burstcount signal 1 bit wide, but the slave is 0 bit wide.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:24 Info: pll_ref_clk: "hps_sdram" instantiated altera_avalon_clock_source "pll_ref_clk"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:24 Info: global_reset: "hps_sdram" instantiated altera_avalon_reset_source "global_reset"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:24 Info: Reusing file /tmp/alt7811_7094804545658569799.dir/0028_fpga_interfaces_gen/submodules
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:24 Info: pll: "hps_sdram" instantiated altera_mem_if_hps_pll "pll"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:24 Info: p0: Generating clock pair generator
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:25 Info: p0: Generating hps_sdram_p0_altdqdqs
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:31 Info: p0: "hps_sdram" instantiated altera_mem_if_ddr3_hard_phy_core "p0"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/bin/uniphy_mcc -ac_code sequencer_mc/ac_rom.s -inst_code sequencer_mc/inst_rom.s -ac_rom ../hps_AC_ROM.hex -inst_rom ../hps_inst_ROM.hex -header sequencer/sequencer_auto.h -vheader ../sequencer_auto_h.sv -ac_rom_init sequencer/sequencer_auto_ac_init.c -inst_rom_init sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: UniPHY Sequencer Microcode Compiler
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Copyright (C) 2018  Intel Corporation. All rights reserved.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Reading sequencer_mc
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Reading sequencer_mc
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Writing ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Writing ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Writing sequencer
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Writing ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Microcode compilation successful
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../nios2eds/sdk2/bin
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-bsp: Using /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/nios2eds/sdk2/bin
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-bsp: Updating existing BSP because sequencer_bsp
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-bsp: Using SOPC design file ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Updating BSP settings...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: nios2-bsp-update-settings --settings sequencer_bsp/settings.bsp --bsp-dir sequencer_bsp --sopc ../hps.sopcinfo --script /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/nios2eds/sdk2/bin
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Initializing BSP components...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Finished initializing BSP components. Total time taken = 2 seconds
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Searching for BSP components with category: os_software_element
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Initializing SOPC project local software IP
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/0006_s0_gen
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/0006_s0_gen/*
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/0006_s0_gen/ip/**
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: [Info] /tmp/alt7811_3290383731762955120.dir/ip/**
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Finished initializing SOPC project local software IP. Total time taken = 2 seconds
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Searching for BSP components with category: driver_element
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Searching for BSP components with category: software_package_element
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Loading drivers from ensemble report.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Finished loading drivers from ensemble report.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Tcl message: "No STDIO character device"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Tcl message: "No system timer device"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Tcl message: "Default linker sections mapped to sequencer_mem"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Default memory regions will not be persisted in BSP Settings File.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: BSP settings updated
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Generating BSP files...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Default memory regions will not be persisted in BSP Settings File.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Finished generating BSP files. Total time taken = 2 seconds
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: nios2-app-generate-makefile --bsp-dir sequencer_bsp --app-dir sequencer --elf-name sequencer.elf --set OBJDUMP_INCLUDE_SOURCE 1 --set APP_CFLAGS_DEFINED_SYMBOLS -DSTACK_POINTER=0x17ff0 --set APP_CFLAGS_OPTIMIZATION -Os --param max-inline-insns-single=1000 -fno-zero-initialized-in-bss --set APP_CFLAGS_WARNINGS -Winline -Wall --src-files sequencer.c sequencer.h tclrpt.c tclrpt.h sequencer_auto_ac_init.c sequencer_auto_inst_init.c
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Generating application makefile
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: INFO: Application makefile generated
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make -C sequencer_bsp clean altera_nios2_qsys_hal_driver_ASM_LIB_SRCS=HAL/src/crt0.S  hal_C_LIB_SRCS=HAL/src/alt_main.c hal_C_LIB_SRCS+=HAL/src/alt_load.c  altera_nios2_qsys_hal_driver_C_LIB_SRCS=HAL/src/altera_nios2_qsys_irq.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src/alt_icache_flush_all.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make[1]: Entering directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: [BSP clean complete]
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make[1]: Leaving directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make -C sequencer clean all altera_nios2_qsys_hal_driver_ASM_LIB_SRCS=HAL/src/crt0.S  hal_C_LIB_SRCS=HAL/src/alt_main.c hal_C_LIB_SRCS+=HAL/src/alt_load.c  altera_nios2_qsys_hal_driver_C_LIB_SRCS=HAL/src/altera_nios2_qsys_irq.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src/alt_icache_flush_all.c altera_nios2_qsys_hal_driver_C_LIB_SRCS+=HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make[1]: Entering directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: [sequencer clean complete]
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Building ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make --no-print-directory -C ..
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Compiling alt_dcache_flush_all.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_dcache_flush_all.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Compiling alt_icache_flush_all.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_icache_flush_all.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Compiling alt_load.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_load.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Compiling alt_main.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_main.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Compiling altera_nios2_qsys_irq.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/altera_nios2_qsys_irq.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Compiling crt0.S...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-gcc -MP -MMD -c   -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global    -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED  -Wa,-gdwarf2  -o obj/HAL/src/crt0.o HAL/src
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Compiling alt_sys_init.c...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall  -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global   -o obj
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Creating libhal_bsp.a...
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: rm -f -f libhal_bsp.a
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: nios2-elf-ar -src libhal_bsp.a obj/HAL/src/alt_dcache_flush_all.o obj/HAL/src/alt_icache_flush_all.o obj/HAL/src/alt_load.o obj/HAL/src/alt_main.o obj/HAL/src/altera_nios2_qsys_irq.o obj/HAL/src/crt0.o obj
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: [BSP build complete]
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Info: Compiling sequencer.c to obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: gcc -MP -MMD -c -I../sequencer_bsp/HAL/inc -I../sequencer_bsp -I../sequencer_bsp/drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED  -DSTACK_POINTER=0x17ff0  -Os --param max-inline-insns-single=1000 -fno-zero-initialized-in-bss -g -Winline -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Makefile:781: recipe for target 'obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make[1]: Leaving directory '/tmp/alt7811_3290383731762955120.dir/0006_s0_gen/hps_software
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: Makefile:12: recipe for target 'elf' failed
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: WARNING: The BSP persisted OS version "9.1" is not available. The default latest BSP version will be used instead.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: WARNING: The BSP being loaded used OS version "9.1". The BSP version "18.1" will be used instead.
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: gcc: error: unrecognized command line option ‘-mno-hw-div’; did you mean ‘-fno-wrapv’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: gcc: error: unrecognized command line option ‘-mno-hw-mul’; did you mean ‘-mno-pclmul’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: gcc: error: unrecognized command line option ‘-mno-hw-mulx’; did you mean ‘-mno-pclmul’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: gcc: error: unrecognized command line option ‘-mgpopt=global’; did you mean ‘-Wshadow=global’?
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make[1]: *** [obj/default
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: make: *** [elf] Error 2
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: s0: add_fileset_file: No such file /tmp/alt7811_3290383731762955120.dir/0006_s0_gen
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: while executing
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: "add_fileset_file $file_name [::alt_mem_if::util::hwtcl_utils::get_file_type $file_name 0] PATH $file_pathname"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: ("foreach" body line 4)
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: invoked from within
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: "foreach file_pathname $return_files_sw {
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces:         _dprint 1 "Preparing to add $file_pathname"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces:         set file_name [file tail $file_pathname]
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces:         add_fileset_file $..."
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: (procedure "generate_sw" line 18)
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: invoked from within
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: "generate_sw $name $fileset"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: (procedure "generate_files" line 37)
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: invoked from within
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: "generate_files $name SIM_VERILOG"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: (procedure "generate_verilog_sim" line 3)
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: invoked from within
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: "generate_verilog_sim altera_mem_if_hhp_qseq_top"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Info: s0: "hps_sdram" instantiated altera_mem_if_hhp_ddr3_qseq "s0"
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Error: Generation stopped, 10 or more modules remaining
+Error: 2018.10.07.09:47:39 Error: fpga_interfaces: 2018.10.07.09:47:39 Info: hps_sdram: Done "hps_sdram" with 16 modules, 61 files
+Info: 2018.10.07.09:47:40 Info: fpga_interfaces: "hps_0" instantiated altera_interface_generator "fpga_interfaces"
+Error: 2018.10.07.09:47:40 Error: Generation stopped, 118 or more modules remaining
+Info: 2018.10.07.09:47:40 Info: soc_system: Done "soc_system" with 72 modules, 129 files
+Error: 2018.10.07.09:47:40 Error: qsys-generate failed with exit code 1: 265 Errors, 55 Warnings
+Info: 2018.10.07.09:47:40 Info: Finished: Create simulation model
+Info: 2018.10.07.09:47:40 Info: Starting: Create Modelsim Project.
+Info: 2018.10.07.09:47:40 Info: sim-script-gen --spd=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/soc_system.spd --output-directory=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:40 Info: Doing: ip-make-simscript --spd=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/soc_system.spd --output-directory=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:40 Info: Generating the following file(s) for MODELSIM simulator in /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:40 Info:     mentor
+Info: 2018.10.07.09:47:40 Info: Generating the following file(s) for VCS simulator in /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:40 Info:     synopsys/vcs
+Info: 2018.10.07.09:47:41 Info: Generating the following file(s) for VCSMX simulator in /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:41 Info:     synopsys/vcsmx
+Info: 2018.10.07.09:47:41 Info:     synopsys/vcsmx
+Info: 2018.10.07.09:47:41 Info: Generating the following file(s) for NCSIM simulator in /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:41 Info:     cadence
+Info: 2018.10.07.09:47:41 Info:     cadence
+Info: 2018.10.07.09:47:41 Info:     cadence
+Info: 2018.10.07.09:47:41 Info:     29 .cds.lib files in cadence/cds_libs
+Info: 2018.10.07.09:47:41 Info: Generating the following file(s) for RIVIERA simulator in /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:41 Info:     aldec
+Info: 2018.10.07.09:47:41 Info: For information on how to simulate your IP, see the explanatory comments in the simulator-specific subdirectories under /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/simulation
+Info: 2018.10.07.09:47:41 Info: Regenerate these scripts whenever you make any change to any Quartus-generated IP in your project.
+Info: 2018.10.07.09:47:41 Info: Finished: Create Modelsim Project.
+Info: 2018.10.07.09:47:41 Info: Starting: Create block symbol file (.bsf)
+Info: 2018.10.07.09:47:41 Info: Loading DE10_NANO_SoC_FB
+Info: 2018.10.07.09:47:41 Info: Reading input file
+Info: 2018.10.07.09:47:41 Info: Adding ILC [interrupt_latency_counter 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module ILC
+Info: 2018.10.07.09:47:41 Info: Adding alt_vip_itc_0 [alt_vip_itc 14.0]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module alt_vip_itc_0
+Info: 2018.10.07.09:47:41 Info: Adding alt_vip_vfr_hdmi [alt_vip_vfr 14.0]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module alt_vip_vfr_hdmi
+Info: 2018.10.07.09:47:41 Info: Adding button_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module button_pio
+Info: 2018.10.07.09:47:41 Info: Adding clk_0 [clock_source 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module clk_0
+Info: 2018.10.07.09:47:41 Info: Adding clock_bridge_0 [altera_clock_bridge 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module clock_bridge_0
+Info: 2018.10.07.09:47:41 Info: Adding dipsw_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module dipsw_pio
+Info: 2018.10.07.09:47:41 Info: Adding f2sdram_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module f2sdram_only_master
+Info: 2018.10.07.09:47:41 Info: Adding fpga_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module fpga_only_master
+Info: 2018.10.07.09:47:41 Info: Adding hps_0 [altera_hps 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module hps_0
+Info: 2018.10.07.09:47:41 Info: Adding hps_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module hps_only_master
+Info: 2018.10.07.09:47:41 Info: Adding jtag_uart [altera_avalon_jtag_uart 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module jtag_uart
+Info: 2018.10.07.09:47:41 Info: Adding led_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module led_pio
+Info: 2018.10.07.09:47:41 Info: Adding mm_bridge_0 [altera_avalon_mm_bridge 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module mm_bridge_0
+Info: 2018.10.07.09:47:41 Info: Adding sysid_qsys [altera_avalon_sysid_qsys 18.1]
+Info: 2018.10.07.09:47:41 Info: Parameterizing module sysid_qsys
+Info: 2018.10.07.09:47:41 Info: Building connections
+Info: 2018.10.07.09:47:41 Info: Parameterizing connections
+Info: 2018.10.07.09:47:41 Info: Validating
+Info: 2018.10.07.09:47:47 Info: Done reading input file
+Warning: 2018.10.07.09:47:48 Warning: soc_system.alt_vip_vfr_hdmi: The module properties SIMULATION_MODEL_IN_VERILOG and SIMULATION_MODEL_IN_VHDL can not both be set when using the SIMULATION file property: src_hdl/alt_vipvfr131_vfr.v, src_hdl/alt_vipvfr131_vfr_controller.v, src_hdl/alt_vipvfr131_vfr_control_packet_encoder.v, src_hdl/alt_vipvfr131_prc.v, src_hdl/alt_vipvfr131_prc_core.v, src_hdl/alt_vipvfr131_prc_read_master.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_package.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_master.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_unpack_data.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_slave.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_stream_output.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_pulling_width_adapter.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_general_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_fifo_usedw_calculator.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_gray_clock_crosser.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_std_logic_vector_delay.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_one_bit_delay.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_logic_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl
+Info: 2018.10.07.09:47:48 Info: soc_system.button_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+2018.10.07.09:47:48 Info: soc_system.dipsw_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: 2018.10.07.09:47:48 Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+2018.10.07.09:47:48 Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2018.10.07.09:47:48 Info: soc_system.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: 2018.10.07.09:47:48 Info: soc_system.sysid_qsys: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+2018.10.07.09:47:48 Info: soc_system.sysid_qsys: Time stamp will be automatically updated when this component is generated.
+Warning: 2018.10.07.09:47:48 Warning: soc_system.alt_vip_vfr_hdmi: Interrupt sender alt_vip_vfr_hdmi.interrupt_sender is not connected to an interrupt receiver
+Info: 2018.10.07.09:47:49 Info: qsys-generate succeeded.
+Info: 2018.10.07.09:47:49 Info: Finished: Create block symbol file (.bsf)
+Info: 2018.10.07.09:47:49 Info:
+Info: 2018.10.07.09:47:49 Info: Starting: Create HDL design files for synthesis
+Info: 2018.10.07.09:47:49 Info: Loading DE10_NANO_SoC_FB
+Info: 2018.10.07.09:47:49 Info: Reading input file
+Info: 2018.10.07.09:47:49 Info: Adding ILC [interrupt_latency_counter 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module ILC
+Info: 2018.10.07.09:47:49 Info: Adding alt_vip_itc_0 [alt_vip_itc 14.0]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module alt_vip_itc_0
+Info: 2018.10.07.09:47:49 Info: Adding alt_vip_vfr_hdmi [alt_vip_vfr 14.0]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module alt_vip_vfr_hdmi
+Info: 2018.10.07.09:47:49 Info: Adding button_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module button_pio
+Info: 2018.10.07.09:47:49 Info: Adding clk_0 [clock_source 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module clk_0
+Info: 2018.10.07.09:47:49 Info: Adding clock_bridge_0 [altera_clock_bridge 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module clock_bridge_0
+Info: 2018.10.07.09:47:49 Info: Adding dipsw_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module dipsw_pio
+Info: 2018.10.07.09:47:49 Info: Adding f2sdram_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module f2sdram_only_master
+Info: 2018.10.07.09:47:49 Info: Adding fpga_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module fpga_only_master
+Info: 2018.10.07.09:47:49 Info: Adding hps_0 [altera_hps 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module hps_0
+Info: 2018.10.07.09:47:49 Info: Adding hps_only_master [altera_jtag_avalon_master 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module hps_only_master
+Info: 2018.10.07.09:47:49 Info: Adding jtag_uart [altera_avalon_jtag_uart 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module jtag_uart
+Info: 2018.10.07.09:47:49 Info: Adding led_pio [altera_avalon_pio 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module led_pio
+Info: 2018.10.07.09:47:49 Info: Adding mm_bridge_0 [altera_avalon_mm_bridge 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module mm_bridge_0
+Info: 2018.10.07.09:47:49 Info: Adding sysid_qsys [altera_avalon_sysid_qsys 18.1]
+Info: 2018.10.07.09:47:49 Info: Parameterizing module sysid_qsys
+Info: 2018.10.07.09:47:49 Info: Building connections
+Info: 2018.10.07.09:47:49 Info: Parameterizing connections
+Info: 2018.10.07.09:47:49 Info: Validating
+Info: 2018.10.07.09:47:55 Info: Done reading input file
+Warning: 2018.10.07.09:47:56 Warning: soc_system.alt_vip_vfr_hdmi: The module properties SIMULATION_MODEL_IN_VERILOG and SIMULATION_MODEL_IN_VHDL can not both be set when using the SIMULATION file property: src_hdl/alt_vipvfr131_vfr.v, src_hdl/alt_vipvfr131_vfr_controller.v, src_hdl/alt_vipvfr131_vfr_control_packet_encoder.v, src_hdl/alt_vipvfr131_prc.v, src_hdl/alt_vipvfr131_prc_core.v, src_hdl/alt_vipvfr131_prc_read_master.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_package.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_master.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_unpack_data.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_slave.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_stream_output.v, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_pulling_width_adapter.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_general_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_fifo_usedw_calculator.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_gray_clock_crosser.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_std_logic_vector_delay.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_one_bit_delay.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_logic_fifo.vhd, /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/ip/altera/frame_reader/common_hdl
+Info: 2018.10.07.09:47:56 Info: soc_system.button_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+2018.10.07.09:47:56 Info: soc_system.dipsw_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: 2018.10.07.09:47:56 Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2018.10.07.09:47:56 Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2018.10.07.09:47:56 Info: soc_system.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: 2018.10.07.09:47:56 Info: soc_system.sysid_qsys: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: 2018.10.07.09:47:56 Info: soc_system.sysid_qsys: Time stamp will be automatically updated when this component is generated.
+Warning: 2018.10.07.09:47:56 Warning: soc_system.alt_vip_vfr_hdmi: Interrupt sender alt_vip_vfr_hdmi.interrupt_sender is not connected to an interrupt receiver
+Info: 2018.10.07.09:48:14 Info: soc_system: Generating soc_system "soc_system" for QUARTUS_SYNTH
+Info: 2018.10.07.09:48:17 Info: Interconnect is inserted between master hps_0.h2f_lw_axi_master and slave mm_bridge_0.s0 because the master is of type axi and the slave is of type avalon.
+Info: 2018.10.07.09:48:17 Info: Inserting clock-crossing logic between cmd_demux.src2 and cmd_mux_002.sink0
+Info: 2018.10.07.09:48:17 Info: Inserting clock-crossing logic between rsp_demux_002.src0 and rsp_mux.sink2
+Info: 2018.10.07.09:48:18 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has address signal 32 bit wide, but the slave is 27 bit wide.
+Info: 2018.10.07.09:48:18 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has readdata signal 32 bit wide, but the slave is 256 bit wide.
+2018.10.07.09:48:18 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has writedata signal 32 bit wide, but the slave is 256 bit wide.
+Info: 2018.10.07.09:48:18 Info: Interconnect is inserted between master f2sdram_only_master.master and slave hps_0.f2h_sdram0_data because the master has byteenable signal 4 bit wide, but the slave is 32 bit wide.
+Warning: 2018.10.07.09:48:18 Warning: hps_0.f2h_irq0: Cannot connect clock for irq_mapper_001.sender
+Warning: 2018.10.07.09:48:18 Warning: hps_0.f2h_irq0: Cannot connect reset for irq_mapper_001.sender
+Warning: 2018.10.07.09:48:18 Warning: hps_0.f2h_irq1: Cannot connect clock for irq_mapper_002.sender
+Warning: 2018.10.07.09:48:18 Warning: hps_0.f2h_irq1: Cannot connect reset for irq_mapper_002.sender
+Info: 2018.10.07.09:48:22 Info: ILC: "soc_system" instantiated interrupt_latency_counter "ILC"
+Info: 2018.10.07.09:48:22 Info: alt_vip_itc_0: "soc_system" instantiated alt_vip_itc "alt_vip_itc_0"
+Info: 2018.10.07.09:48:22 Info: alt_vip_vfr_hdmi: "soc_system" instantiated alt_vip_vfr "alt_vip_vfr_hdmi"
+Info: 2018.10.07.09:48:22 Info: button_pio: Starting RTL generation for module 'soc_system_button_pio'
+Info: 2018.10.07.09:48:22 Info: button_pio:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_button_pio --dir=/tmp/alt7811_7094804545658569799.dir/0031_button_pio_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0031_button_pio_gen/
+Info: 2018.10.07.09:48:22 Info: button_pio: Done RTL generation for module 'soc_system_button_pio'
+Info: 2018.10.07.09:48:22 Info: button_pio: "soc_system" instantiated altera_avalon_pio "button_pio"
+Info: 2018.10.07.09:48:22 Info: dipsw_pio: Starting RTL generation for module 'soc_system_dipsw_pio'
+Info: 2018.10.07.09:48:22 Info: dipsw_pio:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_dipsw_pio --dir=/tmp/alt7811_7094804545658569799.dir/0032_dipsw_pio_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0032_dipsw_pio_gen/
+Info: 2018.10.07.09:48:22 Info: dipsw_pio: Done RTL generation for module 'soc_system_dipsw_pio'
+Info: 2018.10.07.09:48:22 Info: dipsw_pio: "soc_system" instantiated altera_avalon_pio "dipsw_pio"
+Info: 2018.10.07.09:48:22 Info: f2sdram_only_master: "soc_system" instantiated altera_jtag_avalon_master "f2sdram_only_master"
+Info: 2018.10.07.09:48:22 Info: hps_0: "Running  for module: hps_0"
+Info: 2018.10.07.09:48:23 Info: hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2018.10.07.09:48:23 Info: hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2018.10.07.09:48:23 Info: hps_0: "soc_system" instantiated altera_hps "hps_0"
+Info: 2018.10.07.09:48:23 Info: jtag_uart: Starting RTL generation for module 'soc_system_jtag_uart'
+Info: 2018.10.07.09:48:23 Info: jtag_uart:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=soc_system_jtag_uart --dir=/tmp/alt7811_7094804545658569799.dir/0033_jtag_uart_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0033_jtag_uart_gen/
+Info: 2018.10.07.09:48:24 Info: jtag_uart: Done RTL generation for module 'soc_system_jtag_uart'
+Info: 2018.10.07.09:48:24 Info: jtag_uart: "soc_system" instantiated altera_avalon_jtag_uart "jtag_uart"
+Info: 2018.10.07.09:48:24 Info: led_pio: Starting RTL generation for module 'soc_system_led_pio'
+Info: 2018.10.07.09:48:24 Info: led_pio:   Generation command is [exec /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/bin/perl -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/linux64/perl/lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/europa -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin/perl_lib -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/sopc_builder/bin -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/common -I /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_led_pio --dir=/tmp/alt7811_7094804545658569799.dir/0034_led_pio_gen/ --quartus_dir=/media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus --verilog --config=/tmp/alt7811_7094804545658569799.dir/0034_led_pio_gen/
+Info: 2018.10.07.09:48:24 Info: led_pio: Done RTL generation for module 'soc_system_led_pio'
+Info: 2018.10.07.09:48:24 Info: led_pio: "soc_system" instantiated altera_avalon_pio "led_pio"
+Info: 2018.10.07.09:48:24 Info: mm_bridge_0: "soc_system" instantiated altera_avalon_mm_bridge "mm_bridge_0"
+Info: 2018.10.07.09:48:24 Info: sysid_qsys: "soc_system" instantiated altera_avalon_sysid_qsys "sysid_qsys"
+Info: 2018.10.07.09:48:24 Info: mm_interconnect_0: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: 2018.10.07.09:48:24 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:24 Info: mm_interconnect_1: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_1"
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:25 Info: mm_interconnect_2: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_2"
+Info: 2018.10.07.09:48:25 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2018.10.07.09:48:26 Info: mm_interconnect_3: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_3"
+Info: 2018.10.07.09:48:26 Info: irq_mapper: "soc_system" instantiated altera_irq_mapper "irq_mapper"
+Info: 2018.10.07.09:48:26 Info: irq_mapper_001: "soc_system" instantiated altera_irq_mapper "irq_mapper_001"
+Info: 2018.10.07.09:48:26 Info: irq_mapper_002: "soc_system" instantiated altera_irq_mapper "irq_mapper_002"
+Info: 2018.10.07.09:48:26 Info: rst_controller: "soc_system" instantiated altera_reset_controller "rst_controller"
+Info: 2018.10.07.09:48:26 Info: jtag_phy_embedded_in_jtag_master: "f2sdram_only_master" instantiated altera_jtag_dc_streaming "jtag_phy_embedded_in_jtag_master"
+Info: 2018.10.07.09:48:26 Info: timing_adt: "f2sdram_only_master" instantiated timing_adapter "timing_adt"
+Info: 2018.10.07.09:48:26 Info: fifo: "f2sdram_only_master" instantiated altera_avalon_sc_fifo "fifo"
+Info: 2018.10.07.09:48:26 Info: b2p: "f2sdram_only_master" instantiated altera_avalon_st_bytes_to_packets "b2p"
+Info: 2018.10.07.09:48:26 Info: p2b: "f2sdram_only_master" instantiated altera_avalon_st_packets_to_bytes "p2b"
+Info: 2018.10.07.09:48:26 Info: transacto: "f2sdram_only_master" instantiated altera_avalon_packets_to_master "transacto"
+Info: 2018.10.07.09:48:26 Info: b2p_adapter: "f2sdram_only_master" instantiated channel_adapter "b2p_adapter"
+Info: 2018.10.07.09:48:26 Info: p2b_adapter: "f2sdram_only_master" instantiated channel_adapter "p2b_adapter"
+Info: 2018.10.07.09:48:26 Info: fpga_interfaces: "hps_0" instantiated altera_interface_generator "fpga_interfaces"
+Info: 2018.10.07.09:48:26 Info: hps_io: "hps_0" instantiated altera_hps_io "hps_io"
+Info: 2018.10.07.09:48:26 Info: alt_vip_vfr_hdmi_avalon_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "alt_vip_vfr_hdmi_avalon_master_translator"
+Info: 2018.10.07.09:48:26 Info: alt_vip_vfr_hdmi_avalon_master_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "alt_vip_vfr_hdmi_avalon_master_agent"
+Info: 2018.10.07.09:48:26 Info: hps_0_f2h_axi_slave_agent: "mm_interconnect_0" instantiated altera_merlin_axi_slave_ni "hps_0_f2h_axi_slave_agent"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: 2018.10.07.09:48:26 Info: router_001: "mm_interconnect_0" instantiated altera_merlin_router "router_001"
+Info: 2018.10.07.09:48:26 Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: 2018.10.07.09:48:26 Info: alt_vip_vfr_hdmi_avalon_master_limiter: "mm_interconnect_0" instantiated altera_merlin_traffic_limiter "alt_vip_vfr_hdmi_avalon_master_limiter"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: hps_0_f2h_axi_slave_wr_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "hps_0_f2h_axi_slave_wr_burst_adapter"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: 2018.10.07.09:48:26 Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
+Info: 2018.10.07.09:48:26 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: 2018.10.07.09:48:26 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: hps_only_master_master_cmd_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "hps_only_master_master_cmd_width_adapter"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: mm_bridge_0_s0_translator: "mm_interconnect_1" instantiated altera_merlin_slave_translator "mm_bridge_0_s0_translator"
+Info: 2018.10.07.09:48:26 Info: hps_0_h2f_lw_axi_master_agent: "mm_interconnect_1" instantiated altera_merlin_axi_master_ni "hps_0_h2f_lw_axi_master_agent"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: mm_bridge_0_s0_agent: "mm_interconnect_1" instantiated altera_merlin_slave_agent "mm_bridge_0_s0_agent"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: router: "mm_interconnect_1" instantiated altera_merlin_router "router"
+Info: 2018.10.07.09:48:26 Info: router_002: "mm_interconnect_1" instantiated altera_merlin_router "router_002"
+Info: 2018.10.07.09:48:26 Info: cmd_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: 2018.10.07.09:48:26 Info: cmd_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: rsp_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: 2018.10.07.09:48:26 Info: rsp_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: avalon_st_adapter: "mm_interconnect_1" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: 2018.10.07.09:48:26 Info: router: "mm_interconnect_2" instantiated altera_merlin_router "router"
+Info: 2018.10.07.09:48:26 Info: router_001: "mm_interconnect_2" instantiated altera_merlin_router "router_001"
+Info: 2018.10.07.09:48:26 Info: router_002: "mm_interconnect_2" instantiated altera_merlin_router "router_002"
+Info: 2018.10.07.09:48:26 Info: router_004: "mm_interconnect_2" instantiated altera_merlin_router "router_004"
+Info: 2018.10.07.09:48:26 Info: cmd_demux: "mm_interconnect_2" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: 2018.10.07.09:48:26 Info: cmd_demux_001: "mm_interconnect_2" instantiated altera_merlin_demultiplexer "cmd_demux_001"
+Info: 2018.10.07.09:48:26 Info: cmd_mux: "mm_interconnect_2" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: cmd_mux_002: "mm_interconnect_2" instantiated altera_merlin_multiplexer "cmd_mux_002"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: rsp_demux: "mm_interconnect_2" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: 2018.10.07.09:48:26 Info: rsp_demux_002: "mm_interconnect_2" instantiated altera_merlin_demultiplexer "rsp_demux_002"
+Info: 2018.10.07.09:48:26 Info: rsp_mux: "mm_interconnect_2" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: rsp_mux_001: "mm_interconnect_2" instantiated altera_merlin_multiplexer "rsp_mux_001"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: crosser: "mm_interconnect_2" instantiated altera_avalon_st_handshake_clock_crosser "crosser"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: router: "mm_interconnect_3" instantiated altera_merlin_router "router"
+Info: 2018.10.07.09:48:26 Info: router_001: "mm_interconnect_3" instantiated altera_merlin_router "router_001"
+Info: 2018.10.07.09:48:26 Info: cmd_demux: "mm_interconnect_3" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: 2018.10.07.09:48:26 Info: cmd_mux: "mm_interconnect_3" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: rsp_mux: "mm_interconnect_3" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: 2018.10.07.09:48:26 Info: Reusing file /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/terasic/systemCD/Demonstrations/SoC_FPGA/DE10_NANO_SoC_FB/soc_system/synthesis/submodules
+Info: 2018.10.07.09:48:26 Info: avalon_st_adapter: "mm_interconnect_3" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: 2018.10.07.09:48:46 Info: border: "hps_io" instantiated altera_interface_generator "border"
+Info: 2018.10.07.09:48:46 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: 2018.10.07.09:48:46 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: 2018.10.07.09:48:46 Info: soc_system: Done "soc_system" with 75 modules, 178 files
+Info: 2018.10.07.09:48:47 Info: qsys-generate succeeded.
+Info: 2018.10.07.09:48:47 Info: Finished: Create HDL design files for synthesis
+Info (11904): Restoring file "soc_system.BAK.qsys" to "soc_system.qsys"
+Error (14923): Error upgrading Platform Designer file "soc_system.qsys"
+Info (11902): Backing up file "ip/vga_pll/vga_pll.v" to "ip/vga_pll/vga_pll.BAK.v"
+Info (11837): Started upgrading IP component altera_pll with file "ip/vga_pll/vga_pll.v"
+Info (11902): Backing up file "ip/altsource_probe/hps_reset.v" to "ip/altsource_probe/hps_reset.BAK.v"
+Info (11837): Started upgrading IP component In-System Sources and Probes with file "ip/altsource_probe/hps_reset.v"
+Error (11890): Unable to automatically upgrade Platform Designer component. Please manually upgrade "soc_system.qsys" in Platform Designer
+Info (11131): Completed upgrading IP component altera_pll with file "ip/vga_pll/vga_pll.v"
+Info (11131): Completed upgrading IP component In-System Sources and Probes with file "ip/altsource_probe/hps_reset.v"
+Error (23031): Evaluation of Tcl script /media/rsarwar/4ca9736b-e552-4ce5-810d-70f97fc8ed6c/altera_2018.1/quartus/common/tcl/internal/ip_regen/ip_regen.tcl unsuccessful
+Error: Quartus Prime Shell was unsuccessful. 261 errors, 71 warnings
+    Error: Peak virtual memory: 1075 megabytes
+    Error: Processing ended: Sun Oct  7 09:49:31 2018
+    Error: Elapsed time: 00:04:01
+    Error: Total CPU time (on all processors): 00:07:41
+
+

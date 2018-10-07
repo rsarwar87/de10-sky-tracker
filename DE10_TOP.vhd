@@ -76,15 +76,15 @@ entity DE10_TOP is
         
        
         ------- INPUT/OUTPUT --------------------
-        HEY			: in	std_logic_vector(1 downto 0);
-        HED			: out	std_logic_vector(7 downto 0);
-        HW			: in	std_logic_vector(3 downto 0);
+        KEY			: in	std_logic_vector(1 downto 0);
+        LED			: out	std_logic_vector(7 downto 0);
+        SW			: in	std_logic_vector(3 downto 0);
                	
         ------- ADC 			--------------------
-        HDC_CONVST		: out	std_logic;
-        HDC_SCK			: out	std_logic;
-        HDC_SDI			: out	std_logic;
-        HDC_SDO			: in	std_logic
+        ADC_CONVST		: out	std_logic;
+        ADC_SCK			: out	std_logic;
+        ADC_SDI			: out	std_logic;
+        ADC_SDO			: in	std_logic
     );
 end DE10_TOP;
 

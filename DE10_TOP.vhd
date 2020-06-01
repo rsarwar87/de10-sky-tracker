@@ -230,7 +230,30 @@ architecture rtl of DE10_TOP is
             ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     -- byte_enable
             ctrl_rw                                   : out   std_logic;                                        -- rw
             ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    -- write_data
-            ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => 'X')  -- read_data
+            ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => 'X');  -- read_data
+				buf0_1_export                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            buf1_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            buf0_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            ra_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            de_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            ra_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            de_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            de_counter_load_export                    : out   std_logic_vector(31 downto 0);                    -- export
+            de_counter_load_1_export                  : out   std_logic_vector(31 downto 0);                    -- export
+            de_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
+            ra_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
+            de_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
+            ra_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
+            de_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
+            ra_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
+            de_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
+            ra_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
+            de_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
+            ra_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
+            de_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
+            ra_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
+            de_backlash_duration_export               : out   std_logic_vector(31 downto 0);                    -- export
+            ra_backlash_duration_export               : out   std_logic_vector(31 downto 0)                     -- export
         );
   end component soc_system;
 
@@ -272,7 +295,10 @@ signal de_rst_n : STD_LOGIC;
 signal de_step : STD_LOGIC;
 signal de_direction : STD_LOGIC;
 signal de_fault_n : STD_LOGIC;
-			  
+signal buf3_export                             :     std_logic_vector(31 downto 0) := (others => 'X'); -- export
+signal buf1_export                               :     std_logic_vector(31 downto 0) := (others => 'X'); -- export
+signal buf0_export                               :     std_logic_vector(31 downto 0) := (others => 'X'); -- export
+            
 signal sts_acknowledge                           : std_logic                     := 'X';             -- acknowledge
 signal sts_irq                                   : std_logic                     := 'X';             -- irq
 signal sts_address                               : std_logic_vector(11 downto 0);                    -- address
@@ -290,6 +316,27 @@ signal ctrl_byte_enable                          : std_logic_vector(3 downto 0);
 signal ctrl_rw                                   : std_logic;                                        -- rw
 signal ctrl_write_data                           : std_logic_vector(31 downto 0);                    -- write_data
 signal ctrl_read_data                            : std_logic_vector(31 downto 0) := (others => 'X');  -- read_data
+signal ra_step_count 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+signal ra_status     		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+signal ra_cmdcontrol 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- steps, go, stop, direction
+signal ra_cmdtick           : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');    -- speed of command
+signal ra_cmdduration 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');    -- speed of command
+signal ra_backlash_tick 	 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');  -- speed of backlash
+signal ra_backlash_duration : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
+signal ra_counter_load 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
+signal ra_counter_max 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
+signal ra_trackctrl 			 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+
+signal de_step_count 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+signal de_status     		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+signal de_cmdcontrol 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- steps, go, stop, direction
+signal de_cmdtick           : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');    -- speed of command
+signal de_cmdduration 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');    -- speed of command
+signal de_backlash_tick 	 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');  -- speed of backlash
+signal de_backlash_duration : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
+signal de_counter_load 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
+signal de_counter_max 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
+signal de_trackctrl 			 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
 begin
     LED(7 downto 1) <= fpga_led_internal;
     fpga_clk_50 <= FPGA_CLK1_50;
@@ -443,7 +490,30 @@ begin
             ctrl_byte_enable                          => ctrl_byte_enable,                          --                               .byte_enable
             ctrl_rw                                   => ctrl_rw,                                   --                               .rw
             ctrl_write_data                           => ctrl_write_data,                           --                               .write_data
-            ctrl_read_data                            => ctrl_read_data                             --   
+            ctrl_read_data                            => ctrl_read_data,                             --   
+				buf0_1_export                             => buf3_export,                             --                         buf0_1.export
+            buf1_export                               => buf1_export,                               --                           buf1.export
+            buf0_export                               => buf0_export,                               --                           buf0.export
+            de_status_export                          => de_status,                          --                      ra_status.export
+            ra_status_export                          => ra_status,                          --                      de_status.export
+            ra_count_export                           => ra_step_count,                           --                       ra_count.export
+            de_count_export                           => de_step_count,                           --                       de_count.export
+            de_counter_load_export                    => de_counter_load,                    --                de_counter_load.export
+            de_counter_load_1_export                  => ra_counter_load,                  --              de_counter_load_1.export
+            de_counter_max_export                     => de_counter_max,                     --                 de_counter_max.export
+            ra_counter_max_export                     => ra_counter_max,                     --                 ra_counter_max.export
+            de_cmdcontrol_export                      => de_cmdcontrol,                      --                  de_cmdcontrol.export
+            ra_cmdcontrol_export                      => ra_cmdcontrol,                      --                  ra_cmdcontrol.export
+            de_cmdduration_export                     => de_cmdduration,                     --                 de_cmdduration.export
+            ra_cmdduration_export                     => ra_cmdduration,                     --                 ra_cmdduration.export
+            de_trackctrl_export                       => de_trackctrl,                       --                   de_trackctrl.export
+            ra_trackctrl_export                       => ra_trackctrl,                       --                   ra_trackctrl.export
+            de_cmdtick_export                         => de_cmdtick,                         --                     de_cmdtick.export
+            ra_cmdtick_export                         => ra_cmdtick,                         --                     ra_cmdtick.export
+            de_backlash_tick_export                   => de_backlash_tick,                   --               de_backlash_tick.export
+            ra_backlash_tick_export                   => ra_backlash_tick,                   --               ra_backlash_tick.export
+            de_backlash_duration_export               => de_backlash_duration,               --           de_backlash_duration.export
+            ra_backlash_duration_export               => ra_backlash_duration                --           ra_backlash_duration.export
     );
 	 GPIO_0(2 downto 0) <= ra_mode;
 	 GPIO_0(3) <= ra_sleep_n;
@@ -493,7 +563,30 @@ begin
             ctrl_byte_enable                          => ctrl_byte_enable,                          --                               .byte_enable
             ctrl_rw                                   => ctrl_rw,                                   --                               .rw
             ctrl_write_data                           => ctrl_write_data,                           --                               .write_data
-            ctrl_read_data                            => ctrl_read_data  
+            ctrl_read_data                            => ctrl_read_data , 
+				buf3_export                             => buf3_export,                             --                         buf0_1.export
+            buf1_export                               => buf1_export,                               --                           buf1.export
+            buf0_export                               => buf0_export,                               --                           buf0.export
+            ra_status_export                          => ra_status,                          --                      ra_status.export
+            de_status_export                          => de_status,                          --                      de_status.export
+            ra_step_count_export                           => ra_step_count,                           --                       ra_count.export
+            de_step_count_export                           => de_step_count,                           --                       de_count.export
+            ra_counter_load_export                    => de_counter_load,                    --                de_counter_load.export
+            de_counter_load_export                  => ra_counter_load,                  --              de_counter_load_1.export
+            de_counter_max_export                     => de_counter_max,                     --                 de_counter_max.export
+            ra_counter_max_export                     => ra_counter_max,                     --                 ra_counter_max.export
+            de_cmdcontrol_export                      => de_cmdcontrol,                      --                  de_cmdcontrol.export
+            ra_cmdcontrol_export                      => ra_cmdcontrol,                      --                  ra_cmdcontrol.export
+            de_cmdduration_export                     => de_cmdduration,                     --                 de_cmdduration.export
+            ra_cmdduration_export                     => ra_cmdduration,                     --                 ra_cmdduration.export
+            de_trackctrl_export                       => de_trackctrl,                       --                   de_trackctrl.export
+            ra_trackctrl_export                       => ra_trackctrl,                       --                   ra_trackctrl.export
+            de_cmdtick_export                         => de_cmdtick,                         --                     de_cmdtick.export
+            ra_cmdtick_export                         => ra_cmdtick,                         --                     ra_cmdtick.export
+            de_backlash_tick_export                   => de_backlash_tick,                   --               de_backlash_tick.export
+            ra_backlash_tick_export                   => ra_backlash_tick,                   --               ra_backlash_tick.export
+            de_backlash_duration_export               => de_backlash_duration,               --           de_backlash_duration.export
+            ra_backlash_duration_export               => ra_backlash_duration 
 	 );
     vga_pll_i : vga_pll 
     port map (

@@ -11,6 +11,14 @@
 		.button_pio_external_connection_export     (<connected-to-button_pio_external_connection_export>),     // button_pio_external_connection.export
 		.clk_clk                                   (<connected-to-clk_clk>),                                   //                            clk.clk
 		.clk_130_clk                               (<connected-to-clk_130_clk>),                               //                        clk_130.clk
+		.ctrl_acknowledge                          (<connected-to-ctrl_acknowledge>),                          //                           ctrl.acknowledge
+		.ctrl_irq                                  (<connected-to-ctrl_irq>),                                  //                               .irq
+		.ctrl_address                              (<connected-to-ctrl_address>),                              //                               .address
+		.ctrl_bus_enable                           (<connected-to-ctrl_bus_enable>),                           //                               .bus_enable
+		.ctrl_byte_enable                          (<connected-to-ctrl_byte_enable>),                          //                               .byte_enable
+		.ctrl_rw                                   (<connected-to-ctrl_rw>),                                   //                               .rw
+		.ctrl_write_data                           (<connected-to-ctrl_write_data>),                           //                               .write_data
+		.ctrl_read_data                            (<connected-to-ctrl_read_data>),                            //                               .read_data
 		.dipsw_pio_external_connection_export      (<connected-to-dipsw_pio_external_connection_export>),      //  dipsw_pio_external_connection.export
 		.hps_0_f2h_cold_reset_req_reset_n          (<connected-to-hps_0_f2h_cold_reset_req_reset_n>),          //       hps_0_f2h_cold_reset_req.reset_n
 		.hps_0_f2h_debug_reset_req_reset_n         (<connected-to-hps_0_f2h_debug_reset_req_reset_n>),         //      hps_0_f2h_debug_reset_req.reset_n
@@ -91,13 +99,28 @@
 		.sts_rw                                    (<connected-to-sts_rw>),                                    //                               .rw
 		.sts_write_data                            (<connected-to-sts_write_data>),                            //                               .write_data
 		.sts_read_data                             (<connected-to-sts_read_data>),                             //                               .read_data
-		.ctrl_acknowledge                          (<connected-to-ctrl_acknowledge>),                          //                           ctrl.acknowledge
-		.ctrl_irq                                  (<connected-to-ctrl_irq>),                                  //                               .irq
-		.ctrl_address                              (<connected-to-ctrl_address>),                              //                               .address
-		.ctrl_bus_enable                           (<connected-to-ctrl_bus_enable>),                           //                               .bus_enable
-		.ctrl_byte_enable                          (<connected-to-ctrl_byte_enable>),                          //                               .byte_enable
-		.ctrl_rw                                   (<connected-to-ctrl_rw>),                                   //                               .rw
-		.ctrl_write_data                           (<connected-to-ctrl_write_data>),                           //                               .write_data
-		.ctrl_read_data                            (<connected-to-ctrl_read_data>)                             //                               .read_data
+		.buf0_1_export                             (<connected-to-buf0_1_export>),                             //                         buf0_1.export
+		.buf1_export                               (<connected-to-buf1_export>),                               //                           buf1.export
+		.buf0_export                               (<connected-to-buf0_export>),                               //                           buf0.export
+		.ra_status_export                          (<connected-to-ra_status_export>),                          //                      ra_status.export
+		.de_status_export                          (<connected-to-de_status_export>),                          //                      de_status.export
+		.ra_count_export                           (<connected-to-ra_count_export>),                           //                       ra_count.export
+		.de_count_export                           (<connected-to-de_count_export>),                           //                       de_count.export
+		.de_counter_load_export                    (<connected-to-de_counter_load_export>),                    //                de_counter_load.export
+		.de_counter_load_1_export                  (<connected-to-de_counter_load_1_export>),                  //              de_counter_load_1.export
+		.de_counter_max_export                     (<connected-to-de_counter_max_export>),                     //                 de_counter_max.export
+		.ra_counter_max_export                     (<connected-to-ra_counter_max_export>),                     //                 ra_counter_max.export
+		.de_cmdcontrol_export                      (<connected-to-de_cmdcontrol_export>),                      //                  de_cmdcontrol.export
+		.ra_cmdcontrol_export                      (<connected-to-ra_cmdcontrol_export>),                      //                  ra_cmdcontrol.export
+		.de_cmdduration_export                     (<connected-to-de_cmdduration_export>),                     //                 de_cmdduration.export
+		.ra_cmdduration_export                     (<connected-to-ra_cmdduration_export>),                     //                 ra_cmdduration.export
+		.de_trackctrl_export                       (<connected-to-de_trackctrl_export>),                       //                   de_trackctrl.export
+		.ra_trackctrl_export                       (<connected-to-ra_trackctrl_export>),                       //                   ra_trackctrl.export
+		.de_cmdtick_export                         (<connected-to-de_cmdtick_export>),                         //                     de_cmdtick.export
+		.ra_cmdtick_export                         (<connected-to-ra_cmdtick_export>),                         //                     ra_cmdtick.export
+		.de_backlash_tick_export                   (<connected-to-de_backlash_tick_export>),                   //               de_backlash_tick.export
+		.ra_backlash_tick_export                   (<connected-to-ra_backlash_tick_export>),                   //               ra_backlash_tick.export
+		.de_backlash_duration_export               (<connected-to-de_backlash_duration_export>),               //           de_backlash_duration.export
+		.ra_backlash_duration_export               (<connected-to-ra_backlash_duration_export>)                //           ra_backlash_duration.export
 	);
 

@@ -12,6 +12,14 @@
 			button_pio_external_connection_export     : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- export
 			clk_clk                                   : in    std_logic                     := 'X';             -- clk
 			clk_130_clk                               : in    std_logic                     := 'X';             -- clk
+			ctrl_acknowledge                          : in    std_logic                     := 'X';             -- acknowledge
+			ctrl_irq                                  : in    std_logic                     := 'X';             -- irq
+			ctrl_address                              : out   std_logic_vector(11 downto 0);                    -- address
+			ctrl_bus_enable                           : out   std_logic;                                        -- bus_enable
+			ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     -- byte_enable
+			ctrl_rw                                   : out   std_logic;                                        -- rw
+			ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    -- write_data
+			ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => 'X'); -- read_data
 			dipsw_pio_external_connection_export      : in    std_logic_vector(3 downto 0)  := (others => 'X'); -- export
 			hps_0_f2h_cold_reset_req_reset_n          : in    std_logic                     := 'X';             -- reset_n
 			hps_0_f2h_debug_reset_req_reset_n         : in    std_logic                     := 'X';             -- reset_n
@@ -92,14 +100,29 @@
 			sts_rw                                    : out   std_logic;                                        -- rw
 			sts_write_data                            : out   std_logic_vector(31 downto 0);                    -- write_data
 			sts_read_data                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- read_data
-			ctrl_acknowledge                          : in    std_logic                     := 'X';             -- acknowledge
-			ctrl_irq                                  : in    std_logic                     := 'X';             -- irq
-			ctrl_address                              : out   std_logic_vector(11 downto 0);                    -- address
-			ctrl_bus_enable                           : out   std_logic;                                        -- bus_enable
-			ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     -- byte_enable
-			ctrl_rw                                   : out   std_logic;                                        -- rw
-			ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    -- write_data
-			ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => 'X')  -- read_data
+			buf0_1_export                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			buf1_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			buf0_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			ra_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			de_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			ra_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			de_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			de_counter_load_export                    : out   std_logic_vector(31 downto 0);                    -- export
+			de_counter_load_1_export                  : out   std_logic_vector(31 downto 0);                    -- export
+			de_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
+			ra_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
+			de_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
+			ra_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
+			de_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
+			ra_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
+			de_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
+			ra_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
+			de_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
+			ra_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
+			de_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
+			ra_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
+			de_backlash_duration_export               : out   std_logic_vector(31 downto 0);                    -- export
+			ra_backlash_duration_export               : out   std_logic_vector(31 downto 0)                     -- export
 		);
 	end component soc_system;
 
@@ -117,6 +140,14 @@
 			button_pio_external_connection_export     => CONNECTED_TO_button_pio_external_connection_export,     -- button_pio_external_connection.export
 			clk_clk                                   => CONNECTED_TO_clk_clk,                                   --                            clk.clk
 			clk_130_clk                               => CONNECTED_TO_clk_130_clk,                               --                        clk_130.clk
+			ctrl_acknowledge                          => CONNECTED_TO_ctrl_acknowledge,                          --                           ctrl.acknowledge
+			ctrl_irq                                  => CONNECTED_TO_ctrl_irq,                                  --                               .irq
+			ctrl_address                              => CONNECTED_TO_ctrl_address,                              --                               .address
+			ctrl_bus_enable                           => CONNECTED_TO_ctrl_bus_enable,                           --                               .bus_enable
+			ctrl_byte_enable                          => CONNECTED_TO_ctrl_byte_enable,                          --                               .byte_enable
+			ctrl_rw                                   => CONNECTED_TO_ctrl_rw,                                   --                               .rw
+			ctrl_write_data                           => CONNECTED_TO_ctrl_write_data,                           --                               .write_data
+			ctrl_read_data                            => CONNECTED_TO_ctrl_read_data,                            --                               .read_data
 			dipsw_pio_external_connection_export      => CONNECTED_TO_dipsw_pio_external_connection_export,      --  dipsw_pio_external_connection.export
 			hps_0_f2h_cold_reset_req_reset_n          => CONNECTED_TO_hps_0_f2h_cold_reset_req_reset_n,          --       hps_0_f2h_cold_reset_req.reset_n
 			hps_0_f2h_debug_reset_req_reset_n         => CONNECTED_TO_hps_0_f2h_debug_reset_req_reset_n,         --      hps_0_f2h_debug_reset_req.reset_n
@@ -197,13 +228,28 @@
 			sts_rw                                    => CONNECTED_TO_sts_rw,                                    --                               .rw
 			sts_write_data                            => CONNECTED_TO_sts_write_data,                            --                               .write_data
 			sts_read_data                             => CONNECTED_TO_sts_read_data,                             --                               .read_data
-			ctrl_acknowledge                          => CONNECTED_TO_ctrl_acknowledge,                          --                           ctrl.acknowledge
-			ctrl_irq                                  => CONNECTED_TO_ctrl_irq,                                  --                               .irq
-			ctrl_address                              => CONNECTED_TO_ctrl_address,                              --                               .address
-			ctrl_bus_enable                           => CONNECTED_TO_ctrl_bus_enable,                           --                               .bus_enable
-			ctrl_byte_enable                          => CONNECTED_TO_ctrl_byte_enable,                          --                               .byte_enable
-			ctrl_rw                                   => CONNECTED_TO_ctrl_rw,                                   --                               .rw
-			ctrl_write_data                           => CONNECTED_TO_ctrl_write_data,                           --                               .write_data
-			ctrl_read_data                            => CONNECTED_TO_ctrl_read_data                             --                               .read_data
+			buf0_1_export                             => CONNECTED_TO_buf0_1_export,                             --                         buf0_1.export
+			buf1_export                               => CONNECTED_TO_buf1_export,                               --                           buf1.export
+			buf0_export                               => CONNECTED_TO_buf0_export,                               --                           buf0.export
+			ra_status_export                          => CONNECTED_TO_ra_status_export,                          --                      ra_status.export
+			de_status_export                          => CONNECTED_TO_de_status_export,                          --                      de_status.export
+			ra_count_export                           => CONNECTED_TO_ra_count_export,                           --                       ra_count.export
+			de_count_export                           => CONNECTED_TO_de_count_export,                           --                       de_count.export
+			de_counter_load_export                    => CONNECTED_TO_de_counter_load_export,                    --                de_counter_load.export
+			de_counter_load_1_export                  => CONNECTED_TO_de_counter_load_1_export,                  --              de_counter_load_1.export
+			de_counter_max_export                     => CONNECTED_TO_de_counter_max_export,                     --                 de_counter_max.export
+			ra_counter_max_export                     => CONNECTED_TO_ra_counter_max_export,                     --                 ra_counter_max.export
+			de_cmdcontrol_export                      => CONNECTED_TO_de_cmdcontrol_export,                      --                  de_cmdcontrol.export
+			ra_cmdcontrol_export                      => CONNECTED_TO_ra_cmdcontrol_export,                      --                  ra_cmdcontrol.export
+			de_cmdduration_export                     => CONNECTED_TO_de_cmdduration_export,                     --                 de_cmdduration.export
+			ra_cmdduration_export                     => CONNECTED_TO_ra_cmdduration_export,                     --                 ra_cmdduration.export
+			de_trackctrl_export                       => CONNECTED_TO_de_trackctrl_export,                       --                   de_trackctrl.export
+			ra_trackctrl_export                       => CONNECTED_TO_ra_trackctrl_export,                       --                   ra_trackctrl.export
+			de_cmdtick_export                         => CONNECTED_TO_de_cmdtick_export,                         --                     de_cmdtick.export
+			ra_cmdtick_export                         => CONNECTED_TO_ra_cmdtick_export,                         --                     ra_cmdtick.export
+			de_backlash_tick_export                   => CONNECTED_TO_de_backlash_tick_export,                   --               de_backlash_tick.export
+			ra_backlash_tick_export                   => CONNECTED_TO_ra_backlash_tick_export,                   --               ra_backlash_tick.export
+			de_backlash_duration_export               => CONNECTED_TO_de_backlash_duration_export,               --           de_backlash_duration.export
+			ra_backlash_duration_export               => CONNECTED_TO_ra_backlash_duration_export                --           ra_backlash_duration.export
 		);
 

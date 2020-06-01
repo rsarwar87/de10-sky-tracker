@@ -17,6 +17,9 @@ entity soc_system is
 		alt_vip_itc_0_clocked_video_vid_f         : out   std_logic;                                        --                               .vid_f
 		alt_vip_itc_0_clocked_video_vid_h         : out   std_logic;                                        --                               .vid_h
 		alt_vip_itc_0_clocked_video_vid_v         : out   std_logic;                                        --                               .vid_v
+		buf0_export                               : in    std_logic_vector(31 downto 0) := (others => '0'); --                           buf0.export
+		buf0_1_export                             : in    std_logic_vector(31 downto 0) := (others => '0'); --                         buf0_1.export
+		buf1_export                               : in    std_logic_vector(31 downto 0) := (others => '0'); --                           buf1.export
 		button_pio_external_connection_export     : in    std_logic_vector(1 downto 0)  := (others => '0'); -- button_pio_external_connection.export
 		clk_clk                                   : in    std_logic                     := '0';             --                            clk.clk
 		clk_130_clk                               : in    std_logic                     := '0';             --                        clk_130.clk
@@ -28,6 +31,17 @@ entity soc_system is
 		ctrl_rw                                   : out   std_logic;                                        --                               .rw
 		ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    --                               .write_data
 		ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => '0'); --                               .read_data
+		de_backlash_duration_export               : out   std_logic_vector(31 downto 0);                    --           de_backlash_duration.export
+		de_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    --               de_backlash_tick.export
+		de_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    --                  de_cmdcontrol.export
+		de_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    --                 de_cmdduration.export
+		de_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    --                     de_cmdtick.export
+		de_count_export                           : in    std_logic_vector(31 downto 0) := (others => '0'); --                       de_count.export
+		de_counter_load_export                    : out   std_logic_vector(31 downto 0);                    --                de_counter_load.export
+		de_counter_load_1_export                  : out   std_logic_vector(31 downto 0);                    --              de_counter_load_1.export
+		de_counter_max_export                     : out   std_logic_vector(31 downto 0);                    --                 de_counter_max.export
+		de_status_export                          : in    std_logic_vector(31 downto 0) := (others => '0'); --                      de_status.export
+		de_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    --                   de_trackctrl.export
 		dipsw_pio_external_connection_export      : in    std_logic_vector(3 downto 0)  := (others => '0'); --  dipsw_pio_external_connection.export
 		hps_0_f2h_cold_reset_req_reset_n          : in    std_logic                     := '0';             --       hps_0_f2h_cold_reset_req.reset_n
 		hps_0_f2h_debug_reset_req_reset_n         : in    std_logic                     := '0';             --      hps_0_f2h_debug_reset_req.reset_n
@@ -99,6 +113,15 @@ entity soc_system is
 		memory_mem_odt                            : out   std_logic;                                        --                               .mem_odt
 		memory_mem_dm                             : out   std_logic_vector(3 downto 0);                     --                               .mem_dm
 		memory_oct_rzqin                          : in    std_logic                     := '0';             --                               .oct_rzqin
+		ra_backlash_duration_export               : out   std_logic_vector(31 downto 0);                    --           ra_backlash_duration.export
+		ra_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    --               ra_backlash_tick.export
+		ra_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    --                  ra_cmdcontrol.export
+		ra_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    --                 ra_cmdduration.export
+		ra_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    --                     ra_cmdtick.export
+		ra_count_export                           : in    std_logic_vector(31 downto 0) := (others => '0'); --                       ra_count.export
+		ra_counter_max_export                     : out   std_logic_vector(31 downto 0);                    --                 ra_counter_max.export
+		ra_status_export                          : in    std_logic_vector(31 downto 0) := (others => '0'); --                      ra_status.export
+		ra_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    --                   ra_trackctrl.export
 		reset_reset_n                             : in    std_logic                     := '0';             --                          reset.reset_n
 		sts_acknowledge                           : in    std_logic                     := '0';             --                            sts.acknowledge
 		sts_irq                                   : in    std_logic                     := '0';             --                               .irq
@@ -223,6 +246,20 @@ architecture rtl of soc_system is
 		);
 	end component alt_vipvfr131_vfr;
 
+	component soc_system_buf0 is
+		port (
+			clk        : in  std_logic                     := 'X';             -- clk
+			reset_n    : in  std_logic                     := 'X';             -- reset_n
+			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			write_n    : in  std_logic                     := 'X';             -- write_n
+			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			chipselect : in  std_logic                     := 'X';             -- chipselect
+			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
+			in_port    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			irq        : out std_logic                                         -- irq
+		);
+	end component soc_system_buf0;
+
 	component soc_system_button_pio is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
@@ -260,6 +297,19 @@ architecture rtl of soc_system is
 			read_data          : in  std_logic_vector(31 downto 0) := (others => 'X')  -- export
 		);
 	end component soc_system_ctrl;
+
+	component soc_system_de_backlash_duration is
+		port (
+			clk        : in  std_logic                     := 'X';             -- clk
+			reset_n    : in  std_logic                     := 'X';             -- reset_n
+			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			write_n    : in  std_logic                     := 'X';             -- write_n
+			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			chipselect : in  std_logic                     := 'X';             -- chipselect
+			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
+			out_port   : out std_logic_vector(31 downto 0)                     -- export
+		);
+	end component soc_system_de_backlash_duration;
 
 	component soc_system_dipsw_pio is
 		port (
@@ -718,6 +768,21 @@ architecture rtl of soc_system is
 			alt_vip_vfr_hdmi_avalon_slave_read                             : out std_logic;                                        -- read
 			alt_vip_vfr_hdmi_avalon_slave_readdata                         : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			alt_vip_vfr_hdmi_avalon_slave_writedata                        : out std_logic_vector(31 downto 0);                    -- writedata
+			buf0_s1_address                                                : out std_logic_vector(1 downto 0);                     -- address
+			buf0_s1_write                                                  : out std_logic;                                        -- write
+			buf0_s1_readdata                                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			buf0_s1_writedata                                              : out std_logic_vector(31 downto 0);                    -- writedata
+			buf0_s1_chipselect                                             : out std_logic;                                        -- chipselect
+			buf1_s1_address                                                : out std_logic_vector(1 downto 0);                     -- address
+			buf1_s1_write                                                  : out std_logic;                                        -- write
+			buf1_s1_readdata                                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			buf1_s1_writedata                                              : out std_logic_vector(31 downto 0);                    -- writedata
+			buf1_s1_chipselect                                             : out std_logic;                                        -- chipselect
+			buf2_s1_address                                                : out std_logic_vector(1 downto 0);                     -- address
+			buf2_s1_write                                                  : out std_logic;                                        -- write
+			buf2_s1_readdata                                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			buf2_s1_writedata                                              : out std_logic_vector(31 downto 0);                    -- writedata
+			buf2_s1_chipselect                                             : out std_logic;                                        -- chipselect
 			button_pio_s1_address                                          : out std_logic_vector(1 downto 0);                     -- address
 			button_pio_s1_write                                            : out std_logic;                                        -- write
 			button_pio_s1_readdata                                         : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -731,6 +796,56 @@ architecture rtl of soc_system is
 			ctrl_avalon_slave_byteenable                                   : out std_logic_vector(3 downto 0);                     -- byteenable
 			ctrl_avalon_slave_waitrequest                                  : in  std_logic                     := 'X';             -- waitrequest
 			ctrl_avalon_slave_chipselect                                   : out std_logic;                                        -- chipselect
+			de_backlash_duration_s1_address                                : out std_logic_vector(1 downto 0);                     -- address
+			de_backlash_duration_s1_write                                  : out std_logic;                                        -- write
+			de_backlash_duration_s1_readdata                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_backlash_duration_s1_writedata                              : out std_logic_vector(31 downto 0);                    -- writedata
+			de_backlash_duration_s1_chipselect                             : out std_logic;                                        -- chipselect
+			de_backlash_tick_s1_address                                    : out std_logic_vector(1 downto 0);                     -- address
+			de_backlash_tick_s1_write                                      : out std_logic;                                        -- write
+			de_backlash_tick_s1_readdata                                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_backlash_tick_s1_writedata                                  : out std_logic_vector(31 downto 0);                    -- writedata
+			de_backlash_tick_s1_chipselect                                 : out std_logic;                                        -- chipselect
+			de_cmdcontrol_s1_address                                       : out std_logic_vector(1 downto 0);                     -- address
+			de_cmdcontrol_s1_write                                         : out std_logic;                                        -- write
+			de_cmdcontrol_s1_readdata                                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_cmdcontrol_s1_writedata                                     : out std_logic_vector(31 downto 0);                    -- writedata
+			de_cmdcontrol_s1_chipselect                                    : out std_logic;                                        -- chipselect
+			de_cmdduration_s1_address                                      : out std_logic_vector(1 downto 0);                     -- address
+			de_cmdduration_s1_write                                        : out std_logic;                                        -- write
+			de_cmdduration_s1_readdata                                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_cmdduration_s1_writedata                                    : out std_logic_vector(31 downto 0);                    -- writedata
+			de_cmdduration_s1_chipselect                                   : out std_logic;                                        -- chipselect
+			de_cmdtick_s1_address                                          : out std_logic_vector(1 downto 0);                     -- address
+			de_cmdtick_s1_write                                            : out std_logic;                                        -- write
+			de_cmdtick_s1_readdata                                         : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_cmdtick_s1_writedata                                        : out std_logic_vector(31 downto 0);                    -- writedata
+			de_cmdtick_s1_chipselect                                       : out std_logic;                                        -- chipselect
+			de_count_s1_address                                            : out std_logic_vector(1 downto 0);                     -- address
+			de_count_s1_write                                              : out std_logic;                                        -- write
+			de_count_s1_readdata                                           : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_count_s1_writedata                                          : out std_logic_vector(31 downto 0);                    -- writedata
+			de_count_s1_chipselect                                         : out std_logic;                                        -- chipselect
+			de_counter_load_s1_address                                     : out std_logic_vector(1 downto 0);                     -- address
+			de_counter_load_s1_write                                       : out std_logic;                                        -- write
+			de_counter_load_s1_readdata                                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_counter_load_s1_writedata                                   : out std_logic_vector(31 downto 0);                    -- writedata
+			de_counter_load_s1_chipselect                                  : out std_logic;                                        -- chipselect
+			de_counter_max_s1_address                                      : out std_logic_vector(1 downto 0);                     -- address
+			de_counter_max_s1_write                                        : out std_logic;                                        -- write
+			de_counter_max_s1_readdata                                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_counter_max_s1_writedata                                    : out std_logic_vector(31 downto 0);                    -- writedata
+			de_counter_max_s1_chipselect                                   : out std_logic;                                        -- chipselect
+			de_status_s1_address                                           : out std_logic_vector(1 downto 0);                     -- address
+			de_status_s1_write                                             : out std_logic;                                        -- write
+			de_status_s1_readdata                                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_status_s1_writedata                                         : out std_logic_vector(31 downto 0);                    -- writedata
+			de_status_s1_chipselect                                        : out std_logic;                                        -- chipselect
+			de_trackctrl_s1_address                                        : out std_logic_vector(1 downto 0);                     -- address
+			de_trackctrl_s1_write                                          : out std_logic;                                        -- write
+			de_trackctrl_s1_readdata                                       : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			de_trackctrl_s1_writedata                                      : out std_logic_vector(31 downto 0);                    -- writedata
+			de_trackctrl_s1_chipselect                                     : out std_logic;                                        -- chipselect
 			dipsw_pio_s1_address                                           : out std_logic_vector(1 downto 0);                     -- address
 			dipsw_pio_s1_write                                             : out std_logic;                                        -- write
 			dipsw_pio_s1_readdata                                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -753,6 +868,56 @@ architecture rtl of soc_system is
 			led_pio_s1_readdata                                            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			led_pio_s1_writedata                                           : out std_logic_vector(31 downto 0);                    -- writedata
 			led_pio_s1_chipselect                                          : out std_logic;                                        -- chipselect
+			ra_backlash_duration_s1_address                                : out std_logic_vector(1 downto 0);                     -- address
+			ra_backlash_duration_s1_write                                  : out std_logic;                                        -- write
+			ra_backlash_duration_s1_readdata                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_backlash_duration_s1_writedata                              : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_backlash_duration_s1_chipselect                             : out std_logic;                                        -- chipselect
+			ra_backlash_tick_s1_address                                    : out std_logic_vector(1 downto 0);                     -- address
+			ra_backlash_tick_s1_write                                      : out std_logic;                                        -- write
+			ra_backlash_tick_s1_readdata                                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_backlash_tick_s1_writedata                                  : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_backlash_tick_s1_chipselect                                 : out std_logic;                                        -- chipselect
+			ra_cmdcontrol_s1_address                                       : out std_logic_vector(1 downto 0);                     -- address
+			ra_cmdcontrol_s1_write                                         : out std_logic;                                        -- write
+			ra_cmdcontrol_s1_readdata                                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_cmdcontrol_s1_writedata                                     : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_cmdcontrol_s1_chipselect                                    : out std_logic;                                        -- chipselect
+			ra_cmdduration_s1_address                                      : out std_logic_vector(1 downto 0);                     -- address
+			ra_cmdduration_s1_write                                        : out std_logic;                                        -- write
+			ra_cmdduration_s1_readdata                                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_cmdduration_s1_writedata                                    : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_cmdduration_s1_chipselect                                   : out std_logic;                                        -- chipselect
+			ra_cmdtick_s1_address                                          : out std_logic_vector(1 downto 0);                     -- address
+			ra_cmdtick_s1_write                                            : out std_logic;                                        -- write
+			ra_cmdtick_s1_readdata                                         : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_cmdtick_s1_writedata                                        : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_cmdtick_s1_chipselect                                       : out std_logic;                                        -- chipselect
+			ra_count_s1_address                                            : out std_logic_vector(1 downto 0);                     -- address
+			ra_count_s1_write                                              : out std_logic;                                        -- write
+			ra_count_s1_readdata                                           : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_count_s1_writedata                                          : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_count_s1_chipselect                                         : out std_logic;                                        -- chipselect
+			ra_counter_load_s1_address                                     : out std_logic_vector(1 downto 0);                     -- address
+			ra_counter_load_s1_write                                       : out std_logic;                                        -- write
+			ra_counter_load_s1_readdata                                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_counter_load_s1_writedata                                   : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_counter_load_s1_chipselect                                  : out std_logic;                                        -- chipselect
+			ra_counter_max_s1_address                                      : out std_logic_vector(1 downto 0);                     -- address
+			ra_counter_max_s1_write                                        : out std_logic;                                        -- write
+			ra_counter_max_s1_readdata                                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_counter_max_s1_writedata                                    : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_counter_max_s1_chipselect                                   : out std_logic;                                        -- chipselect
+			ra_status_s1_address                                           : out std_logic_vector(1 downto 0);                     -- address
+			ra_status_s1_write                                             : out std_logic;                                        -- write
+			ra_status_s1_readdata                                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_status_s1_writedata                                         : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_status_s1_chipselect                                        : out std_logic;                                        -- chipselect
+			ra_trackctrl_s1_address                                        : out std_logic_vector(1 downto 0);                     -- address
+			ra_trackctrl_s1_write                                          : out std_logic;                                        -- write
+			ra_trackctrl_s1_readdata                                       : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ra_trackctrl_s1_writedata                                      : out std_logic_vector(31 downto 0);                    -- writedata
+			ra_trackctrl_s1_chipselect                                     : out std_logic;                                        -- chipselect
 			sts_avalon_slave_address                                       : out std_logic_vector(9 downto 0);                     -- address
 			sts_avalon_slave_write                                         : out std_logic;                                        -- write
 			sts_avalon_slave_read                                          : out std_logic;                                        -- read
@@ -1060,6 +1225,121 @@ architecture rtl of soc_system is
 	signal mm_interconnect_2_button_pio_s1_address                       : std_logic_vector(1 downto 0);   -- mm_interconnect_2:button_pio_s1_address -> button_pio:address
 	signal mm_interconnect_2_button_pio_s1_write                         : std_logic;                      -- mm_interconnect_2:button_pio_s1_write -> mm_interconnect_2_button_pio_s1_write:in
 	signal mm_interconnect_2_button_pio_s1_writedata                     : std_logic_vector(31 downto 0);  -- mm_interconnect_2:button_pio_s1_writedata -> button_pio:writedata
+	signal mm_interconnect_2_buf2_s1_chipselect                          : std_logic;                      -- mm_interconnect_2:buf2_s1_chipselect -> buf2:chipselect
+	signal mm_interconnect_2_buf2_s1_readdata                            : std_logic_vector(31 downto 0);  -- buf2:readdata -> mm_interconnect_2:buf2_s1_readdata
+	signal mm_interconnect_2_buf2_s1_address                             : std_logic_vector(1 downto 0);   -- mm_interconnect_2:buf2_s1_address -> buf2:address
+	signal mm_interconnect_2_buf2_s1_write                               : std_logic;                      -- mm_interconnect_2:buf2_s1_write -> mm_interconnect_2_buf2_s1_write:in
+	signal mm_interconnect_2_buf2_s1_writedata                           : std_logic_vector(31 downto 0);  -- mm_interconnect_2:buf2_s1_writedata -> buf2:writedata
+	signal mm_interconnect_2_buf1_s1_chipselect                          : std_logic;                      -- mm_interconnect_2:buf1_s1_chipselect -> buf1:chipselect
+	signal mm_interconnect_2_buf1_s1_readdata                            : std_logic_vector(31 downto 0);  -- buf1:readdata -> mm_interconnect_2:buf1_s1_readdata
+	signal mm_interconnect_2_buf1_s1_address                             : std_logic_vector(1 downto 0);   -- mm_interconnect_2:buf1_s1_address -> buf1:address
+	signal mm_interconnect_2_buf1_s1_write                               : std_logic;                      -- mm_interconnect_2:buf1_s1_write -> mm_interconnect_2_buf1_s1_write:in
+	signal mm_interconnect_2_buf1_s1_writedata                           : std_logic_vector(31 downto 0);  -- mm_interconnect_2:buf1_s1_writedata -> buf1:writedata
+	signal mm_interconnect_2_buf0_s1_chipselect                          : std_logic;                      -- mm_interconnect_2:buf0_s1_chipselect -> buf0:chipselect
+	signal mm_interconnect_2_buf0_s1_readdata                            : std_logic_vector(31 downto 0);  -- buf0:readdata -> mm_interconnect_2:buf0_s1_readdata
+	signal mm_interconnect_2_buf0_s1_address                             : std_logic_vector(1 downto 0);   -- mm_interconnect_2:buf0_s1_address -> buf0:address
+	signal mm_interconnect_2_buf0_s1_write                               : std_logic;                      -- mm_interconnect_2:buf0_s1_write -> mm_interconnect_2_buf0_s1_write:in
+	signal mm_interconnect_2_buf0_s1_writedata                           : std_logic_vector(31 downto 0);  -- mm_interconnect_2:buf0_s1_writedata -> buf0:writedata
+	signal mm_interconnect_2_de_count_s1_chipselect                      : std_logic;                      -- mm_interconnect_2:de_count_s1_chipselect -> de_count:chipselect
+	signal mm_interconnect_2_de_count_s1_readdata                        : std_logic_vector(31 downto 0);  -- de_count:readdata -> mm_interconnect_2:de_count_s1_readdata
+	signal mm_interconnect_2_de_count_s1_address                         : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_count_s1_address -> de_count:address
+	signal mm_interconnect_2_de_count_s1_write                           : std_logic;                      -- mm_interconnect_2:de_count_s1_write -> mm_interconnect_2_de_count_s1_write:in
+	signal mm_interconnect_2_de_count_s1_writedata                       : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_count_s1_writedata -> de_count:writedata
+	signal mm_interconnect_2_ra_count_s1_chipselect                      : std_logic;                      -- mm_interconnect_2:ra_count_s1_chipselect -> ra_count:chipselect
+	signal mm_interconnect_2_ra_count_s1_readdata                        : std_logic_vector(31 downto 0);  -- ra_count:readdata -> mm_interconnect_2:ra_count_s1_readdata
+	signal mm_interconnect_2_ra_count_s1_address                         : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_count_s1_address -> ra_count:address
+	signal mm_interconnect_2_ra_count_s1_write                           : std_logic;                      -- mm_interconnect_2:ra_count_s1_write -> mm_interconnect_2_ra_count_s1_write:in
+	signal mm_interconnect_2_ra_count_s1_writedata                       : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_count_s1_writedata -> ra_count:writedata
+	signal mm_interconnect_2_de_status_s1_chipselect                     : std_logic;                      -- mm_interconnect_2:de_status_s1_chipselect -> de_status:chipselect
+	signal mm_interconnect_2_de_status_s1_readdata                       : std_logic_vector(31 downto 0);  -- de_status:readdata -> mm_interconnect_2:de_status_s1_readdata
+	signal mm_interconnect_2_de_status_s1_address                        : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_status_s1_address -> de_status:address
+	signal mm_interconnect_2_de_status_s1_write                          : std_logic;                      -- mm_interconnect_2:de_status_s1_write -> mm_interconnect_2_de_status_s1_write:in
+	signal mm_interconnect_2_de_status_s1_writedata                      : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_status_s1_writedata -> de_status:writedata
+	signal mm_interconnect_2_ra_status_s1_chipselect                     : std_logic;                      -- mm_interconnect_2:ra_status_s1_chipselect -> ra_status:chipselect
+	signal mm_interconnect_2_ra_status_s1_readdata                       : std_logic_vector(31 downto 0);  -- ra_status:readdata -> mm_interconnect_2:ra_status_s1_readdata
+	signal mm_interconnect_2_ra_status_s1_address                        : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_status_s1_address -> ra_status:address
+	signal mm_interconnect_2_ra_status_s1_write                          : std_logic;                      -- mm_interconnect_2:ra_status_s1_write -> mm_interconnect_2_ra_status_s1_write:in
+	signal mm_interconnect_2_ra_status_s1_writedata                      : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_status_s1_writedata -> ra_status:writedata
+	signal mm_interconnect_2_de_counter_load_s1_chipselect               : std_logic;                      -- mm_interconnect_2:de_counter_load_s1_chipselect -> de_counter_load:chipselect
+	signal mm_interconnect_2_de_counter_load_s1_readdata                 : std_logic_vector(31 downto 0);  -- de_counter_load:readdata -> mm_interconnect_2:de_counter_load_s1_readdata
+	signal mm_interconnect_2_de_counter_load_s1_address                  : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_counter_load_s1_address -> de_counter_load:address
+	signal mm_interconnect_2_de_counter_load_s1_write                    : std_logic;                      -- mm_interconnect_2:de_counter_load_s1_write -> mm_interconnect_2_de_counter_load_s1_write:in
+	signal mm_interconnect_2_de_counter_load_s1_writedata                : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_counter_load_s1_writedata -> de_counter_load:writedata
+	signal mm_interconnect_2_ra_counter_load_s1_chipselect               : std_logic;                      -- mm_interconnect_2:ra_counter_load_s1_chipselect -> ra_counter_load:chipselect
+	signal mm_interconnect_2_ra_counter_load_s1_readdata                 : std_logic_vector(31 downto 0);  -- ra_counter_load:readdata -> mm_interconnect_2:ra_counter_load_s1_readdata
+	signal mm_interconnect_2_ra_counter_load_s1_address                  : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_counter_load_s1_address -> ra_counter_load:address
+	signal mm_interconnect_2_ra_counter_load_s1_write                    : std_logic;                      -- mm_interconnect_2:ra_counter_load_s1_write -> mm_interconnect_2_ra_counter_load_s1_write:in
+	signal mm_interconnect_2_ra_counter_load_s1_writedata                : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_counter_load_s1_writedata -> ra_counter_load:writedata
+	signal mm_interconnect_2_de_counter_max_s1_chipselect                : std_logic;                      -- mm_interconnect_2:de_counter_max_s1_chipselect -> de_counter_max:chipselect
+	signal mm_interconnect_2_de_counter_max_s1_readdata                  : std_logic_vector(31 downto 0);  -- de_counter_max:readdata -> mm_interconnect_2:de_counter_max_s1_readdata
+	signal mm_interconnect_2_de_counter_max_s1_address                   : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_counter_max_s1_address -> de_counter_max:address
+	signal mm_interconnect_2_de_counter_max_s1_write                     : std_logic;                      -- mm_interconnect_2:de_counter_max_s1_write -> mm_interconnect_2_de_counter_max_s1_write:in
+	signal mm_interconnect_2_de_counter_max_s1_writedata                 : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_counter_max_s1_writedata -> de_counter_max:writedata
+	signal mm_interconnect_2_ra_counter_max_s1_chipselect                : std_logic;                      -- mm_interconnect_2:ra_counter_max_s1_chipselect -> ra_counter_max:chipselect
+	signal mm_interconnect_2_ra_counter_max_s1_readdata                  : std_logic_vector(31 downto 0);  -- ra_counter_max:readdata -> mm_interconnect_2:ra_counter_max_s1_readdata
+	signal mm_interconnect_2_ra_counter_max_s1_address                   : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_counter_max_s1_address -> ra_counter_max:address
+	signal mm_interconnect_2_ra_counter_max_s1_write                     : std_logic;                      -- mm_interconnect_2:ra_counter_max_s1_write -> mm_interconnect_2_ra_counter_max_s1_write:in
+	signal mm_interconnect_2_ra_counter_max_s1_writedata                 : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_counter_max_s1_writedata -> ra_counter_max:writedata
+	signal mm_interconnect_2_de_cmdcontrol_s1_chipselect                 : std_logic;                      -- mm_interconnect_2:de_cmdcontrol_s1_chipselect -> de_cmdcontrol:chipselect
+	signal mm_interconnect_2_de_cmdcontrol_s1_readdata                   : std_logic_vector(31 downto 0);  -- de_cmdcontrol:readdata -> mm_interconnect_2:de_cmdcontrol_s1_readdata
+	signal mm_interconnect_2_de_cmdcontrol_s1_address                    : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_cmdcontrol_s1_address -> de_cmdcontrol:address
+	signal mm_interconnect_2_de_cmdcontrol_s1_write                      : std_logic;                      -- mm_interconnect_2:de_cmdcontrol_s1_write -> mm_interconnect_2_de_cmdcontrol_s1_write:in
+	signal mm_interconnect_2_de_cmdcontrol_s1_writedata                  : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_cmdcontrol_s1_writedata -> de_cmdcontrol:writedata
+	signal mm_interconnect_2_ra_cmdcontrol_s1_chipselect                 : std_logic;                      -- mm_interconnect_2:ra_cmdcontrol_s1_chipselect -> ra_cmdcontrol:chipselect
+	signal mm_interconnect_2_ra_cmdcontrol_s1_readdata                   : std_logic_vector(31 downto 0);  -- ra_cmdcontrol:readdata -> mm_interconnect_2:ra_cmdcontrol_s1_readdata
+	signal mm_interconnect_2_ra_cmdcontrol_s1_address                    : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_cmdcontrol_s1_address -> ra_cmdcontrol:address
+	signal mm_interconnect_2_ra_cmdcontrol_s1_write                      : std_logic;                      -- mm_interconnect_2:ra_cmdcontrol_s1_write -> mm_interconnect_2_ra_cmdcontrol_s1_write:in
+	signal mm_interconnect_2_ra_cmdcontrol_s1_writedata                  : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_cmdcontrol_s1_writedata -> ra_cmdcontrol:writedata
+	signal mm_interconnect_2_de_cmdduration_s1_chipselect                : std_logic;                      -- mm_interconnect_2:de_cmdduration_s1_chipselect -> de_cmdduration:chipselect
+	signal mm_interconnect_2_de_cmdduration_s1_readdata                  : std_logic_vector(31 downto 0);  -- de_cmdduration:readdata -> mm_interconnect_2:de_cmdduration_s1_readdata
+	signal mm_interconnect_2_de_cmdduration_s1_address                   : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_cmdduration_s1_address -> de_cmdduration:address
+	signal mm_interconnect_2_de_cmdduration_s1_write                     : std_logic;                      -- mm_interconnect_2:de_cmdduration_s1_write -> mm_interconnect_2_de_cmdduration_s1_write:in
+	signal mm_interconnect_2_de_cmdduration_s1_writedata                 : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_cmdduration_s1_writedata -> de_cmdduration:writedata
+	signal mm_interconnect_2_ra_cmdduration_s1_chipselect                : std_logic;                      -- mm_interconnect_2:ra_cmdduration_s1_chipselect -> ra_cmdduration:chipselect
+	signal mm_interconnect_2_ra_cmdduration_s1_readdata                  : std_logic_vector(31 downto 0);  -- ra_cmdduration:readdata -> mm_interconnect_2:ra_cmdduration_s1_readdata
+	signal mm_interconnect_2_ra_cmdduration_s1_address                   : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_cmdduration_s1_address -> ra_cmdduration:address
+	signal mm_interconnect_2_ra_cmdduration_s1_write                     : std_logic;                      -- mm_interconnect_2:ra_cmdduration_s1_write -> mm_interconnect_2_ra_cmdduration_s1_write:in
+	signal mm_interconnect_2_ra_cmdduration_s1_writedata                 : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_cmdduration_s1_writedata -> ra_cmdduration:writedata
+	signal mm_interconnect_2_de_trackctrl_s1_chipselect                  : std_logic;                      -- mm_interconnect_2:de_trackctrl_s1_chipselect -> de_trackctrl:chipselect
+	signal mm_interconnect_2_de_trackctrl_s1_readdata                    : std_logic_vector(31 downto 0);  -- de_trackctrl:readdata -> mm_interconnect_2:de_trackctrl_s1_readdata
+	signal mm_interconnect_2_de_trackctrl_s1_address                     : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_trackctrl_s1_address -> de_trackctrl:address
+	signal mm_interconnect_2_de_trackctrl_s1_write                       : std_logic;                      -- mm_interconnect_2:de_trackctrl_s1_write -> mm_interconnect_2_de_trackctrl_s1_write:in
+	signal mm_interconnect_2_de_trackctrl_s1_writedata                   : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_trackctrl_s1_writedata -> de_trackctrl:writedata
+	signal mm_interconnect_2_ra_trackctrl_s1_chipselect                  : std_logic;                      -- mm_interconnect_2:ra_trackctrl_s1_chipselect -> ra_trackctrl:chipselect
+	signal mm_interconnect_2_ra_trackctrl_s1_readdata                    : std_logic_vector(31 downto 0);  -- ra_trackctrl:readdata -> mm_interconnect_2:ra_trackctrl_s1_readdata
+	signal mm_interconnect_2_ra_trackctrl_s1_address                     : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_trackctrl_s1_address -> ra_trackctrl:address
+	signal mm_interconnect_2_ra_trackctrl_s1_write                       : std_logic;                      -- mm_interconnect_2:ra_trackctrl_s1_write -> mm_interconnect_2_ra_trackctrl_s1_write:in
+	signal mm_interconnect_2_ra_trackctrl_s1_writedata                   : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_trackctrl_s1_writedata -> ra_trackctrl:writedata
+	signal mm_interconnect_2_de_cmdtick_s1_chipselect                    : std_logic;                      -- mm_interconnect_2:de_cmdtick_s1_chipselect -> de_cmdtick:chipselect
+	signal mm_interconnect_2_de_cmdtick_s1_readdata                      : std_logic_vector(31 downto 0);  -- de_cmdtick:readdata -> mm_interconnect_2:de_cmdtick_s1_readdata
+	signal mm_interconnect_2_de_cmdtick_s1_address                       : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_cmdtick_s1_address -> de_cmdtick:address
+	signal mm_interconnect_2_de_cmdtick_s1_write                         : std_logic;                      -- mm_interconnect_2:de_cmdtick_s1_write -> mm_interconnect_2_de_cmdtick_s1_write:in
+	signal mm_interconnect_2_de_cmdtick_s1_writedata                     : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_cmdtick_s1_writedata -> de_cmdtick:writedata
+	signal mm_interconnect_2_ra_cmdtick_s1_chipselect                    : std_logic;                      -- mm_interconnect_2:ra_cmdtick_s1_chipselect -> ra_cmdtick:chipselect
+	signal mm_interconnect_2_ra_cmdtick_s1_readdata                      : std_logic_vector(31 downto 0);  -- ra_cmdtick:readdata -> mm_interconnect_2:ra_cmdtick_s1_readdata
+	signal mm_interconnect_2_ra_cmdtick_s1_address                       : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_cmdtick_s1_address -> ra_cmdtick:address
+	signal mm_interconnect_2_ra_cmdtick_s1_write                         : std_logic;                      -- mm_interconnect_2:ra_cmdtick_s1_write -> mm_interconnect_2_ra_cmdtick_s1_write:in
+	signal mm_interconnect_2_ra_cmdtick_s1_writedata                     : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_cmdtick_s1_writedata -> ra_cmdtick:writedata
+	signal mm_interconnect_2_de_backlash_tick_s1_chipselect              : std_logic;                      -- mm_interconnect_2:de_backlash_tick_s1_chipselect -> de_backlash_tick:chipselect
+	signal mm_interconnect_2_de_backlash_tick_s1_readdata                : std_logic_vector(31 downto 0);  -- de_backlash_tick:readdata -> mm_interconnect_2:de_backlash_tick_s1_readdata
+	signal mm_interconnect_2_de_backlash_tick_s1_address                 : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_backlash_tick_s1_address -> de_backlash_tick:address
+	signal mm_interconnect_2_de_backlash_tick_s1_write                   : std_logic;                      -- mm_interconnect_2:de_backlash_tick_s1_write -> mm_interconnect_2_de_backlash_tick_s1_write:in
+	signal mm_interconnect_2_de_backlash_tick_s1_writedata               : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_backlash_tick_s1_writedata -> de_backlash_tick:writedata
+	signal mm_interconnect_2_ra_backlash_tick_s1_chipselect              : std_logic;                      -- mm_interconnect_2:ra_backlash_tick_s1_chipselect -> ra_backlash_tick:chipselect
+	signal mm_interconnect_2_ra_backlash_tick_s1_readdata                : std_logic_vector(31 downto 0);  -- ra_backlash_tick:readdata -> mm_interconnect_2:ra_backlash_tick_s1_readdata
+	signal mm_interconnect_2_ra_backlash_tick_s1_address                 : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_backlash_tick_s1_address -> ra_backlash_tick:address
+	signal mm_interconnect_2_ra_backlash_tick_s1_write                   : std_logic;                      -- mm_interconnect_2:ra_backlash_tick_s1_write -> mm_interconnect_2_ra_backlash_tick_s1_write:in
+	signal mm_interconnect_2_ra_backlash_tick_s1_writedata               : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_backlash_tick_s1_writedata -> ra_backlash_tick:writedata
+	signal mm_interconnect_2_de_backlash_duration_s1_chipselect          : std_logic;                      -- mm_interconnect_2:de_backlash_duration_s1_chipselect -> de_backlash_duration:chipselect
+	signal mm_interconnect_2_de_backlash_duration_s1_readdata            : std_logic_vector(31 downto 0);  -- de_backlash_duration:readdata -> mm_interconnect_2:de_backlash_duration_s1_readdata
+	signal mm_interconnect_2_de_backlash_duration_s1_address             : std_logic_vector(1 downto 0);   -- mm_interconnect_2:de_backlash_duration_s1_address -> de_backlash_duration:address
+	signal mm_interconnect_2_de_backlash_duration_s1_write               : std_logic;                      -- mm_interconnect_2:de_backlash_duration_s1_write -> mm_interconnect_2_de_backlash_duration_s1_write:in
+	signal mm_interconnect_2_de_backlash_duration_s1_writedata           : std_logic_vector(31 downto 0);  -- mm_interconnect_2:de_backlash_duration_s1_writedata -> de_backlash_duration:writedata
+	signal mm_interconnect_2_ra_backlash_duration_s1_chipselect          : std_logic;                      -- mm_interconnect_2:ra_backlash_duration_s1_chipselect -> ra_backlash_duration:chipselect
+	signal mm_interconnect_2_ra_backlash_duration_s1_readdata            : std_logic_vector(31 downto 0);  -- ra_backlash_duration:readdata -> mm_interconnect_2:ra_backlash_duration_s1_readdata
+	signal mm_interconnect_2_ra_backlash_duration_s1_address             : std_logic_vector(1 downto 0);   -- mm_interconnect_2:ra_backlash_duration_s1_address -> ra_backlash_duration:address
+	signal mm_interconnect_2_ra_backlash_duration_s1_write               : std_logic;                      -- mm_interconnect_2:ra_backlash_duration_s1_write -> mm_interconnect_2_ra_backlash_duration_s1_write:in
+	signal mm_interconnect_2_ra_backlash_duration_s1_writedata           : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ra_backlash_duration_s1_writedata -> ra_backlash_duration:writedata
 	signal f2sdram_only_master_master_readdata                           : std_logic_vector(31 downto 0);  -- mm_interconnect_3:f2sdram_only_master_master_readdata -> f2sdram_only_master:master_readdata
 	signal f2sdram_only_master_master_waitrequest                        : std_logic;                      -- mm_interconnect_3:f2sdram_only_master_master_waitrequest -> f2sdram_only_master:master_waitrequest
 	signal f2sdram_only_master_master_address                            : std_logic_vector(31 downto 0);  -- f2sdram_only_master:master_address -> mm_interconnect_3:f2sdram_only_master_master_address
@@ -1093,7 +1373,30 @@ architecture rtl of soc_system is
 	signal mm_interconnect_2_led_pio_s1_write_ports_inv                  : std_logic;                      -- mm_interconnect_2_led_pio_s1_write:inv -> led_pio:write_n
 	signal mm_interconnect_2_dipsw_pio_s1_write_ports_inv                : std_logic;                      -- mm_interconnect_2_dipsw_pio_s1_write:inv -> dipsw_pio:write_n
 	signal mm_interconnect_2_button_pio_s1_write_ports_inv               : std_logic;                      -- mm_interconnect_2_button_pio_s1_write:inv -> button_pio:write_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                      -- rst_controller_reset_out_reset:inv -> [ILC:reset_n, button_pio:reset_n, dipsw_pio:reset_n, jtag_uart:rst_n, led_pio:reset_n, sysid_qsys:reset_n]
+	signal mm_interconnect_2_buf2_s1_write_ports_inv                     : std_logic;                      -- mm_interconnect_2_buf2_s1_write:inv -> buf2:write_n
+	signal mm_interconnect_2_buf1_s1_write_ports_inv                     : std_logic;                      -- mm_interconnect_2_buf1_s1_write:inv -> buf1:write_n
+	signal mm_interconnect_2_buf0_s1_write_ports_inv                     : std_logic;                      -- mm_interconnect_2_buf0_s1_write:inv -> buf0:write_n
+	signal mm_interconnect_2_de_count_s1_write_ports_inv                 : std_logic;                      -- mm_interconnect_2_de_count_s1_write:inv -> de_count:write_n
+	signal mm_interconnect_2_ra_count_s1_write_ports_inv                 : std_logic;                      -- mm_interconnect_2_ra_count_s1_write:inv -> ra_count:write_n
+	signal mm_interconnect_2_de_status_s1_write_ports_inv                : std_logic;                      -- mm_interconnect_2_de_status_s1_write:inv -> de_status:write_n
+	signal mm_interconnect_2_ra_status_s1_write_ports_inv                : std_logic;                      -- mm_interconnect_2_ra_status_s1_write:inv -> ra_status:write_n
+	signal mm_interconnect_2_de_counter_load_s1_write_ports_inv          : std_logic;                      -- mm_interconnect_2_de_counter_load_s1_write:inv -> de_counter_load:write_n
+	signal mm_interconnect_2_ra_counter_load_s1_write_ports_inv          : std_logic;                      -- mm_interconnect_2_ra_counter_load_s1_write:inv -> ra_counter_load:write_n
+	signal mm_interconnect_2_de_counter_max_s1_write_ports_inv           : std_logic;                      -- mm_interconnect_2_de_counter_max_s1_write:inv -> de_counter_max:write_n
+	signal mm_interconnect_2_ra_counter_max_s1_write_ports_inv           : std_logic;                      -- mm_interconnect_2_ra_counter_max_s1_write:inv -> ra_counter_max:write_n
+	signal mm_interconnect_2_de_cmdcontrol_s1_write_ports_inv            : std_logic;                      -- mm_interconnect_2_de_cmdcontrol_s1_write:inv -> de_cmdcontrol:write_n
+	signal mm_interconnect_2_ra_cmdcontrol_s1_write_ports_inv            : std_logic;                      -- mm_interconnect_2_ra_cmdcontrol_s1_write:inv -> ra_cmdcontrol:write_n
+	signal mm_interconnect_2_de_cmdduration_s1_write_ports_inv           : std_logic;                      -- mm_interconnect_2_de_cmdduration_s1_write:inv -> de_cmdduration:write_n
+	signal mm_interconnect_2_ra_cmdduration_s1_write_ports_inv           : std_logic;                      -- mm_interconnect_2_ra_cmdduration_s1_write:inv -> ra_cmdduration:write_n
+	signal mm_interconnect_2_de_trackctrl_s1_write_ports_inv             : std_logic;                      -- mm_interconnect_2_de_trackctrl_s1_write:inv -> de_trackctrl:write_n
+	signal mm_interconnect_2_ra_trackctrl_s1_write_ports_inv             : std_logic;                      -- mm_interconnect_2_ra_trackctrl_s1_write:inv -> ra_trackctrl:write_n
+	signal mm_interconnect_2_de_cmdtick_s1_write_ports_inv               : std_logic;                      -- mm_interconnect_2_de_cmdtick_s1_write:inv -> de_cmdtick:write_n
+	signal mm_interconnect_2_ra_cmdtick_s1_write_ports_inv               : std_logic;                      -- mm_interconnect_2_ra_cmdtick_s1_write:inv -> ra_cmdtick:write_n
+	signal mm_interconnect_2_de_backlash_tick_s1_write_ports_inv         : std_logic;                      -- mm_interconnect_2_de_backlash_tick_s1_write:inv -> de_backlash_tick:write_n
+	signal mm_interconnect_2_ra_backlash_tick_s1_write_ports_inv         : std_logic;                      -- mm_interconnect_2_ra_backlash_tick_s1_write:inv -> ra_backlash_tick:write_n
+	signal mm_interconnect_2_de_backlash_duration_s1_write_ports_inv     : std_logic;                      -- mm_interconnect_2_de_backlash_duration_s1_write:inv -> de_backlash_duration:write_n
+	signal mm_interconnect_2_ra_backlash_duration_s1_write_ports_inv     : std_logic;                      -- mm_interconnect_2_ra_backlash_duration_s1_write:inv -> ra_backlash_duration:write_n
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                      -- rst_controller_reset_out_reset:inv -> [ILC:reset_n, buf0:reset_n, buf1:reset_n, buf2:reset_n, button_pio:reset_n, de_backlash_duration:reset_n, de_backlash_tick:reset_n, de_cmdcontrol:reset_n, de_cmdduration:reset_n, de_cmdtick:reset_n, de_count:reset_n, de_counter_load:reset_n, de_counter_max:reset_n, de_status:reset_n, de_trackctrl:reset_n, dipsw_pio:reset_n, jtag_uart:rst_n, led_pio:reset_n, ra_backlash_duration:reset_n, ra_backlash_tick:reset_n, ra_cmdcontrol:reset_n, ra_cmdduration:reset_n, ra_cmdtick:reset_n, ra_count:reset_n, ra_counter_load:reset_n, ra_counter_max:reset_n, ra_status:reset_n, ra_trackctrl:reset_n, sysid_qsys:reset_n]
 
 begin
 
@@ -1205,6 +1508,45 @@ begin
 			master_waitrequest   => alt_vip_vfr_hdmi_avalon_master_waitrequest                 --                        .waitrequest
 		);
 
+	buf0 : component soc_system_buf0
+		port map (
+			clk        => clk_clk,                                   --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,  --               reset.reset_n
+			address    => mm_interconnect_2_buf0_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_buf0_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_buf0_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_buf0_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_buf0_s1_readdata,        --                    .readdata
+			in_port    => buf0_export,                               -- external_connection.export
+			irq        => open                                       --                 irq.irq
+		);
+
+	buf1 : component soc_system_buf0
+		port map (
+			clk        => clk_clk,                                   --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,  --               reset.reset_n
+			address    => mm_interconnect_2_buf1_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_buf1_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_buf1_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_buf1_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_buf1_s1_readdata,        --                    .readdata
+			in_port    => buf1_export,                               -- external_connection.export
+			irq        => open                                       --                 irq.irq
+		);
+
+	buf2 : component soc_system_buf0
+		port map (
+			clk        => clk_clk,                                   --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,  --               reset.reset_n
+			address    => mm_interconnect_2_buf2_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_buf2_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_buf2_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_buf2_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_buf2_s1_readdata,        --                    .readdata
+			in_port    => buf0_1_export,                             -- external_connection.export
+			irq        => open                                       --                 irq.irq
+		);
+
 	button_pio : component soc_system_button_pio
 		port map (
 			clk        => clk_clk,                                         --                 clk.clk
@@ -1239,6 +1581,128 @@ begin
 			rw                 => ctrl_rw,                                         --                   .export
 			write_data         => ctrl_write_data,                                 --                   .export
 			read_data          => ctrl_read_data                                   --                   .export
+		);
+
+	de_backlash_duration : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                                   --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,                  --               reset.reset_n
+			address    => mm_interconnect_2_de_backlash_duration_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_backlash_duration_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_backlash_duration_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_backlash_duration_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_backlash_duration_s1_readdata,        --                    .readdata
+			out_port   => de_backlash_duration_export                                -- external_connection.export
+		);
+
+	de_backlash_tick : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                               --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,              --               reset.reset_n
+			address    => mm_interconnect_2_de_backlash_tick_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_backlash_tick_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_backlash_tick_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_backlash_tick_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_backlash_tick_s1_readdata,        --                    .readdata
+			out_port   => de_backlash_tick_export                                -- external_connection.export
+		);
+
+	de_cmdcontrol : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                            --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,           --               reset.reset_n
+			address    => mm_interconnect_2_de_cmdcontrol_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_cmdcontrol_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_cmdcontrol_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_cmdcontrol_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_cmdcontrol_s1_readdata,        --                    .readdata
+			out_port   => de_cmdcontrol_export                                -- external_connection.export
+		);
+
+	de_cmdduration : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                             --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,            --               reset.reset_n
+			address    => mm_interconnect_2_de_cmdduration_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_cmdduration_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_cmdduration_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_cmdduration_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_cmdduration_s1_readdata,        --                    .readdata
+			out_port   => de_cmdduration_export                                -- external_connection.export
+		);
+
+	de_cmdtick : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                         --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,        --               reset.reset_n
+			address    => mm_interconnect_2_de_cmdtick_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_cmdtick_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_cmdtick_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_cmdtick_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_cmdtick_s1_readdata,        --                    .readdata
+			out_port   => de_cmdtick_export                                -- external_connection.export
+		);
+
+	de_count : component soc_system_buf0
+		port map (
+			clk        => clk_clk,                                       --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,      --               reset.reset_n
+			address    => mm_interconnect_2_de_count_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_count_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_count_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_count_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_count_s1_readdata,        --                    .readdata
+			in_port    => de_count_export,                               -- external_connection.export
+			irq        => open                                           --                 irq.irq
+		);
+
+	de_counter_load : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                              --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,             --               reset.reset_n
+			address    => mm_interconnect_2_de_counter_load_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_counter_load_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_counter_load_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_counter_load_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_counter_load_s1_readdata,        --                    .readdata
+			out_port   => de_counter_load_export                                -- external_connection.export
+		);
+
+	de_counter_max : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                             --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,            --               reset.reset_n
+			address    => mm_interconnect_2_de_counter_max_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_counter_max_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_counter_max_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_counter_max_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_counter_max_s1_readdata,        --                    .readdata
+			out_port   => de_counter_max_export                                -- external_connection.export
+		);
+
+	de_status : component soc_system_buf0
+		port map (
+			clk        => clk_clk,                                        --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,       --               reset.reset_n
+			address    => mm_interconnect_2_de_status_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_status_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_status_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_status_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_status_s1_readdata,        --                    .readdata
+			in_port    => de_status_export,                               -- external_connection.export
+			irq        => open                                            --                 irq.irq
+		);
+
+	de_trackctrl : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                           --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,          --               reset.reset_n
+			address    => mm_interconnect_2_de_trackctrl_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_de_trackctrl_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_de_trackctrl_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_de_trackctrl_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_de_trackctrl_s1_readdata,        --                    .readdata
+			out_port   => de_trackctrl_export                                -- external_connection.export
 		);
 
 	dipsw_pio : component soc_system_dipsw_pio
@@ -1578,6 +2042,128 @@ begin
 			m0_response      => "00"                                            -- (terminated)
 		);
 
+	ra_backlash_duration : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                                   --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,                  --               reset.reset_n
+			address    => mm_interconnect_2_ra_backlash_duration_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_backlash_duration_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_backlash_duration_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_backlash_duration_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_backlash_duration_s1_readdata,        --                    .readdata
+			out_port   => ra_backlash_duration_export                                -- external_connection.export
+		);
+
+	ra_backlash_tick : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                               --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,              --               reset.reset_n
+			address    => mm_interconnect_2_ra_backlash_tick_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_backlash_tick_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_backlash_tick_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_backlash_tick_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_backlash_tick_s1_readdata,        --                    .readdata
+			out_port   => ra_backlash_tick_export                                -- external_connection.export
+		);
+
+	ra_cmdcontrol : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                            --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,           --               reset.reset_n
+			address    => mm_interconnect_2_ra_cmdcontrol_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_cmdcontrol_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_cmdcontrol_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_cmdcontrol_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_cmdcontrol_s1_readdata,        --                    .readdata
+			out_port   => ra_cmdcontrol_export                                -- external_connection.export
+		);
+
+	ra_cmdduration : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                             --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,            --               reset.reset_n
+			address    => mm_interconnect_2_ra_cmdduration_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_cmdduration_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_cmdduration_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_cmdduration_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_cmdduration_s1_readdata,        --                    .readdata
+			out_port   => ra_cmdduration_export                                -- external_connection.export
+		);
+
+	ra_cmdtick : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                         --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,        --               reset.reset_n
+			address    => mm_interconnect_2_ra_cmdtick_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_cmdtick_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_cmdtick_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_cmdtick_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_cmdtick_s1_readdata,        --                    .readdata
+			out_port   => ra_cmdtick_export                                -- external_connection.export
+		);
+
+	ra_count : component soc_system_buf0
+		port map (
+			clk        => clk_clk,                                       --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,      --               reset.reset_n
+			address    => mm_interconnect_2_ra_count_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_count_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_count_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_count_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_count_s1_readdata,        --                    .readdata
+			in_port    => ra_count_export,                               -- external_connection.export
+			irq        => open                                           --                 irq.irq
+		);
+
+	ra_counter_load : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                              --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,             --               reset.reset_n
+			address    => mm_interconnect_2_ra_counter_load_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_counter_load_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_counter_load_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_counter_load_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_counter_load_s1_readdata,        --                    .readdata
+			out_port   => de_counter_load_1_export                              -- external_connection.export
+		);
+
+	ra_counter_max : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                             --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,            --               reset.reset_n
+			address    => mm_interconnect_2_ra_counter_max_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_counter_max_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_counter_max_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_counter_max_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_counter_max_s1_readdata,        --                    .readdata
+			out_port   => ra_counter_max_export                                -- external_connection.export
+		);
+
+	ra_status : component soc_system_buf0
+		port map (
+			clk        => clk_clk,                                        --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,       --               reset.reset_n
+			address    => mm_interconnect_2_ra_status_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_status_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_status_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_status_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_status_s1_readdata,        --                    .readdata
+			in_port    => ra_status_export,                               -- external_connection.export
+			irq        => open                                            --                 irq.irq
+		);
+
+	ra_trackctrl : component soc_system_de_backlash_duration
+		port map (
+			clk        => clk_clk,                                           --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,          --               reset.reset_n
+			address    => mm_interconnect_2_ra_trackctrl_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_2_ra_trackctrl_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_2_ra_trackctrl_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_2_ra_trackctrl_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_2_ra_trackctrl_s1_readdata,        --                    .readdata
+			out_port   => ra_trackctrl_export                                -- external_connection.export
+		);
+
 	sts : component soc_system_ctrl
 		port map (
 			clk                => clk_clk,                                        --                clk.clk
@@ -1752,6 +2338,21 @@ begin
 			alt_vip_vfr_hdmi_avalon_slave_read                             => mm_interconnect_2_alt_vip_vfr_hdmi_avalon_slave_read,      --                                                         .read
 			alt_vip_vfr_hdmi_avalon_slave_readdata                         => mm_interconnect_2_alt_vip_vfr_hdmi_avalon_slave_readdata,  --                                                         .readdata
 			alt_vip_vfr_hdmi_avalon_slave_writedata                        => mm_interconnect_2_alt_vip_vfr_hdmi_avalon_slave_writedata, --                                                         .writedata
+			buf0_s1_address                                                => mm_interconnect_2_buf0_s1_address,                         --                                                  buf0_s1.address
+			buf0_s1_write                                                  => mm_interconnect_2_buf0_s1_write,                           --                                                         .write
+			buf0_s1_readdata                                               => mm_interconnect_2_buf0_s1_readdata,                        --                                                         .readdata
+			buf0_s1_writedata                                              => mm_interconnect_2_buf0_s1_writedata,                       --                                                         .writedata
+			buf0_s1_chipselect                                             => mm_interconnect_2_buf0_s1_chipselect,                      --                                                         .chipselect
+			buf1_s1_address                                                => mm_interconnect_2_buf1_s1_address,                         --                                                  buf1_s1.address
+			buf1_s1_write                                                  => mm_interconnect_2_buf1_s1_write,                           --                                                         .write
+			buf1_s1_readdata                                               => mm_interconnect_2_buf1_s1_readdata,                        --                                                         .readdata
+			buf1_s1_writedata                                              => mm_interconnect_2_buf1_s1_writedata,                       --                                                         .writedata
+			buf1_s1_chipselect                                             => mm_interconnect_2_buf1_s1_chipselect,                      --                                                         .chipselect
+			buf2_s1_address                                                => mm_interconnect_2_buf2_s1_address,                         --                                                  buf2_s1.address
+			buf2_s1_write                                                  => mm_interconnect_2_buf2_s1_write,                           --                                                         .write
+			buf2_s1_readdata                                               => mm_interconnect_2_buf2_s1_readdata,                        --                                                         .readdata
+			buf2_s1_writedata                                              => mm_interconnect_2_buf2_s1_writedata,                       --                                                         .writedata
+			buf2_s1_chipselect                                             => mm_interconnect_2_buf2_s1_chipselect,                      --                                                         .chipselect
 			button_pio_s1_address                                          => mm_interconnect_2_button_pio_s1_address,                   --                                            button_pio_s1.address
 			button_pio_s1_write                                            => mm_interconnect_2_button_pio_s1_write,                     --                                                         .write
 			button_pio_s1_readdata                                         => mm_interconnect_2_button_pio_s1_readdata,                  --                                                         .readdata
@@ -1765,6 +2366,56 @@ begin
 			ctrl_avalon_slave_byteenable                                   => mm_interconnect_2_ctrl_avalon_slave_byteenable,            --                                                         .byteenable
 			ctrl_avalon_slave_waitrequest                                  => mm_interconnect_2_ctrl_avalon_slave_waitrequest,           --                                                         .waitrequest
 			ctrl_avalon_slave_chipselect                                   => mm_interconnect_2_ctrl_avalon_slave_chipselect,            --                                                         .chipselect
+			de_backlash_duration_s1_address                                => mm_interconnect_2_de_backlash_duration_s1_address,         --                                  de_backlash_duration_s1.address
+			de_backlash_duration_s1_write                                  => mm_interconnect_2_de_backlash_duration_s1_write,           --                                                         .write
+			de_backlash_duration_s1_readdata                               => mm_interconnect_2_de_backlash_duration_s1_readdata,        --                                                         .readdata
+			de_backlash_duration_s1_writedata                              => mm_interconnect_2_de_backlash_duration_s1_writedata,       --                                                         .writedata
+			de_backlash_duration_s1_chipselect                             => mm_interconnect_2_de_backlash_duration_s1_chipselect,      --                                                         .chipselect
+			de_backlash_tick_s1_address                                    => mm_interconnect_2_de_backlash_tick_s1_address,             --                                      de_backlash_tick_s1.address
+			de_backlash_tick_s1_write                                      => mm_interconnect_2_de_backlash_tick_s1_write,               --                                                         .write
+			de_backlash_tick_s1_readdata                                   => mm_interconnect_2_de_backlash_tick_s1_readdata,            --                                                         .readdata
+			de_backlash_tick_s1_writedata                                  => mm_interconnect_2_de_backlash_tick_s1_writedata,           --                                                         .writedata
+			de_backlash_tick_s1_chipselect                                 => mm_interconnect_2_de_backlash_tick_s1_chipselect,          --                                                         .chipselect
+			de_cmdcontrol_s1_address                                       => mm_interconnect_2_de_cmdcontrol_s1_address,                --                                         de_cmdcontrol_s1.address
+			de_cmdcontrol_s1_write                                         => mm_interconnect_2_de_cmdcontrol_s1_write,                  --                                                         .write
+			de_cmdcontrol_s1_readdata                                      => mm_interconnect_2_de_cmdcontrol_s1_readdata,               --                                                         .readdata
+			de_cmdcontrol_s1_writedata                                     => mm_interconnect_2_de_cmdcontrol_s1_writedata,              --                                                         .writedata
+			de_cmdcontrol_s1_chipselect                                    => mm_interconnect_2_de_cmdcontrol_s1_chipselect,             --                                                         .chipselect
+			de_cmdduration_s1_address                                      => mm_interconnect_2_de_cmdduration_s1_address,               --                                        de_cmdduration_s1.address
+			de_cmdduration_s1_write                                        => mm_interconnect_2_de_cmdduration_s1_write,                 --                                                         .write
+			de_cmdduration_s1_readdata                                     => mm_interconnect_2_de_cmdduration_s1_readdata,              --                                                         .readdata
+			de_cmdduration_s1_writedata                                    => mm_interconnect_2_de_cmdduration_s1_writedata,             --                                                         .writedata
+			de_cmdduration_s1_chipselect                                   => mm_interconnect_2_de_cmdduration_s1_chipselect,            --                                                         .chipselect
+			de_cmdtick_s1_address                                          => mm_interconnect_2_de_cmdtick_s1_address,                   --                                            de_cmdtick_s1.address
+			de_cmdtick_s1_write                                            => mm_interconnect_2_de_cmdtick_s1_write,                     --                                                         .write
+			de_cmdtick_s1_readdata                                         => mm_interconnect_2_de_cmdtick_s1_readdata,                  --                                                         .readdata
+			de_cmdtick_s1_writedata                                        => mm_interconnect_2_de_cmdtick_s1_writedata,                 --                                                         .writedata
+			de_cmdtick_s1_chipselect                                       => mm_interconnect_2_de_cmdtick_s1_chipselect,                --                                                         .chipselect
+			de_count_s1_address                                            => mm_interconnect_2_de_count_s1_address,                     --                                              de_count_s1.address
+			de_count_s1_write                                              => mm_interconnect_2_de_count_s1_write,                       --                                                         .write
+			de_count_s1_readdata                                           => mm_interconnect_2_de_count_s1_readdata,                    --                                                         .readdata
+			de_count_s1_writedata                                          => mm_interconnect_2_de_count_s1_writedata,                   --                                                         .writedata
+			de_count_s1_chipselect                                         => mm_interconnect_2_de_count_s1_chipselect,                  --                                                         .chipselect
+			de_counter_load_s1_address                                     => mm_interconnect_2_de_counter_load_s1_address,              --                                       de_counter_load_s1.address
+			de_counter_load_s1_write                                       => mm_interconnect_2_de_counter_load_s1_write,                --                                                         .write
+			de_counter_load_s1_readdata                                    => mm_interconnect_2_de_counter_load_s1_readdata,             --                                                         .readdata
+			de_counter_load_s1_writedata                                   => mm_interconnect_2_de_counter_load_s1_writedata,            --                                                         .writedata
+			de_counter_load_s1_chipselect                                  => mm_interconnect_2_de_counter_load_s1_chipselect,           --                                                         .chipselect
+			de_counter_max_s1_address                                      => mm_interconnect_2_de_counter_max_s1_address,               --                                        de_counter_max_s1.address
+			de_counter_max_s1_write                                        => mm_interconnect_2_de_counter_max_s1_write,                 --                                                         .write
+			de_counter_max_s1_readdata                                     => mm_interconnect_2_de_counter_max_s1_readdata,              --                                                         .readdata
+			de_counter_max_s1_writedata                                    => mm_interconnect_2_de_counter_max_s1_writedata,             --                                                         .writedata
+			de_counter_max_s1_chipselect                                   => mm_interconnect_2_de_counter_max_s1_chipselect,            --                                                         .chipselect
+			de_status_s1_address                                           => mm_interconnect_2_de_status_s1_address,                    --                                             de_status_s1.address
+			de_status_s1_write                                             => mm_interconnect_2_de_status_s1_write,                      --                                                         .write
+			de_status_s1_readdata                                          => mm_interconnect_2_de_status_s1_readdata,                   --                                                         .readdata
+			de_status_s1_writedata                                         => mm_interconnect_2_de_status_s1_writedata,                  --                                                         .writedata
+			de_status_s1_chipselect                                        => mm_interconnect_2_de_status_s1_chipselect,                 --                                                         .chipselect
+			de_trackctrl_s1_address                                        => mm_interconnect_2_de_trackctrl_s1_address,                 --                                          de_trackctrl_s1.address
+			de_trackctrl_s1_write                                          => mm_interconnect_2_de_trackctrl_s1_write,                   --                                                         .write
+			de_trackctrl_s1_readdata                                       => mm_interconnect_2_de_trackctrl_s1_readdata,                --                                                         .readdata
+			de_trackctrl_s1_writedata                                      => mm_interconnect_2_de_trackctrl_s1_writedata,               --                                                         .writedata
+			de_trackctrl_s1_chipselect                                     => mm_interconnect_2_de_trackctrl_s1_chipselect,              --                                                         .chipselect
 			dipsw_pio_s1_address                                           => mm_interconnect_2_dipsw_pio_s1_address,                    --                                             dipsw_pio_s1.address
 			dipsw_pio_s1_write                                             => mm_interconnect_2_dipsw_pio_s1_write,                      --                                                         .write
 			dipsw_pio_s1_readdata                                          => mm_interconnect_2_dipsw_pio_s1_readdata,                   --                                                         .readdata
@@ -1787,6 +2438,56 @@ begin
 			led_pio_s1_readdata                                            => mm_interconnect_2_led_pio_s1_readdata,                     --                                                         .readdata
 			led_pio_s1_writedata                                           => mm_interconnect_2_led_pio_s1_writedata,                    --                                                         .writedata
 			led_pio_s1_chipselect                                          => mm_interconnect_2_led_pio_s1_chipselect,                   --                                                         .chipselect
+			ra_backlash_duration_s1_address                                => mm_interconnect_2_ra_backlash_duration_s1_address,         --                                  ra_backlash_duration_s1.address
+			ra_backlash_duration_s1_write                                  => mm_interconnect_2_ra_backlash_duration_s1_write,           --                                                         .write
+			ra_backlash_duration_s1_readdata                               => mm_interconnect_2_ra_backlash_duration_s1_readdata,        --                                                         .readdata
+			ra_backlash_duration_s1_writedata                              => mm_interconnect_2_ra_backlash_duration_s1_writedata,       --                                                         .writedata
+			ra_backlash_duration_s1_chipselect                             => mm_interconnect_2_ra_backlash_duration_s1_chipselect,      --                                                         .chipselect
+			ra_backlash_tick_s1_address                                    => mm_interconnect_2_ra_backlash_tick_s1_address,             --                                      ra_backlash_tick_s1.address
+			ra_backlash_tick_s1_write                                      => mm_interconnect_2_ra_backlash_tick_s1_write,               --                                                         .write
+			ra_backlash_tick_s1_readdata                                   => mm_interconnect_2_ra_backlash_tick_s1_readdata,            --                                                         .readdata
+			ra_backlash_tick_s1_writedata                                  => mm_interconnect_2_ra_backlash_tick_s1_writedata,           --                                                         .writedata
+			ra_backlash_tick_s1_chipselect                                 => mm_interconnect_2_ra_backlash_tick_s1_chipselect,          --                                                         .chipselect
+			ra_cmdcontrol_s1_address                                       => mm_interconnect_2_ra_cmdcontrol_s1_address,                --                                         ra_cmdcontrol_s1.address
+			ra_cmdcontrol_s1_write                                         => mm_interconnect_2_ra_cmdcontrol_s1_write,                  --                                                         .write
+			ra_cmdcontrol_s1_readdata                                      => mm_interconnect_2_ra_cmdcontrol_s1_readdata,               --                                                         .readdata
+			ra_cmdcontrol_s1_writedata                                     => mm_interconnect_2_ra_cmdcontrol_s1_writedata,              --                                                         .writedata
+			ra_cmdcontrol_s1_chipselect                                    => mm_interconnect_2_ra_cmdcontrol_s1_chipselect,             --                                                         .chipselect
+			ra_cmdduration_s1_address                                      => mm_interconnect_2_ra_cmdduration_s1_address,               --                                        ra_cmdduration_s1.address
+			ra_cmdduration_s1_write                                        => mm_interconnect_2_ra_cmdduration_s1_write,                 --                                                         .write
+			ra_cmdduration_s1_readdata                                     => mm_interconnect_2_ra_cmdduration_s1_readdata,              --                                                         .readdata
+			ra_cmdduration_s1_writedata                                    => mm_interconnect_2_ra_cmdduration_s1_writedata,             --                                                         .writedata
+			ra_cmdduration_s1_chipselect                                   => mm_interconnect_2_ra_cmdduration_s1_chipselect,            --                                                         .chipselect
+			ra_cmdtick_s1_address                                          => mm_interconnect_2_ra_cmdtick_s1_address,                   --                                            ra_cmdtick_s1.address
+			ra_cmdtick_s1_write                                            => mm_interconnect_2_ra_cmdtick_s1_write,                     --                                                         .write
+			ra_cmdtick_s1_readdata                                         => mm_interconnect_2_ra_cmdtick_s1_readdata,                  --                                                         .readdata
+			ra_cmdtick_s1_writedata                                        => mm_interconnect_2_ra_cmdtick_s1_writedata,                 --                                                         .writedata
+			ra_cmdtick_s1_chipselect                                       => mm_interconnect_2_ra_cmdtick_s1_chipselect,                --                                                         .chipselect
+			ra_count_s1_address                                            => mm_interconnect_2_ra_count_s1_address,                     --                                              ra_count_s1.address
+			ra_count_s1_write                                              => mm_interconnect_2_ra_count_s1_write,                       --                                                         .write
+			ra_count_s1_readdata                                           => mm_interconnect_2_ra_count_s1_readdata,                    --                                                         .readdata
+			ra_count_s1_writedata                                          => mm_interconnect_2_ra_count_s1_writedata,                   --                                                         .writedata
+			ra_count_s1_chipselect                                         => mm_interconnect_2_ra_count_s1_chipselect,                  --                                                         .chipselect
+			ra_counter_load_s1_address                                     => mm_interconnect_2_ra_counter_load_s1_address,              --                                       ra_counter_load_s1.address
+			ra_counter_load_s1_write                                       => mm_interconnect_2_ra_counter_load_s1_write,                --                                                         .write
+			ra_counter_load_s1_readdata                                    => mm_interconnect_2_ra_counter_load_s1_readdata,             --                                                         .readdata
+			ra_counter_load_s1_writedata                                   => mm_interconnect_2_ra_counter_load_s1_writedata,            --                                                         .writedata
+			ra_counter_load_s1_chipselect                                  => mm_interconnect_2_ra_counter_load_s1_chipselect,           --                                                         .chipselect
+			ra_counter_max_s1_address                                      => mm_interconnect_2_ra_counter_max_s1_address,               --                                        ra_counter_max_s1.address
+			ra_counter_max_s1_write                                        => mm_interconnect_2_ra_counter_max_s1_write,                 --                                                         .write
+			ra_counter_max_s1_readdata                                     => mm_interconnect_2_ra_counter_max_s1_readdata,              --                                                         .readdata
+			ra_counter_max_s1_writedata                                    => mm_interconnect_2_ra_counter_max_s1_writedata,             --                                                         .writedata
+			ra_counter_max_s1_chipselect                                   => mm_interconnect_2_ra_counter_max_s1_chipselect,            --                                                         .chipselect
+			ra_status_s1_address                                           => mm_interconnect_2_ra_status_s1_address,                    --                                             ra_status_s1.address
+			ra_status_s1_write                                             => mm_interconnect_2_ra_status_s1_write,                      --                                                         .write
+			ra_status_s1_readdata                                          => mm_interconnect_2_ra_status_s1_readdata,                   --                                                         .readdata
+			ra_status_s1_writedata                                         => mm_interconnect_2_ra_status_s1_writedata,                  --                                                         .writedata
+			ra_status_s1_chipselect                                        => mm_interconnect_2_ra_status_s1_chipselect,                 --                                                         .chipselect
+			ra_trackctrl_s1_address                                        => mm_interconnect_2_ra_trackctrl_s1_address,                 --                                          ra_trackctrl_s1.address
+			ra_trackctrl_s1_write                                          => mm_interconnect_2_ra_trackctrl_s1_write,                   --                                                         .write
+			ra_trackctrl_s1_readdata                                       => mm_interconnect_2_ra_trackctrl_s1_readdata,                --                                                         .readdata
+			ra_trackctrl_s1_writedata                                      => mm_interconnect_2_ra_trackctrl_s1_writedata,               --                                                         .writedata
+			ra_trackctrl_s1_chipselect                                     => mm_interconnect_2_ra_trackctrl_s1_chipselect,              --                                                         .chipselect
 			sts_avalon_slave_address                                       => mm_interconnect_2_sts_avalon_slave_address,                --                                         sts_avalon_slave.address
 			sts_avalon_slave_write                                         => mm_interconnect_2_sts_avalon_slave_write,                  --                                                         .write
 			sts_avalon_slave_read                                          => mm_interconnect_2_sts_avalon_slave_read,                   --                                                         .read
@@ -2059,6 +2760,52 @@ begin
 	mm_interconnect_2_dipsw_pio_s1_write_ports_inv <= not mm_interconnect_2_dipsw_pio_s1_write;
 
 	mm_interconnect_2_button_pio_s1_write_ports_inv <= not mm_interconnect_2_button_pio_s1_write;
+
+	mm_interconnect_2_buf2_s1_write_ports_inv <= not mm_interconnect_2_buf2_s1_write;
+
+	mm_interconnect_2_buf1_s1_write_ports_inv <= not mm_interconnect_2_buf1_s1_write;
+
+	mm_interconnect_2_buf0_s1_write_ports_inv <= not mm_interconnect_2_buf0_s1_write;
+
+	mm_interconnect_2_de_count_s1_write_ports_inv <= not mm_interconnect_2_de_count_s1_write;
+
+	mm_interconnect_2_ra_count_s1_write_ports_inv <= not mm_interconnect_2_ra_count_s1_write;
+
+	mm_interconnect_2_de_status_s1_write_ports_inv <= not mm_interconnect_2_de_status_s1_write;
+
+	mm_interconnect_2_ra_status_s1_write_ports_inv <= not mm_interconnect_2_ra_status_s1_write;
+
+	mm_interconnect_2_de_counter_load_s1_write_ports_inv <= not mm_interconnect_2_de_counter_load_s1_write;
+
+	mm_interconnect_2_ra_counter_load_s1_write_ports_inv <= not mm_interconnect_2_ra_counter_load_s1_write;
+
+	mm_interconnect_2_de_counter_max_s1_write_ports_inv <= not mm_interconnect_2_de_counter_max_s1_write;
+
+	mm_interconnect_2_ra_counter_max_s1_write_ports_inv <= not mm_interconnect_2_ra_counter_max_s1_write;
+
+	mm_interconnect_2_de_cmdcontrol_s1_write_ports_inv <= not mm_interconnect_2_de_cmdcontrol_s1_write;
+
+	mm_interconnect_2_ra_cmdcontrol_s1_write_ports_inv <= not mm_interconnect_2_ra_cmdcontrol_s1_write;
+
+	mm_interconnect_2_de_cmdduration_s1_write_ports_inv <= not mm_interconnect_2_de_cmdduration_s1_write;
+
+	mm_interconnect_2_ra_cmdduration_s1_write_ports_inv <= not mm_interconnect_2_ra_cmdduration_s1_write;
+
+	mm_interconnect_2_de_trackctrl_s1_write_ports_inv <= not mm_interconnect_2_de_trackctrl_s1_write;
+
+	mm_interconnect_2_ra_trackctrl_s1_write_ports_inv <= not mm_interconnect_2_ra_trackctrl_s1_write;
+
+	mm_interconnect_2_de_cmdtick_s1_write_ports_inv <= not mm_interconnect_2_de_cmdtick_s1_write;
+
+	mm_interconnect_2_ra_cmdtick_s1_write_ports_inv <= not mm_interconnect_2_ra_cmdtick_s1_write;
+
+	mm_interconnect_2_de_backlash_tick_s1_write_ports_inv <= not mm_interconnect_2_de_backlash_tick_s1_write;
+
+	mm_interconnect_2_ra_backlash_tick_s1_write_ports_inv <= not mm_interconnect_2_ra_backlash_tick_s1_write;
+
+	mm_interconnect_2_de_backlash_duration_s1_write_ports_inv <= not mm_interconnect_2_de_backlash_duration_s1_write;
+
+	mm_interconnect_2_ra_backlash_duration_s1_write_ports_inv <= not mm_interconnect_2_ra_backlash_duration_s1_write;
 
 	rst_controller_reset_out_reset_ports_inv <= not rst_controller_reset_out_reset;
 

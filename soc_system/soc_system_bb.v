@@ -12,6 +12,14 @@ module soc_system (
 	button_pio_external_connection_export,
 	clk_clk,
 	clk_130_clk,
+	ctrl_acknowledge,
+	ctrl_irq,
+	ctrl_address,
+	ctrl_bus_enable,
+	ctrl_byte_enable,
+	ctrl_rw,
+	ctrl_write_data,
+	ctrl_read_data,
 	dipsw_pio_external_connection_export,
 	hps_0_f2h_cold_reset_req_reset_n,
 	hps_0_f2h_debug_reset_req_reset_n,
@@ -92,14 +100,29 @@ module soc_system (
 	sts_rw,
 	sts_write_data,
 	sts_read_data,
-	ctrl_acknowledge,
-	ctrl_irq,
-	ctrl_address,
-	ctrl_bus_enable,
-	ctrl_byte_enable,
-	ctrl_rw,
-	ctrl_write_data,
-	ctrl_read_data);	
+	buf0_1_export,
+	buf1_export,
+	buf0_export,
+	ra_status_export,
+	de_status_export,
+	ra_count_export,
+	de_count_export,
+	de_counter_load_export,
+	de_counter_load_1_export,
+	de_counter_max_export,
+	ra_counter_max_export,
+	de_cmdcontrol_export,
+	ra_cmdcontrol_export,
+	de_cmdduration_export,
+	ra_cmdduration_export,
+	de_trackctrl_export,
+	ra_trackctrl_export,
+	de_cmdtick_export,
+	ra_cmdtick_export,
+	de_backlash_tick_export,
+	ra_backlash_tick_export,
+	de_backlash_duration_export,
+	ra_backlash_duration_export);	
 
 	input		alt_vip_itc_0_clocked_video_vid_clk;
 	output	[31:0]	alt_vip_itc_0_clocked_video_vid_data;
@@ -113,6 +136,14 @@ module soc_system (
 	input	[1:0]	button_pio_external_connection_export;
 	input		clk_clk;
 	input		clk_130_clk;
+	input		ctrl_acknowledge;
+	input		ctrl_irq;
+	output	[11:0]	ctrl_address;
+	output		ctrl_bus_enable;
+	output	[3:0]	ctrl_byte_enable;
+	output		ctrl_rw;
+	output	[31:0]	ctrl_write_data;
+	input	[31:0]	ctrl_read_data;
 	input	[3:0]	dipsw_pio_external_connection_export;
 	input		hps_0_f2h_cold_reset_req_reset_n;
 	input		hps_0_f2h_debug_reset_req_reset_n;
@@ -193,12 +224,27 @@ module soc_system (
 	output		sts_rw;
 	output	[31:0]	sts_write_data;
 	input	[31:0]	sts_read_data;
-	input		ctrl_acknowledge;
-	input		ctrl_irq;
-	output	[11:0]	ctrl_address;
-	output		ctrl_bus_enable;
-	output	[3:0]	ctrl_byte_enable;
-	output		ctrl_rw;
-	output	[31:0]	ctrl_write_data;
-	input	[31:0]	ctrl_read_data;
+	input	[31:0]	buf0_1_export;
+	input	[31:0]	buf1_export;
+	input	[31:0]	buf0_export;
+	input	[31:0]	ra_status_export;
+	input	[31:0]	de_status_export;
+	input	[31:0]	ra_count_export;
+	input	[31:0]	de_count_export;
+	output	[31:0]	de_counter_load_export;
+	output	[31:0]	de_counter_load_1_export;
+	output	[31:0]	de_counter_max_export;
+	output	[31:0]	ra_counter_max_export;
+	output	[31:0]	de_cmdcontrol_export;
+	output	[31:0]	ra_cmdcontrol_export;
+	output	[31:0]	de_cmdduration_export;
+	output	[31:0]	ra_cmdduration_export;
+	output	[31:0]	de_trackctrl_export;
+	output	[31:0]	ra_trackctrl_export;
+	output	[31:0]	de_cmdtick_export;
+	output	[31:0]	ra_cmdtick_export;
+	output	[31:0]	de_backlash_tick_export;
+	output	[31:0]	ra_backlash_tick_export;
+	output	[31:0]	de_backlash_duration_export;
+	output	[31:0]	ra_backlash_duration_export;
 endmodule

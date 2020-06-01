@@ -79,7 +79,8 @@ entity DE10_TOP is
         KEY			: in	std_logic_vector(1 downto 0);
         LED			: out	std_logic_vector(7 downto 0);
         SW			: in	std_logic_vector(3 downto 0);
-               	
+        GPIO_0    : out std_logic_vector(35 downto 0);
+        GPIO_1    : in  std_logic_vector(35 downto 0);
         ------- ADC 			--------------------
         ADC_CONVST		: out	std_logic;
         ADC_SCK			: out	std_logic;
@@ -213,7 +214,23 @@ architecture rtl of DE10_TOP is
             memory_mem_odt                            : out   std_logic;                                        -- mem_odt
             memory_mem_dm                             : out   std_logic_vector(3 downto 0);                     -- mem_dm
             memory_oct_rzqin                          : in    std_logic                     := 'X';             -- oct_rzqin
-            reset_reset_n                             : in    std_logic                     := 'X'              -- reset_n
+            reset_reset_n                             : in    std_logic                     := 'X';              -- reset_n
+				sts_acknowledge                           : in    std_logic                     := 'X';             -- acknowledge
+            sts_irq                                   : in    std_logic                     := 'X';             -- irq
+            sts_address                               : out   std_logic_vector(11 downto 0);                    -- address
+            sts_bus_enable                            : out   std_logic;                                        -- bus_enable
+            sts_byte_enable                           : out   std_logic_vector(3 downto 0);                     -- byte_enable
+            sts_rw                                    : out   std_logic;                                        -- rw
+            sts_write_data                            : out   std_logic_vector(31 downto 0);                    -- write_data
+            sts_read_data                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- read_data
+            ctrl_acknowledge                          : in    std_logic                     := 'X';             -- acknowledge
+            ctrl_irq                                  : in    std_logic                     := 'X';             -- irq
+            ctrl_address                              : out   std_logic_vector(11 downto 0);                    -- address
+            ctrl_bus_enable                           : out   std_logic;                                        -- bus_enable
+            ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     -- byte_enable
+            ctrl_rw                                   : out   std_logic;                                        -- rw
+            ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    -- write_data
+            ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => 'X')  -- read_data
         );
   end component soc_system;
 
@@ -240,6 +257,39 @@ architecture rtl of DE10_TOP is
     );
   end component hps_reset0;
 
+  
+signal ra_mode : STD_LOGIC_VECTOR (2 downto 0);
+signal ra_enable_n : STD_LOGIC;
+signal ra_sleep_n : STD_LOGIC;
+signal ra_rst_n : STD_LOGIC;
+signal ra_step : STD_LOGIC;
+signal ra_direction : STD_LOGIC;
+signal ra_fault_n : STD_LOGIC;
+signal de_mode : STD_LOGIC_VECTOR (2 downto 0);
+signal de_enable_n : STD_LOGIC;
+signal de_sleep_n : STD_LOGIC;
+signal de_rst_n : STD_LOGIC;
+signal de_step : STD_LOGIC;
+signal de_direction : STD_LOGIC;
+signal de_fault_n : STD_LOGIC;
+			  
+signal sts_acknowledge                           : std_logic                     := 'X';             -- acknowledge
+signal sts_irq                                   : std_logic                     := 'X';             -- irq
+signal sts_address                               : std_logic_vector(11 downto 0);                    -- address
+signal sts_bus_enable                            : std_logic;                                        -- bus_enable
+signal sts_byte_enable                           : std_logic_vector(3 downto 0);                     -- byte_enable
+signal sts_rw                                    : std_logic;                                        -- rw
+signal sts_write_data                            : std_logic_vector(31 downto 0);                    -- write_data
+signal sts_read_data                             : std_logic_vector(31 downto 0) := (others => 'X'); -- read_data
+           
+signal ctrl_acknowledge                          : std_logic                     := 'X';             -- acknowledge
+signal ctrl_irq                                  : std_logic                     := 'X';             -- irq
+signal ctrl_address                              : std_logic_vector(11 downto 0);                    -- address
+signal ctrl_bus_enable                           : std_logic;                                        -- bus_enable
+signal ctrl_byte_enable                          : std_logic_vector(3 downto 0);                     -- byte_enable
+signal ctrl_rw                                   : std_logic;                                        -- rw
+signal ctrl_write_data                           : std_logic_vector(31 downto 0);                    -- write_data
+signal ctrl_read_data                            : std_logic_vector(31 downto 0) := (others => 'X');  -- read_data
 begin
     LED(7 downto 1) <= fpga_led_internal;
     fpga_clk_50 <= FPGA_CLK1_50;
@@ -377,9 +427,74 @@ begin
         memory_mem_dqs_n                          => HPS_DDR3_DQS_N,     --                               .mem_dqs_n
         memory_mem_odt                            => HPS_DDR3_ODT,       --                               .mem_odt
         memory_mem_dm                             => HPS_DDR3_DM,        --                               .mem_dm
-        memory_oct_rzqin                          => HPS_DDR3_RZQ        --                          reset.reset_n
+        memory_oct_rzqin                          => HPS_DDR3_RZQ,        --                          reset.reset_n
+				sts_acknowledge                           => sts_acknowledge,                           --                            sts.acknowledge
+            sts_irq                                   => sts_irq,                                   --                               .irq
+            sts_address                               => sts_address,                               --                               .address
+            sts_bus_enable                            => sts_bus_enable,                            --                               .bus_enable
+            sts_byte_enable                           => sts_byte_enable,                           --                               .byte_enable
+            sts_rw                                    => sts_rw,                                    --                               .rw
+            sts_write_data                            => sts_write_data,                            --                               .write_data
+            sts_read_data                             => sts_read_data,                             --                               .read_data
+            ctrl_acknowledge                          => ctrl_acknowledge,                          --                           ctrl.acknowledge
+            ctrl_irq                                  => ctrl_irq,                                  --                               .irq
+            ctrl_address                              => ctrl_address,                              --                               .address
+            ctrl_bus_enable                           => ctrl_bus_enable,                           --                               .bus_enable
+            ctrl_byte_enable                          => ctrl_byte_enable,                          --                               .byte_enable
+            ctrl_rw                                   => ctrl_rw,                                   --                               .rw
+            ctrl_write_data                           => ctrl_write_data,                           --                               .write_data
+            ctrl_read_data                            => ctrl_read_data                             --   
     );
-		  
+	 GPIO_0(2 downto 0) <= ra_mode;
+	 GPIO_0(3) <= ra_sleep_n;
+	 GPIO_0(4) <= ra_rst_n;
+	 GPIO_0(5) <= ra_enable_n;
+	 GPIO_0(6) <= ra_step;
+	 GPIO_0(7) <= ra_direction;
+	 GPIO_0(12 downto 10) <= de_mode;
+	 GPIO_0(13) <= de_sleep_n;
+	 GPIO_0(14) <= de_rst_n;
+	 GPIO_0(15) <= de_enable_n;
+	 GPIO_0(16) <= de_step;
+	 GPIO_0(17) <= de_direction;
+	 
+	 SKYTRACKER :  entity work.sky_tracker	
+		port map (
+			  clk_50  => FPGA_CLK1_50,
+           rstn_50 => hps_fpga_reset_n,
+			  
+           ra_mode => ra_mode,
+           ra_enable_n => ra_enable_n,
+           ra_sleep_n => ra_sleep_n,
+           ra_rst_n => ra_rst_n,
+           ra_step => ra_step,
+           ra_direction => ra_direction,
+           ra_fault_n => ra_fault_n,
+			  de_mode => de_mode,
+           de_enable_n => de_enable_n,
+           de_sleep_n => de_sleep_n,
+           de_rst_n => de_rst_n,
+           de_step => de_step,
+           de_direction => de_direction,
+           de_fault_n => de_fault_n,
+			  
+   		   sts_acknowledge                           => sts_acknowledge,                           --                            sts.acknowledge
+            sts_irq                                   => sts_irq,                                   --                               .irq
+            sts_address                               => sts_address,                               --                               .address
+            sts_bus_enable                            => sts_bus_enable,                            --                               .bus_enable
+            sts_byte_enable                           => sts_byte_enable,                           --                               .byte_enable
+            sts_rw                                    => sts_rw,                                    --                               .rw
+            sts_write_data                            => sts_write_data,                            --                               .write_data
+            sts_read_data                             => sts_read_data,                             --                               .read_data
+            ctrl_acknowledge                          => ctrl_acknowledge,                          --                           ctrl.acknowledge
+            ctrl_irq                                  => ctrl_irq,                                  --                               .irq
+            ctrl_address                              => ctrl_address,                              --                               .address
+            ctrl_bus_enable                           => ctrl_bus_enable,                           --                               .bus_enable
+            ctrl_byte_enable                          => ctrl_byte_enable,                          --                               .byte_enable
+            ctrl_rw                                   => ctrl_rw,                                   --                               .rw
+            ctrl_write_data                           => ctrl_write_data,                           --                               .write_data
+            ctrl_read_data                            => ctrl_read_data  
+	 );
     vga_pll_i : vga_pll 
     port map (
         refclk  => fpga_clk_50,         --  refclk.clk
@@ -415,4 +530,7 @@ begin
         data_in => KEY,
         data_out => fpga_debounced_buttons
     );
+	 
+	 
+	 
 end rtl;

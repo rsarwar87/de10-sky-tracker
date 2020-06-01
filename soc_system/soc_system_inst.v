@@ -82,6 +82,22 @@
 		.memory_mem_odt                            (<connected-to-memory_mem_odt>),                            //                               .mem_odt
 		.memory_mem_dm                             (<connected-to-memory_mem_dm>),                             //                               .mem_dm
 		.memory_oct_rzqin                          (<connected-to-memory_oct_rzqin>),                          //                               .oct_rzqin
-		.reset_reset_n                             (<connected-to-reset_reset_n>)                              //                          reset.reset_n
+		.reset_reset_n                             (<connected-to-reset_reset_n>),                             //                          reset.reset_n
+		.sts_acknowledge                           (<connected-to-sts_acknowledge>),                           //                            sts.acknowledge
+		.sts_irq                                   (<connected-to-sts_irq>),                                   //                               .irq
+		.sts_address                               (<connected-to-sts_address>),                               //                               .address
+		.sts_bus_enable                            (<connected-to-sts_bus_enable>),                            //                               .bus_enable
+		.sts_byte_enable                           (<connected-to-sts_byte_enable>),                           //                               .byte_enable
+		.sts_rw                                    (<connected-to-sts_rw>),                                    //                               .rw
+		.sts_write_data                            (<connected-to-sts_write_data>),                            //                               .write_data
+		.sts_read_data                             (<connected-to-sts_read_data>),                             //                               .read_data
+		.ctrl_acknowledge                          (<connected-to-ctrl_acknowledge>),                          //                           ctrl.acknowledge
+		.ctrl_irq                                  (<connected-to-ctrl_irq>),                                  //                               .irq
+		.ctrl_address                              (<connected-to-ctrl_address>),                              //                               .address
+		.ctrl_bus_enable                           (<connected-to-ctrl_bus_enable>),                           //                               .bus_enable
+		.ctrl_byte_enable                          (<connected-to-ctrl_byte_enable>),                          //                               .byte_enable
+		.ctrl_rw                                   (<connected-to-ctrl_rw>),                                   //                               .rw
+		.ctrl_write_data                           (<connected-to-ctrl_write_data>),                           //                               .write_data
+		.ctrl_read_data                            (<connected-to-ctrl_read_data>)                             //                               .read_data
 	);
 

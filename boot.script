@@ -1,0 +1,7 @@
+fatload mmc 0:1 $fpgadata output_files/soc_system.rbf;
+fpga load 0 $fpgadata $filesize;
+setenv fdtimage soc_system.dtb;
+setenv ethaddr 42:d6:17:4a:8a:34;
+run bridge_enable_handoff;
+run mmcload;
+run mmcboot;

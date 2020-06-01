@@ -83,7 +83,23 @@
 			memory_mem_odt                            : out   std_logic;                                        -- mem_odt
 			memory_mem_dm                             : out   std_logic_vector(3 downto 0);                     -- mem_dm
 			memory_oct_rzqin                          : in    std_logic                     := 'X';             -- oct_rzqin
-			reset_reset_n                             : in    std_logic                     := 'X'              -- reset_n
+			reset_reset_n                             : in    std_logic                     := 'X';             -- reset_n
+			sts_acknowledge                           : in    std_logic                     := 'X';             -- acknowledge
+			sts_irq                                   : in    std_logic                     := 'X';             -- irq
+			sts_address                               : out   std_logic_vector(11 downto 0);                    -- address
+			sts_bus_enable                            : out   std_logic;                                        -- bus_enable
+			sts_byte_enable                           : out   std_logic_vector(3 downto 0);                     -- byte_enable
+			sts_rw                                    : out   std_logic;                                        -- rw
+			sts_write_data                            : out   std_logic_vector(31 downto 0);                    -- write_data
+			sts_read_data                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- read_data
+			ctrl_acknowledge                          : in    std_logic                     := 'X';             -- acknowledge
+			ctrl_irq                                  : in    std_logic                     := 'X';             -- irq
+			ctrl_address                              : out   std_logic_vector(11 downto 0);                    -- address
+			ctrl_bus_enable                           : out   std_logic;                                        -- bus_enable
+			ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     -- byte_enable
+			ctrl_rw                                   : out   std_logic;                                        -- rw
+			ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    -- write_data
+			ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => 'X')  -- read_data
 		);
 	end component soc_system;
 
@@ -172,6 +188,22 @@
 			memory_mem_odt                            => CONNECTED_TO_memory_mem_odt,                            --                               .mem_odt
 			memory_mem_dm                             => CONNECTED_TO_memory_mem_dm,                             --                               .mem_dm
 			memory_oct_rzqin                          => CONNECTED_TO_memory_oct_rzqin,                          --                               .oct_rzqin
-			reset_reset_n                             => CONNECTED_TO_reset_reset_n                              --                          reset.reset_n
+			reset_reset_n                             => CONNECTED_TO_reset_reset_n,                             --                          reset.reset_n
+			sts_acknowledge                           => CONNECTED_TO_sts_acknowledge,                           --                            sts.acknowledge
+			sts_irq                                   => CONNECTED_TO_sts_irq,                                   --                               .irq
+			sts_address                               => CONNECTED_TO_sts_address,                               --                               .address
+			sts_bus_enable                            => CONNECTED_TO_sts_bus_enable,                            --                               .bus_enable
+			sts_byte_enable                           => CONNECTED_TO_sts_byte_enable,                           --                               .byte_enable
+			sts_rw                                    => CONNECTED_TO_sts_rw,                                    --                               .rw
+			sts_write_data                            => CONNECTED_TO_sts_write_data,                            --                               .write_data
+			sts_read_data                             => CONNECTED_TO_sts_read_data,                             --                               .read_data
+			ctrl_acknowledge                          => CONNECTED_TO_ctrl_acknowledge,                          --                           ctrl.acknowledge
+			ctrl_irq                                  => CONNECTED_TO_ctrl_irq,                                  --                               .irq
+			ctrl_address                              => CONNECTED_TO_ctrl_address,                              --                               .address
+			ctrl_bus_enable                           => CONNECTED_TO_ctrl_bus_enable,                           --                               .bus_enable
+			ctrl_byte_enable                          => CONNECTED_TO_ctrl_byte_enable,                          --                               .byte_enable
+			ctrl_rw                                   => CONNECTED_TO_ctrl_rw,                                   --                               .rw
+			ctrl_write_data                           => CONNECTED_TO_ctrl_write_data,                           --                               .write_data
+			ctrl_read_data                            => CONNECTED_TO_ctrl_read_data                             --                               .read_data
 		);
 

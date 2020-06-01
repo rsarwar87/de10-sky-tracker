@@ -1,0 +1,36 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+use IEEE.NUMERIC_STD.ALL;
+
+
+entity drv8825 is
+    Port ( clk_50 : in STD_LOGIC;
+           rstn_50 : in STD_LOGIC;
+           drv8825_mode : out STD_LOGIC_VECTOR (2 downto 0);
+           drv8825_enable_n : out STD_LOGIC;
+           drv8825_sleep_n : out STD_LOGIC;
+           drv8825_rst_n : out STD_LOGIC;
+           drv8825_step : out STD_LOGIC;
+           drv8825_direction : out STD_LOGIC;
+           drv8825_fault_n : in STD_LOGIC;
+           ctrl_step_count : out STD_LOGIC_VECTOR (31 downto 0);
+           ctrl_status : out STD_LOGIC_VECTOR (31 downto 0);
+           ctrl_cmdcontrol : in STD_LOGIC_VECTOR (31 downto 0); -- steps, go, stop, direction
+           ctrl_cmdtick : in STD_LOGIC_VECTOR (31 downto 0);    -- speed of command
+           ctrl_cmdduration : in STD_LOGIC_VECTOR (31 downto 0);    -- speed of command
+           ctrl_backlash_tick : in STD_LOGIC_VECTOR (31 downto 0);  -- speed of backlash
+           ctrl_backlash_duration : in STD_LOGIC_VECTOR (31 downto 0); -- duration of backlash
+           ctrl_counter_load : in STD_LOGIC_VECTOR (31 downto 0); -- duration of backlash
+           ctrl_counter_max : in STD_LOGIC_VECTOR (31 downto 0); -- duration of backlash
+           ctrl_trackctrl : in STD_LOGIC_VECTOR (31 downto 0)    -- speed, start, direction
+          );
+end drv8825;
+
+architecture Behavioral of drv8825 is
+
+
+end Behavioral;

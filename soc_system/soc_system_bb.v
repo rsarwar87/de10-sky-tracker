@@ -83,7 +83,23 @@ module soc_system (
 	memory_mem_odt,
 	memory_mem_dm,
 	memory_oct_rzqin,
-	reset_reset_n);	
+	reset_reset_n,
+	sts_acknowledge,
+	sts_irq,
+	sts_address,
+	sts_bus_enable,
+	sts_byte_enable,
+	sts_rw,
+	sts_write_data,
+	sts_read_data,
+	ctrl_acknowledge,
+	ctrl_irq,
+	ctrl_address,
+	ctrl_bus_enable,
+	ctrl_byte_enable,
+	ctrl_rw,
+	ctrl_write_data,
+	ctrl_read_data);	
 
 	input		alt_vip_itc_0_clocked_video_vid_clk;
 	output	[31:0]	alt_vip_itc_0_clocked_video_vid_data;
@@ -169,4 +185,20 @@ module soc_system (
 	output	[3:0]	memory_mem_dm;
 	input		memory_oct_rzqin;
 	input		reset_reset_n;
+	input		sts_acknowledge;
+	input		sts_irq;
+	output	[11:0]	sts_address;
+	output		sts_bus_enable;
+	output	[3:0]	sts_byte_enable;
+	output		sts_rw;
+	output	[31:0]	sts_write_data;
+	input	[31:0]	sts_read_data;
+	input		ctrl_acknowledge;
+	input		ctrl_irq;
+	output	[11:0]	ctrl_address;
+	output		ctrl_bus_enable;
+	output	[3:0]	ctrl_byte_enable;
+	output		ctrl_rw;
+	output	[31:0]	ctrl_write_data;
+	input	[31:0]	ctrl_read_data;
 endmodule

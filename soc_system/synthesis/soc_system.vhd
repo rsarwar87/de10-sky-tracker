@@ -20,6 +20,14 @@ entity soc_system is
 		button_pio_external_connection_export     : in    std_logic_vector(1 downto 0)  := (others => '0'); -- button_pio_external_connection.export
 		clk_clk                                   : in    std_logic                     := '0';             --                            clk.clk
 		clk_130_clk                               : in    std_logic                     := '0';             --                        clk_130.clk
+		ctrl_acknowledge                          : in    std_logic                     := '0';             --                           ctrl.acknowledge
+		ctrl_irq                                  : in    std_logic                     := '0';             --                               .irq
+		ctrl_address                              : out   std_logic_vector(11 downto 0);                    --                               .address
+		ctrl_bus_enable                           : out   std_logic;                                        --                               .bus_enable
+		ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     --                               .byte_enable
+		ctrl_rw                                   : out   std_logic;                                        --                               .rw
+		ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    --                               .write_data
+		ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => '0'); --                               .read_data
 		dipsw_pio_external_connection_export      : in    std_logic_vector(3 downto 0)  := (others => '0'); --  dipsw_pio_external_connection.export
 		hps_0_f2h_cold_reset_req_reset_n          : in    std_logic                     := '0';             --       hps_0_f2h_cold_reset_req.reset_n
 		hps_0_f2h_debug_reset_req_reset_n         : in    std_logic                     := '0';             --      hps_0_f2h_debug_reset_req.reset_n
@@ -91,7 +99,15 @@ entity soc_system is
 		memory_mem_odt                            : out   std_logic;                                        --                               .mem_odt
 		memory_mem_dm                             : out   std_logic_vector(3 downto 0);                     --                               .mem_dm
 		memory_oct_rzqin                          : in    std_logic                     := '0';             --                               .oct_rzqin
-		reset_reset_n                             : in    std_logic                     := '0'              --                          reset.reset_n
+		reset_reset_n                             : in    std_logic                     := '0';             --                          reset.reset_n
+		sts_acknowledge                           : in    std_logic                     := '0';             --                            sts.acknowledge
+		sts_irq                                   : in    std_logic                     := '0';             --                               .irq
+		sts_address                               : out   std_logic_vector(11 downto 0);                    --                               .address
+		sts_bus_enable                            : out   std_logic;                                        --                               .bus_enable
+		sts_byte_enable                           : out   std_logic_vector(3 downto 0);                     --                               .byte_enable
+		sts_rw                                    : out   std_logic;                                        --                               .rw
+		sts_write_data                            : out   std_logic_vector(31 downto 0);                    --                               .write_data
+		sts_read_data                             : in    std_logic_vector(31 downto 0) := (others => '0')  --                               .read_data
 	);
 end entity soc_system;
 
@@ -220,6 +236,30 @@ architecture rtl of soc_system is
 			irq        : out std_logic                                         -- irq
 		);
 	end component soc_system_button_pio;
+
+	component soc_system_ctrl is
+		port (
+			clk                : in  std_logic                     := 'X';             -- clk
+			reset              : in  std_logic                     := 'X';             -- reset
+			avalon_address     : in  std_logic_vector(9 downto 0)  := (others => 'X'); -- address
+			avalon_byteenable  : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
+			avalon_chipselect  : in  std_logic                     := 'X';             -- chipselect
+			avalon_read        : in  std_logic                     := 'X';             -- read
+			avalon_write       : in  std_logic                     := 'X';             -- write
+			avalon_writedata   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			avalon_readdata    : out std_logic_vector(31 downto 0);                    -- readdata
+			avalon_waitrequest : out std_logic;                                        -- waitrequest
+			avalon_irq         : out std_logic;                                        -- irq
+			acknowledge        : in  std_logic                     := 'X';             -- export
+			irq                : in  std_logic                     := 'X';             -- export
+			address            : out std_logic_vector(11 downto 0);                    -- export
+			bus_enable         : out std_logic;                                        -- export
+			byte_enable        : out std_logic_vector(3 downto 0);                     -- export
+			rw                 : out std_logic;                                        -- export
+			write_data         : out std_logic_vector(31 downto 0);                    -- export
+			read_data          : in  std_logic_vector(31 downto 0) := (others => 'X')  -- export
+		);
+	end component soc_system_ctrl;
 
 	component soc_system_dipsw_pio is
 		port (
@@ -504,7 +544,7 @@ architecture rtl of soc_system is
 			s0_readdatavalid : out std_logic;                                        -- readdatavalid
 			s0_burstcount    : in  std_logic_vector(0 downto 0)  := (others => 'X'); -- burstcount
 			s0_writedata     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			s0_address       : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
+			s0_address       : in  std_logic_vector(18 downto 0) := (others => 'X'); -- address
 			s0_write         : in  std_logic                     := 'X';             -- write
 			s0_read          : in  std_logic                     := 'X';             -- read
 			s0_byteenable    : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
@@ -514,7 +554,7 @@ architecture rtl of soc_system is
 			m0_readdatavalid : in  std_logic                     := 'X';             -- readdatavalid
 			m0_burstcount    : out std_logic_vector(0 downto 0);                     -- burstcount
 			m0_writedata     : out std_logic_vector(31 downto 0);                    -- writedata
-			m0_address       : out std_logic_vector(17 downto 0);                    -- address
+			m0_address       : out std_logic_vector(18 downto 0);                    -- address
 			m0_write         : out std_logic;                                        -- write
 			m0_read          : out std_logic;                                        -- read
 			m0_byteenable    : out std_logic_vector(3 downto 0);                     -- byteenable
@@ -635,7 +675,7 @@ architecture rtl of soc_system is
 			clk_0_clk_clk                                                       : in  std_logic                     := 'X';             -- clk
 			hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset : in  std_logic                     := 'X';             -- reset
 			mm_bridge_0_reset_reset_bridge_in_reset_reset                       : in  std_logic                     := 'X';             -- reset
-			mm_bridge_0_s0_address                                              : out std_logic_vector(17 downto 0);                    -- address
+			mm_bridge_0_s0_address                                              : out std_logic_vector(18 downto 0);                    -- address
 			mm_bridge_0_s0_write                                                : out std_logic;                                        -- write
 			mm_bridge_0_s0_read                                                 : out std_logic;                                        -- read
 			mm_bridge_0_s0_readdata                                             : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -663,7 +703,7 @@ architecture rtl of soc_system is
 			fpga_only_master_master_readdatavalid                          : out std_logic;                                        -- readdatavalid
 			fpga_only_master_master_write                                  : in  std_logic                     := 'X';             -- write
 			fpga_only_master_master_writedata                              : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			mm_bridge_0_m0_address                                         : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
+			mm_bridge_0_m0_address                                         : in  std_logic_vector(18 downto 0) := (others => 'X'); -- address
 			mm_bridge_0_m0_waitrequest                                     : out std_logic;                                        -- waitrequest
 			mm_bridge_0_m0_burstcount                                      : in  std_logic_vector(0 downto 0)  := (others => 'X'); -- burstcount
 			mm_bridge_0_m0_byteenable                                      : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
@@ -683,6 +723,14 @@ architecture rtl of soc_system is
 			button_pio_s1_readdata                                         : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			button_pio_s1_writedata                                        : out std_logic_vector(31 downto 0);                    -- writedata
 			button_pio_s1_chipselect                                       : out std_logic;                                        -- chipselect
+			ctrl_avalon_slave_address                                      : out std_logic_vector(9 downto 0);                     -- address
+			ctrl_avalon_slave_write                                        : out std_logic;                                        -- write
+			ctrl_avalon_slave_read                                         : out std_logic;                                        -- read
+			ctrl_avalon_slave_readdata                                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ctrl_avalon_slave_writedata                                    : out std_logic_vector(31 downto 0);                    -- writedata
+			ctrl_avalon_slave_byteenable                                   : out std_logic_vector(3 downto 0);                     -- byteenable
+			ctrl_avalon_slave_waitrequest                                  : in  std_logic                     := 'X';             -- waitrequest
+			ctrl_avalon_slave_chipselect                                   : out std_logic;                                        -- chipselect
 			dipsw_pio_s1_address                                           : out std_logic_vector(1 downto 0);                     -- address
 			dipsw_pio_s1_write                                             : out std_logic;                                        -- write
 			dipsw_pio_s1_readdata                                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -705,6 +753,14 @@ architecture rtl of soc_system is
 			led_pio_s1_readdata                                            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			led_pio_s1_writedata                                           : out std_logic_vector(31 downto 0);                    -- writedata
 			led_pio_s1_chipselect                                          : out std_logic;                                        -- chipselect
+			sts_avalon_slave_address                                       : out std_logic_vector(9 downto 0);                     -- address
+			sts_avalon_slave_write                                         : out std_logic;                                        -- write
+			sts_avalon_slave_read                                          : out std_logic;                                        -- read
+			sts_avalon_slave_readdata                                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			sts_avalon_slave_writedata                                     : out std_logic_vector(31 downto 0);                    -- writedata
+			sts_avalon_slave_byteenable                                    : out std_logic_vector(3 downto 0);                     -- byteenable
+			sts_avalon_slave_waitrequest                                   : in  std_logic                     := 'X';             -- waitrequest
+			sts_avalon_slave_chipselect                                    : out std_logic;                                        -- chipselect
 			sysid_qsys_control_slave_address                               : out std_logic_vector(0 downto 0);                     -- address
 			sysid_qsys_control_slave_readdata                              : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
 		);
@@ -929,7 +985,7 @@ architecture rtl of soc_system is
 	signal mm_interconnect_1_mm_bridge_0_s0_readdata                     : std_logic_vector(31 downto 0);  -- mm_bridge_0:s0_readdata -> mm_interconnect_1:mm_bridge_0_s0_readdata
 	signal mm_interconnect_1_mm_bridge_0_s0_waitrequest                  : std_logic;                      -- mm_bridge_0:s0_waitrequest -> mm_interconnect_1:mm_bridge_0_s0_waitrequest
 	signal mm_interconnect_1_mm_bridge_0_s0_debugaccess                  : std_logic;                      -- mm_interconnect_1:mm_bridge_0_s0_debugaccess -> mm_bridge_0:s0_debugaccess
-	signal mm_interconnect_1_mm_bridge_0_s0_address                      : std_logic_vector(17 downto 0);  -- mm_interconnect_1:mm_bridge_0_s0_address -> mm_bridge_0:s0_address
+	signal mm_interconnect_1_mm_bridge_0_s0_address                      : std_logic_vector(18 downto 0);  -- mm_interconnect_1:mm_bridge_0_s0_address -> mm_bridge_0:s0_address
 	signal mm_interconnect_1_mm_bridge_0_s0_read                         : std_logic;                      -- mm_interconnect_1:mm_bridge_0_s0_read -> mm_bridge_0:s0_read
 	signal mm_interconnect_1_mm_bridge_0_s0_byteenable                   : std_logic_vector(3 downto 0);   -- mm_interconnect_1:mm_bridge_0_s0_byteenable -> mm_bridge_0:s0_byteenable
 	signal mm_interconnect_1_mm_bridge_0_s0_readdatavalid                : std_logic;                      -- mm_bridge_0:s0_readdatavalid -> mm_interconnect_1:mm_bridge_0_s0_readdatavalid
@@ -939,7 +995,7 @@ architecture rtl of soc_system is
 	signal mm_bridge_0_m0_waitrequest                                    : std_logic;                      -- mm_interconnect_2:mm_bridge_0_m0_waitrequest -> mm_bridge_0:m0_waitrequest
 	signal mm_bridge_0_m0_readdata                                       : std_logic_vector(31 downto 0);  -- mm_interconnect_2:mm_bridge_0_m0_readdata -> mm_bridge_0:m0_readdata
 	signal mm_bridge_0_m0_debugaccess                                    : std_logic;                      -- mm_bridge_0:m0_debugaccess -> mm_interconnect_2:mm_bridge_0_m0_debugaccess
-	signal mm_bridge_0_m0_address                                        : std_logic_vector(17 downto 0);  -- mm_bridge_0:m0_address -> mm_interconnect_2:mm_bridge_0_m0_address
+	signal mm_bridge_0_m0_address                                        : std_logic_vector(18 downto 0);  -- mm_bridge_0:m0_address -> mm_interconnect_2:mm_bridge_0_m0_address
 	signal mm_bridge_0_m0_read                                           : std_logic;                      -- mm_bridge_0:m0_read -> mm_interconnect_2:mm_bridge_0_m0_read
 	signal mm_bridge_0_m0_byteenable                                     : std_logic_vector(3 downto 0);   -- mm_bridge_0:m0_byteenable -> mm_interconnect_2:mm_bridge_0_m0_byteenable
 	signal mm_bridge_0_m0_readdatavalid                                  : std_logic;                      -- mm_interconnect_2:mm_bridge_0_m0_readdatavalid -> mm_bridge_0:m0_readdatavalid
@@ -971,6 +1027,22 @@ architecture rtl of soc_system is
 	signal mm_interconnect_2_alt_vip_vfr_hdmi_avalon_slave_read          : std_logic;                      -- mm_interconnect_2:alt_vip_vfr_hdmi_avalon_slave_read -> alt_vip_vfr_hdmi:slave_read
 	signal mm_interconnect_2_alt_vip_vfr_hdmi_avalon_slave_write         : std_logic;                      -- mm_interconnect_2:alt_vip_vfr_hdmi_avalon_slave_write -> alt_vip_vfr_hdmi:slave_write
 	signal mm_interconnect_2_alt_vip_vfr_hdmi_avalon_slave_writedata     : std_logic_vector(31 downto 0);  -- mm_interconnect_2:alt_vip_vfr_hdmi_avalon_slave_writedata -> alt_vip_vfr_hdmi:slave_writedata
+	signal mm_interconnect_2_sts_avalon_slave_chipselect                 : std_logic;                      -- mm_interconnect_2:sts_avalon_slave_chipselect -> sts:avalon_chipselect
+	signal mm_interconnect_2_sts_avalon_slave_readdata                   : std_logic_vector(31 downto 0);  -- sts:avalon_readdata -> mm_interconnect_2:sts_avalon_slave_readdata
+	signal mm_interconnect_2_sts_avalon_slave_waitrequest                : std_logic;                      -- sts:avalon_waitrequest -> mm_interconnect_2:sts_avalon_slave_waitrequest
+	signal mm_interconnect_2_sts_avalon_slave_address                    : std_logic_vector(9 downto 0);   -- mm_interconnect_2:sts_avalon_slave_address -> sts:avalon_address
+	signal mm_interconnect_2_sts_avalon_slave_read                       : std_logic;                      -- mm_interconnect_2:sts_avalon_slave_read -> sts:avalon_read
+	signal mm_interconnect_2_sts_avalon_slave_byteenable                 : std_logic_vector(3 downto 0);   -- mm_interconnect_2:sts_avalon_slave_byteenable -> sts:avalon_byteenable
+	signal mm_interconnect_2_sts_avalon_slave_write                      : std_logic;                      -- mm_interconnect_2:sts_avalon_slave_write -> sts:avalon_write
+	signal mm_interconnect_2_sts_avalon_slave_writedata                  : std_logic_vector(31 downto 0);  -- mm_interconnect_2:sts_avalon_slave_writedata -> sts:avalon_writedata
+	signal mm_interconnect_2_ctrl_avalon_slave_chipselect                : std_logic;                      -- mm_interconnect_2:ctrl_avalon_slave_chipselect -> ctrl:avalon_chipselect
+	signal mm_interconnect_2_ctrl_avalon_slave_readdata                  : std_logic_vector(31 downto 0);  -- ctrl:avalon_readdata -> mm_interconnect_2:ctrl_avalon_slave_readdata
+	signal mm_interconnect_2_ctrl_avalon_slave_waitrequest               : std_logic;                      -- ctrl:avalon_waitrequest -> mm_interconnect_2:ctrl_avalon_slave_waitrequest
+	signal mm_interconnect_2_ctrl_avalon_slave_address                   : std_logic_vector(9 downto 0);   -- mm_interconnect_2:ctrl_avalon_slave_address -> ctrl:avalon_address
+	signal mm_interconnect_2_ctrl_avalon_slave_read                      : std_logic;                      -- mm_interconnect_2:ctrl_avalon_slave_read -> ctrl:avalon_read
+	signal mm_interconnect_2_ctrl_avalon_slave_byteenable                : std_logic_vector(3 downto 0);   -- mm_interconnect_2:ctrl_avalon_slave_byteenable -> ctrl:avalon_byteenable
+	signal mm_interconnect_2_ctrl_avalon_slave_write                     : std_logic;                      -- mm_interconnect_2:ctrl_avalon_slave_write -> ctrl:avalon_write
+	signal mm_interconnect_2_ctrl_avalon_slave_writedata                 : std_logic_vector(31 downto 0);  -- mm_interconnect_2:ctrl_avalon_slave_writedata -> ctrl:avalon_writedata
 	signal mm_interconnect_2_sysid_qsys_control_slave_readdata           : std_logic_vector(31 downto 0);  -- sysid_qsys:readdata -> mm_interconnect_2:sysid_qsys_control_slave_readdata
 	signal mm_interconnect_2_sysid_qsys_control_slave_address            : std_logic_vector(0 downto 0);   -- mm_interconnect_2:sysid_qsys_control_slave_address -> sysid_qsys:address
 	signal mm_interconnect_2_led_pio_s1_chipselect                       : std_logic;                      -- mm_interconnect_2:led_pio_s1_chipselect -> led_pio:chipselect
@@ -1011,7 +1083,7 @@ architecture rtl of soc_system is
 	signal irq_mapper_receiver1_irq                                      : std_logic;                      -- button_pio:irq -> [irq_mapper:receiver1_irq, irq_mapper_001:receiver1_irq]
 	signal irq_mapper_receiver2_irq                                      : std_logic;                      -- dipsw_pio:irq -> [irq_mapper:receiver2_irq, irq_mapper_001:receiver2_irq]
 	signal irq_mapper_receiver0_irq                                      : std_logic;                      -- jtag_uart:av_irq -> [irq_mapper:receiver0_irq, irq_mapper_001:receiver0_irq]
-	signal rst_controller_reset_out_reset                                : std_logic;                      -- rst_controller:reset_out -> [alt_vip_vfr_hdmi:master_reset, irq_mapper:reset, mm_bridge_0:reset, mm_interconnect_0:alt_vip_vfr_hdmi_clock_master_reset_reset_bridge_in_reset_reset, mm_interconnect_0:hps_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:mm_bridge_0_reset_reset_bridge_in_reset_reset, mm_interconnect_2:fpga_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_2:mm_bridge_0_reset_reset_bridge_in_reset_reset, mm_interconnect_3:f2sdram_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_3:f2sdram_only_master_master_translator_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in]
+	signal rst_controller_reset_out_reset                                : std_logic;                      -- rst_controller:reset_out -> [alt_vip_vfr_hdmi:master_reset, ctrl:reset, irq_mapper:reset, mm_bridge_0:reset, mm_interconnect_0:alt_vip_vfr_hdmi_clock_master_reset_reset_bridge_in_reset_reset, mm_interconnect_0:hps_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:mm_bridge_0_reset_reset_bridge_in_reset_reset, mm_interconnect_2:fpga_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_2:mm_bridge_0_reset_reset_bridge_in_reset_reset, mm_interconnect_3:f2sdram_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_3:f2sdram_only_master_master_translator_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, sts:reset]
 	signal rst_controller_001_reset_out_reset                            : std_logic;                      -- rst_controller_001:reset_out -> [alt_vip_itc_0:rst, alt_vip_vfr_hdmi:reset, mm_interconnect_2:alt_vip_vfr_hdmi_clock_reset_reset_reset_bridge_in_reset_reset]
 	signal rst_controller_002_reset_out_reset                            : std_logic;                      -- rst_controller_002:reset_out -> [mm_interconnect_0:hps_0_f2h_axi_slave_agent_reset_sink_reset_bridge_in_reset_reset, mm_interconnect_1:hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_3:hps_0_f2h_sdram0_data_translator_reset_reset_bridge_in_reset_reset]
 	signal hps_0_h2f_reset_reset_n_ports_inv                             : std_logic;                      -- hps_0_h2f_reset_reset_n:inv -> rst_controller_002:reset_in0
@@ -1144,6 +1216,29 @@ begin
 			readdata   => mm_interconnect_2_button_pio_s1_readdata,        --                    .readdata
 			in_port    => button_pio_external_connection_export,           -- external_connection.export
 			irq        => irq_mapper_receiver1_irq                         --                 irq.irq
+		);
+
+	ctrl : component soc_system_ctrl
+		port map (
+			clk                => clk_clk,                                         --                clk.clk
+			reset              => rst_controller_reset_out_reset,                  --              reset.reset
+			avalon_address     => mm_interconnect_2_ctrl_avalon_slave_address,     --       avalon_slave.address
+			avalon_byteenable  => mm_interconnect_2_ctrl_avalon_slave_byteenable,  --                   .byteenable
+			avalon_chipselect  => mm_interconnect_2_ctrl_avalon_slave_chipselect,  --                   .chipselect
+			avalon_read        => mm_interconnect_2_ctrl_avalon_slave_read,        --                   .read
+			avalon_write       => mm_interconnect_2_ctrl_avalon_slave_write,       --                   .write
+			avalon_writedata   => mm_interconnect_2_ctrl_avalon_slave_writedata,   --                   .writedata
+			avalon_readdata    => mm_interconnect_2_ctrl_avalon_slave_readdata,    --                   .readdata
+			avalon_waitrequest => mm_interconnect_2_ctrl_avalon_slave_waitrequest, --                   .waitrequest
+			avalon_irq         => open,                                            --          interrupt.irq
+			acknowledge        => ctrl_acknowledge,                                -- external_interface.export
+			irq                => ctrl_irq,                                        --                   .export
+			address            => ctrl_address,                                    --                   .export
+			bus_enable         => ctrl_bus_enable,                                 --                   .export
+			byte_enable        => ctrl_byte_enable,                                --                   .export
+			rw                 => ctrl_rw,                                         --                   .export
+			write_data         => ctrl_write_data,                                 --                   .export
+			read_data          => ctrl_read_data                                   --                   .export
 		);
 
 	dipsw_pio : component soc_system_dipsw_pio
@@ -1451,7 +1546,7 @@ begin
 		generic map (
 			DATA_WIDTH        => 32,
 			SYMBOL_WIDTH      => 8,
-			HDL_ADDR_WIDTH    => 18,
+			HDL_ADDR_WIDTH    => 19,
 			BURSTCOUNT_WIDTH  => 1,
 			PIPELINE_COMMAND  => 1,
 			PIPELINE_RESPONSE => 1
@@ -1481,6 +1576,29 @@ begin
 			m0_debugaccess   => mm_bridge_0_m0_debugaccess,                     --      .debugaccess
 			s0_response      => open,                                           -- (terminated)
 			m0_response      => "00"                                            -- (terminated)
+		);
+
+	sts : component soc_system_ctrl
+		port map (
+			clk                => clk_clk,                                        --                clk.clk
+			reset              => rst_controller_reset_out_reset,                 --              reset.reset
+			avalon_address     => mm_interconnect_2_sts_avalon_slave_address,     --       avalon_slave.address
+			avalon_byteenable  => mm_interconnect_2_sts_avalon_slave_byteenable,  --                   .byteenable
+			avalon_chipselect  => mm_interconnect_2_sts_avalon_slave_chipselect,  --                   .chipselect
+			avalon_read        => mm_interconnect_2_sts_avalon_slave_read,        --                   .read
+			avalon_write       => mm_interconnect_2_sts_avalon_slave_write,       --                   .write
+			avalon_writedata   => mm_interconnect_2_sts_avalon_slave_writedata,   --                   .writedata
+			avalon_readdata    => mm_interconnect_2_sts_avalon_slave_readdata,    --                   .readdata
+			avalon_waitrequest => mm_interconnect_2_sts_avalon_slave_waitrequest, --                   .waitrequest
+			avalon_irq         => open,                                           --          interrupt.irq
+			acknowledge        => sts_acknowledge,                                -- external_interface.export
+			irq                => sts_irq,                                        --                   .export
+			address            => sts_address,                                    --                   .export
+			bus_enable         => sts_bus_enable,                                 --                   .export
+			byte_enable        => sts_byte_enable,                                --                   .export
+			rw                 => sts_rw,                                         --                   .export
+			write_data         => sts_write_data,                                 --                   .export
+			read_data          => sts_read_data                                   --                   .export
 		);
 
 	sysid_qsys : component soc_system_sysid_qsys
@@ -1639,6 +1757,14 @@ begin
 			button_pio_s1_readdata                                         => mm_interconnect_2_button_pio_s1_readdata,                  --                                                         .readdata
 			button_pio_s1_writedata                                        => mm_interconnect_2_button_pio_s1_writedata,                 --                                                         .writedata
 			button_pio_s1_chipselect                                       => mm_interconnect_2_button_pio_s1_chipselect,                --                                                         .chipselect
+			ctrl_avalon_slave_address                                      => mm_interconnect_2_ctrl_avalon_slave_address,               --                                        ctrl_avalon_slave.address
+			ctrl_avalon_slave_write                                        => mm_interconnect_2_ctrl_avalon_slave_write,                 --                                                         .write
+			ctrl_avalon_slave_read                                         => mm_interconnect_2_ctrl_avalon_slave_read,                  --                                                         .read
+			ctrl_avalon_slave_readdata                                     => mm_interconnect_2_ctrl_avalon_slave_readdata,              --                                                         .readdata
+			ctrl_avalon_slave_writedata                                    => mm_interconnect_2_ctrl_avalon_slave_writedata,             --                                                         .writedata
+			ctrl_avalon_slave_byteenable                                   => mm_interconnect_2_ctrl_avalon_slave_byteenable,            --                                                         .byteenable
+			ctrl_avalon_slave_waitrequest                                  => mm_interconnect_2_ctrl_avalon_slave_waitrequest,           --                                                         .waitrequest
+			ctrl_avalon_slave_chipselect                                   => mm_interconnect_2_ctrl_avalon_slave_chipselect,            --                                                         .chipselect
 			dipsw_pio_s1_address                                           => mm_interconnect_2_dipsw_pio_s1_address,                    --                                             dipsw_pio_s1.address
 			dipsw_pio_s1_write                                             => mm_interconnect_2_dipsw_pio_s1_write,                      --                                                         .write
 			dipsw_pio_s1_readdata                                          => mm_interconnect_2_dipsw_pio_s1_readdata,                   --                                                         .readdata
@@ -1661,6 +1787,14 @@ begin
 			led_pio_s1_readdata                                            => mm_interconnect_2_led_pio_s1_readdata,                     --                                                         .readdata
 			led_pio_s1_writedata                                           => mm_interconnect_2_led_pio_s1_writedata,                    --                                                         .writedata
 			led_pio_s1_chipselect                                          => mm_interconnect_2_led_pio_s1_chipselect,                   --                                                         .chipselect
+			sts_avalon_slave_address                                       => mm_interconnect_2_sts_avalon_slave_address,                --                                         sts_avalon_slave.address
+			sts_avalon_slave_write                                         => mm_interconnect_2_sts_avalon_slave_write,                  --                                                         .write
+			sts_avalon_slave_read                                          => mm_interconnect_2_sts_avalon_slave_read,                   --                                                         .read
+			sts_avalon_slave_readdata                                      => mm_interconnect_2_sts_avalon_slave_readdata,               --                                                         .readdata
+			sts_avalon_slave_writedata                                     => mm_interconnect_2_sts_avalon_slave_writedata,              --                                                         .writedata
+			sts_avalon_slave_byteenable                                    => mm_interconnect_2_sts_avalon_slave_byteenable,             --                                                         .byteenable
+			sts_avalon_slave_waitrequest                                   => mm_interconnect_2_sts_avalon_slave_waitrequest,            --                                                         .waitrequest
+			sts_avalon_slave_chipselect                                    => mm_interconnect_2_sts_avalon_slave_chipselect,             --                                                         .chipselect
 			sysid_qsys_control_slave_address                               => mm_interconnect_2_sysid_qsys_control_slave_address,        --                                 sysid_qsys_control_slave.address
 			sysid_qsys_control_slave_readdata                              => mm_interconnect_2_sysid_qsys_control_slave_readdata        --                                                         .readdata
 		);

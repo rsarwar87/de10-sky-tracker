@@ -9,31 +9,17 @@
 			alt_vip_itc_0_clocked_video_vid_f         : out   std_logic;                                        -- vid_f
 			alt_vip_itc_0_clocked_video_vid_h         : out   std_logic;                                        -- vid_h
 			alt_vip_itc_0_clocked_video_vid_v         : out   std_logic;                                        -- vid_v
-			buf0_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			buf0_1_export                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			buf1_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
 			button_pio_external_connection_export     : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- export
 			clk_clk                                   : in    std_logic                     := 'X';             -- clk
 			clk_130_clk                               : in    std_logic                     := 'X';             -- clk
 			ctrl_acknowledge                          : in    std_logic                     := 'X';             -- acknowledge
 			ctrl_irq                                  : in    std_logic                     := 'X';             -- irq
-			ctrl_address                              : out   std_logic_vector(11 downto 0);                    -- address
+			ctrl_address                              : out   std_logic_vector(9 downto 0);                     -- address
 			ctrl_bus_enable                           : out   std_logic;                                        -- bus_enable
 			ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     -- byte_enable
 			ctrl_rw                                   : out   std_logic;                                        -- rw
 			ctrl_write_data                           : out   std_logic_vector(31 downto 0);                    -- write_data
 			ctrl_read_data                            : in    std_logic_vector(31 downto 0) := (others => 'X'); -- read_data
-			de_backlash_duration_export               : out   std_logic_vector(31 downto 0);                    -- export
-			de_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
-			de_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
-			de_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			de_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
-			de_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			de_counter_load_export                    : out   std_logic_vector(31 downto 0);                    -- export
-			de_counter_load_1_export                  : out   std_logic_vector(31 downto 0);                    -- export
-			de_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			de_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			de_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
 			dipsw_pio_external_connection_export      : in    std_logic_vector(3 downto 0)  := (others => 'X'); -- export
 			hps_0_f2h_cold_reset_req_reset_n          : in    std_logic                     := 'X';             -- reset_n
 			hps_0_f2h_debug_reset_req_reset_n         : in    std_logic                     := 'X';             -- reset_n
@@ -105,19 +91,10 @@
 			memory_mem_odt                            : out   std_logic;                                        -- mem_odt
 			memory_mem_dm                             : out   std_logic_vector(3 downto 0);                     -- mem_dm
 			memory_oct_rzqin                          : in    std_logic                     := 'X';             -- oct_rzqin
-			ra_backlash_duration_export               : out   std_logic_vector(31 downto 0);                    -- export
-			ra_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
-			ra_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
-			ra_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			ra_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
-			ra_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			ra_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			ra_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			ra_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
 			reset_reset_n                             : in    std_logic                     := 'X';             -- reset_n
 			sts_acknowledge                           : in    std_logic                     := 'X';             -- acknowledge
 			sts_irq                                   : in    std_logic                     := 'X';             -- irq
-			sts_address                               : out   std_logic_vector(11 downto 0);                    -- address
+			sts_address                               : out   std_logic_vector(9 downto 0);                     -- address
 			sts_bus_enable                            : out   std_logic;                                        -- bus_enable
 			sts_byte_enable                           : out   std_logic_vector(3 downto 0);                     -- byte_enable
 			sts_rw                                    : out   std_logic;                                        -- rw

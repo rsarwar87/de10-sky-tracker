@@ -99,30 +99,7 @@ module soc_system (
 	sts_byte_enable,
 	sts_rw,
 	sts_write_data,
-	sts_read_data,
-	buf0_1_export,
-	buf1_export,
-	buf0_export,
-	ra_status_export,
-	de_status_export,
-	ra_count_export,
-	de_count_export,
-	de_counter_load_export,
-	de_counter_load_1_export,
-	de_counter_max_export,
-	ra_counter_max_export,
-	de_cmdcontrol_export,
-	ra_cmdcontrol_export,
-	de_cmdduration_export,
-	ra_cmdduration_export,
-	de_trackctrl_export,
-	ra_trackctrl_export,
-	de_cmdtick_export,
-	ra_cmdtick_export,
-	de_backlash_tick_export,
-	ra_backlash_tick_export,
-	de_backlash_duration_export,
-	ra_backlash_duration_export);	
+	sts_read_data);	
 
 	input		alt_vip_itc_0_clocked_video_vid_clk;
 	output	[31:0]	alt_vip_itc_0_clocked_video_vid_data;
@@ -138,7 +115,7 @@ module soc_system (
 	input		clk_130_clk;
 	input		ctrl_acknowledge;
 	input		ctrl_irq;
-	output	[11:0]	ctrl_address;
+	output	[9:0]	ctrl_address;
 	output		ctrl_bus_enable;
 	output	[3:0]	ctrl_byte_enable;
 	output		ctrl_rw;
@@ -218,33 +195,10 @@ module soc_system (
 	input		reset_reset_n;
 	input		sts_acknowledge;
 	input		sts_irq;
-	output	[11:0]	sts_address;
+	output	[9:0]	sts_address;
 	output		sts_bus_enable;
 	output	[3:0]	sts_byte_enable;
 	output		sts_rw;
 	output	[31:0]	sts_write_data;
 	input	[31:0]	sts_read_data;
-	input	[31:0]	buf0_1_export;
-	input	[31:0]	buf1_export;
-	input	[31:0]	buf0_export;
-	input	[31:0]	ra_status_export;
-	input	[31:0]	de_status_export;
-	input	[31:0]	ra_count_export;
-	input	[31:0]	de_count_export;
-	output	[31:0]	de_counter_load_export;
-	output	[31:0]	de_counter_load_1_export;
-	output	[31:0]	de_counter_max_export;
-	output	[31:0]	ra_counter_max_export;
-	output	[31:0]	de_cmdcontrol_export;
-	output	[31:0]	ra_cmdcontrol_export;
-	output	[31:0]	de_cmdduration_export;
-	output	[31:0]	ra_cmdduration_export;
-	output	[31:0]	de_trackctrl_export;
-	output	[31:0]	ra_trackctrl_export;
-	output	[31:0]	de_cmdtick_export;
-	output	[31:0]	ra_cmdtick_export;
-	output	[31:0]	de_backlash_tick_export;
-	output	[31:0]	ra_backlash_tick_export;
-	output	[31:0]	de_backlash_duration_export;
-	output	[31:0]	ra_backlash_duration_export;
 endmodule

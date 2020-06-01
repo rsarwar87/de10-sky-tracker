@@ -98,29 +98,6 @@
 		.sts_byte_enable                           (<connected-to-sts_byte_enable>),                           //                               .byte_enable
 		.sts_rw                                    (<connected-to-sts_rw>),                                    //                               .rw
 		.sts_write_data                            (<connected-to-sts_write_data>),                            //                               .write_data
-		.sts_read_data                             (<connected-to-sts_read_data>),                             //                               .read_data
-		.buf0_1_export                             (<connected-to-buf0_1_export>),                             //                         buf0_1.export
-		.buf1_export                               (<connected-to-buf1_export>),                               //                           buf1.export
-		.buf0_export                               (<connected-to-buf0_export>),                               //                           buf0.export
-		.ra_status_export                          (<connected-to-ra_status_export>),                          //                      ra_status.export
-		.de_status_export                          (<connected-to-de_status_export>),                          //                      de_status.export
-		.ra_count_export                           (<connected-to-ra_count_export>),                           //                       ra_count.export
-		.de_count_export                           (<connected-to-de_count_export>),                           //                       de_count.export
-		.de_counter_load_export                    (<connected-to-de_counter_load_export>),                    //                de_counter_load.export
-		.de_counter_load_1_export                  (<connected-to-de_counter_load_1_export>),                  //              de_counter_load_1.export
-		.de_counter_max_export                     (<connected-to-de_counter_max_export>),                     //                 de_counter_max.export
-		.ra_counter_max_export                     (<connected-to-ra_counter_max_export>),                     //                 ra_counter_max.export
-		.de_cmdcontrol_export                      (<connected-to-de_cmdcontrol_export>),                      //                  de_cmdcontrol.export
-		.ra_cmdcontrol_export                      (<connected-to-ra_cmdcontrol_export>),                      //                  ra_cmdcontrol.export
-		.de_cmdduration_export                     (<connected-to-de_cmdduration_export>),                     //                 de_cmdduration.export
-		.ra_cmdduration_export                     (<connected-to-ra_cmdduration_export>),                     //                 ra_cmdduration.export
-		.de_trackctrl_export                       (<connected-to-de_trackctrl_export>),                       //                   de_trackctrl.export
-		.ra_trackctrl_export                       (<connected-to-ra_trackctrl_export>),                       //                   ra_trackctrl.export
-		.de_cmdtick_export                         (<connected-to-de_cmdtick_export>),                         //                     de_cmdtick.export
-		.ra_cmdtick_export                         (<connected-to-ra_cmdtick_export>),                         //                     ra_cmdtick.export
-		.de_backlash_tick_export                   (<connected-to-de_backlash_tick_export>),                   //               de_backlash_tick.export
-		.ra_backlash_tick_export                   (<connected-to-ra_backlash_tick_export>),                   //               ra_backlash_tick.export
-		.de_backlash_duration_export               (<connected-to-de_backlash_duration_export>),               //           de_backlash_duration.export
-		.ra_backlash_duration_export               (<connected-to-ra_backlash_duration_export>)                //           ra_backlash_duration.export
+		.sts_read_data                             (<connected-to-sts_read_data>)                              //                               .read_data
 	);
 

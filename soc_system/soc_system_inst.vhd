@@ -14,7 +14,7 @@
 			clk_130_clk                               : in    std_logic                     := 'X';             -- clk
 			ctrl_acknowledge                          : in    std_logic                     := 'X';             -- acknowledge
 			ctrl_irq                                  : in    std_logic                     := 'X';             -- irq
-			ctrl_address                              : out   std_logic_vector(11 downto 0);                    -- address
+			ctrl_address                              : out   std_logic_vector(9 downto 0);                     -- address
 			ctrl_bus_enable                           : out   std_logic;                                        -- bus_enable
 			ctrl_byte_enable                          : out   std_logic_vector(3 downto 0);                     -- byte_enable
 			ctrl_rw                                   : out   std_logic;                                        -- rw
@@ -94,35 +94,12 @@
 			reset_reset_n                             : in    std_logic                     := 'X';             -- reset_n
 			sts_acknowledge                           : in    std_logic                     := 'X';             -- acknowledge
 			sts_irq                                   : in    std_logic                     := 'X';             -- irq
-			sts_address                               : out   std_logic_vector(11 downto 0);                    -- address
+			sts_address                               : out   std_logic_vector(9 downto 0);                     -- address
 			sts_bus_enable                            : out   std_logic;                                        -- bus_enable
 			sts_byte_enable                           : out   std_logic_vector(3 downto 0);                     -- byte_enable
 			sts_rw                                    : out   std_logic;                                        -- rw
 			sts_write_data                            : out   std_logic_vector(31 downto 0);                    -- write_data
-			sts_read_data                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- read_data
-			buf0_1_export                             : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			buf1_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			buf0_export                               : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			ra_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			de_status_export                          : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			ra_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			de_count_export                           : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
-			de_counter_load_export                    : out   std_logic_vector(31 downto 0);                    -- export
-			de_counter_load_1_export                  : out   std_logic_vector(31 downto 0);                    -- export
-			de_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			ra_counter_max_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			de_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
-			ra_cmdcontrol_export                      : out   std_logic_vector(31 downto 0);                    -- export
-			de_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			ra_cmdduration_export                     : out   std_logic_vector(31 downto 0);                    -- export
-			de_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
-			ra_trackctrl_export                       : out   std_logic_vector(31 downto 0);                    -- export
-			de_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
-			ra_cmdtick_export                         : out   std_logic_vector(31 downto 0);                    -- export
-			de_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
-			ra_backlash_tick_export                   : out   std_logic_vector(31 downto 0);                    -- export
-			de_backlash_duration_export               : out   std_logic_vector(31 downto 0);                    -- export
-			ra_backlash_duration_export               : out   std_logic_vector(31 downto 0)                     -- export
+			sts_read_data                             : in    std_logic_vector(31 downto 0) := (others => 'X')  -- read_data
 		);
 	end component soc_system;
 
@@ -227,29 +204,6 @@
 			sts_byte_enable                           => CONNECTED_TO_sts_byte_enable,                           --                               .byte_enable
 			sts_rw                                    => CONNECTED_TO_sts_rw,                                    --                               .rw
 			sts_write_data                            => CONNECTED_TO_sts_write_data,                            --                               .write_data
-			sts_read_data                             => CONNECTED_TO_sts_read_data,                             --                               .read_data
-			buf0_1_export                             => CONNECTED_TO_buf0_1_export,                             --                         buf0_1.export
-			buf1_export                               => CONNECTED_TO_buf1_export,                               --                           buf1.export
-			buf0_export                               => CONNECTED_TO_buf0_export,                               --                           buf0.export
-			ra_status_export                          => CONNECTED_TO_ra_status_export,                          --                      ra_status.export
-			de_status_export                          => CONNECTED_TO_de_status_export,                          --                      de_status.export
-			ra_count_export                           => CONNECTED_TO_ra_count_export,                           --                       ra_count.export
-			de_count_export                           => CONNECTED_TO_de_count_export,                           --                       de_count.export
-			de_counter_load_export                    => CONNECTED_TO_de_counter_load_export,                    --                de_counter_load.export
-			de_counter_load_1_export                  => CONNECTED_TO_de_counter_load_1_export,                  --              de_counter_load_1.export
-			de_counter_max_export                     => CONNECTED_TO_de_counter_max_export,                     --                 de_counter_max.export
-			ra_counter_max_export                     => CONNECTED_TO_ra_counter_max_export,                     --                 ra_counter_max.export
-			de_cmdcontrol_export                      => CONNECTED_TO_de_cmdcontrol_export,                      --                  de_cmdcontrol.export
-			ra_cmdcontrol_export                      => CONNECTED_TO_ra_cmdcontrol_export,                      --                  ra_cmdcontrol.export
-			de_cmdduration_export                     => CONNECTED_TO_de_cmdduration_export,                     --                 de_cmdduration.export
-			ra_cmdduration_export                     => CONNECTED_TO_ra_cmdduration_export,                     --                 ra_cmdduration.export
-			de_trackctrl_export                       => CONNECTED_TO_de_trackctrl_export,                       --                   de_trackctrl.export
-			ra_trackctrl_export                       => CONNECTED_TO_ra_trackctrl_export,                       --                   ra_trackctrl.export
-			de_cmdtick_export                         => CONNECTED_TO_de_cmdtick_export,                         --                     de_cmdtick.export
-			ra_cmdtick_export                         => CONNECTED_TO_ra_cmdtick_export,                         --                     ra_cmdtick.export
-			de_backlash_tick_export                   => CONNECTED_TO_de_backlash_tick_export,                   --               de_backlash_tick.export
-			ra_backlash_tick_export                   => CONNECTED_TO_ra_backlash_tick_export,                   --               ra_backlash_tick.export
-			de_backlash_duration_export               => CONNECTED_TO_de_backlash_duration_export,               --           de_backlash_duration.export
-			ra_backlash_duration_export               => CONNECTED_TO_ra_backlash_duration_export                --           ra_backlash_duration.export
+			sts_read_data                             => CONNECTED_TO_sts_read_data                              --                               .read_data
 		);
 

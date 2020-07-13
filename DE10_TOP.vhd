@@ -533,18 +533,36 @@ begin
 --            de_backlash_duration_export               => de_backlash_duration,               --           de_backlash_duration.export
 --            ra_backlash_duration_export               => ra_backlash_duration                --           ra_backlash_duration.export
     );
-	 GPIO_0(2 downto 0) <= ra_mode;
-	 GPIO_0(3) <= ra_sleep_n;
-	 GPIO_0(4) <= ra_rst_n;
-	 GPIO_0(5) <= ra_enable_n;
-	 GPIO_0(6) <= ra_step;
-	 GPIO_0(7) <= ra_direction;
-	 GPIO_0(12 downto 10) <= de_mode;
-	 GPIO_0(13) <= de_sleep_n;
-	 GPIO_0(14) <= de_rst_n;
-	 GPIO_0(15) <= de_enable_n;
-	 GPIO_0(16) <= de_step;
-	 GPIO_0(17) <= de_direction;
+--	 GPIO_0(2 downto 0) <= ra_mode;
+--	 GPIO_0(3) <= ra_sleep_n;
+--	 GPIO_0(4) <= ra_rst_n;
+--	 GPIO_0(5) <= ra_enable_n;
+--	 GPIO_0(6) <= ra_step;
+--	 GPIO_0(7) <= ra_direction;
+--	 GPIO_0(12 downto 10) <= de_mode;
+--	 GPIO_0(13) <= de_sleep_n;
+--	 GPIO_0(14) <= de_rst_n;
+--	 GPIO_0(15) <= de_enable_n;
+--	 GPIO_0(16) <= de_step;
+--	 GPIO_0(17) <= de_direction;
+	
+	 GPIO_0(1) <= ra_enable_n; -- pin 2
+	 GPIO_0(3) <= ra_mode(0);  -- pin 4
+	 GPIO_0(5) <= ra_mode(1);  -- pin 6
+	 GPIO_0(7) <= ra_mode(2);  -- pin 8
+	 GPIO_0(9) <= ra_rst_n;    -- pin 10
+	 GPIO_0(8) <= ra_sleep_n;  -- pin 9
+	 GPIO_0(11) <= ra_step;    -- pin 14
+	 GPIO_0(13) <= ra_direction;-- pin 16
+	 
+	 GPIO_0(15) <= de_enable_n;-- pin 18
+	 GPIO_0(17) <= de_mode(0); -- pin 20
+	 GPIO_0(19) <= de_mode(1); -- pin 22
+	 GPIO_0(21) <= de_mode(2); -- pin 24
+	 GPIO_0(23) <= de_rst_n;   -- pin 26
+	 GPIO_0(25) <= de_sleep_n; -- pin 28
+	 GPIO_0(24) <= de_step;    -- pin 27
+	 GPIO_0(27) <= de_direction;-- pin 32
 	 
 	 SKYTRACKER :  entity work.sky_tracker	
 		port map (

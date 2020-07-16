@@ -555,14 +555,14 @@ begin
 	 GPIO_0(11) <= ra_step;    -- pin 14
 	 GPIO_0(13) <= ra_direction;-- pin 16
 	 
-	 GPIO_0(15) <= de_enable_n;-- pin 18
-	 GPIO_0(17) <= de_mode(0); -- pin 20
-	 GPIO_0(19) <= de_mode(1); -- pin 22
-	 GPIO_0(21) <= de_mode(2); -- pin 24
-	 GPIO_0(23) <= de_rst_n;   -- pin 26
-	 GPIO_0(25) <= de_sleep_n; -- pin 28
-	 GPIO_0(24) <= de_step;    -- pin 27
-	 GPIO_0(27) <= de_direction;-- pin 32
+	 GPIO_0(17) <= de_enable_n;-- pin 20
+	 GPIO_0(19) <= de_mode(0); -- pin 22
+	 GPIO_0(21) <= de_mode(1); -- pin 24
+	 GPIO_0(23) <= de_mode(2); -- pin 26
+	 GPIO_0(25) <= de_rst_n;   -- pin 28
+	 GPIO_0(24) <= de_sleep_n; -- pin 27
+	 GPIO_0(27) <= de_step;    -- pin 32
+	 GPIO_0(29) <= de_direction;-- pin 34
 	 
 	 SKYTRACKER :  entity work.sky_tracker	
 		port map (

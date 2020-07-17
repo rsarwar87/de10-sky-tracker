@@ -81,6 +81,7 @@ architecture Behavioral of drv8825 is
     ATTRIBUTE MARK_DEBUG of state_backlash, ctr_backlash_tick_buf, ctr_backlash_duration_buf: SIGNAL IS "TRUE";
     
     signal max_counter : std_logic_vector (30 downto 0) := (others => '1');
+	 signal delta_counter : unsigned (5 downto 0) := "000001";
 begin
     
     
@@ -88,6 +89,27 @@ begin
     
     ctrl_step_count(31 downto 30) <= "00";
     ctrl_step_count(29 downto 0) <= current_stepper_counter;
+	 delta_counter_proc : process (clk_50, rstn_50)
+    begin
+        if (rstn_50 = '0') then
+            delta_counter <= "000001";
+        elsif(rising_edge(clk_50)) then
+            case current_mode_out is
+					when "000" =>
+						delta_counter <= "100000";
+					when "001" =>
+						delta_counter <= "010000";
+					when "010" =>
+						delta_counter <= "001000";
+					when "011" =>
+						delta_counter <= "000100";
+					when "100" =>
+						delta_counter <= "000010";
+					when others =>
+						delta_counter <= "000001";
+				end case;
+        end if;
+    end process; 
     trigger_changes : process (clk_50, rstn_50)
     begin
         if (rstn_50 = '0') then
@@ -121,6 +143,7 @@ begin
             drv8825_step <= '0';
             drv8825_mode <= "000";
             ctrl_status <= (others => '0');
+				ctrl_status(10 downto 5) <= std_logic_vector(delta_counter);
             ctrl_status(3) <= drv8825_fault_n;          
             ctrl_status(2 downto 0) <= "000";
             if  state_backlash = disabled then 
@@ -756,9 +779,9 @@ begin
 			if (load_count = '1') then
 				current_stepper_counter <= load_counter;
 			elsif (current_direction_buf(0) = '1') then
-				current_stepper_counter <= std_logic_vector(unsigned(current_stepper_counter) + 1);
+				current_stepper_counter <= std_logic_vector(unsigned(current_stepper_counter) + delta_counter);
 			else
-				current_stepper_counter <= std_logic_vector(unsigned(current_stepper_counter) - 1);
+				current_stepper_counter <= std_logic_vector(unsigned(current_stepper_counter) - delta_counter);
 			end if;
 		end if;
 	end if;

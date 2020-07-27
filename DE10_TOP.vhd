@@ -106,7 +106,8 @@ architecture rtl of DE10_TOP is
   signal hdmi_out : std_logic_vector(31 downto 0) := (others => '0');
   signal led_level : std_logic := '0';
   signal counter : integer  := 0;
-
+  signal camera_trigger : STD_LOGIC_VECTOR (1 downto 0) := "00";
+  signal  led_out : std_logic;
   component vga_pll is
     port (
 	refclk   : in  std_logic := '0'; --  refclk.clk
@@ -545,7 +546,7 @@ begin
 --	 GPIO_0(15) <= de_enable_n;
 --	 GPIO_0(16) <= de_step;
 --	 GPIO_0(17) <= de_direction;
-	
+	 GPIO_0(0) <= led_out;
 	 GPIO_0(1) <= ra_enable_n; -- pin 2
 	 GPIO_0(3) <= ra_mode(0);  -- pin 4
 	 GPIO_0(5) <= ra_mode(1);  -- pin 6
@@ -564,10 +565,14 @@ begin
 	 GPIO_0(27) <= de_step;    -- pin 32
 	 GPIO_0(29) <= de_direction;-- pin 34
 	 
+	 GPIO_0(35) <= camera_trigger(0);
+	 GPIO_0(33) <= camera_trigger(1);
+	 
 	 SKYTRACKER :  entity work.sky_tracker	
 		port map (
 			  clk_50  => FPGA_CLK1_50,
            rstn_50 => hps_fpga_reset_n,
+			  
 			  
            ra_mode => ra_mode,
            ra_enable_n => ra_enable_n,
@@ -583,6 +588,8 @@ begin
            de_step => de_step,
            de_direction => de_direction,
            de_fault_n => de_fault_n,
+			  led_pwm => led_out,
+			  camera_trigger => camera_trigger,
 			  ip_addr => ip_addr,
 			  led_status => led_status,
    		   sts_acknowledge                           => sts_acknowledge,                           --                            sts.acknowledge

@@ -26,7 +26,9 @@ entity sky_tracker is
            de_step : out STD_LOGIC;
            de_direction : out STD_LOGIC;
            de_fault_n : in STD_LOGIC;
+			  led_pwm : out STD_LOGIC;
 			  
+			  camera_trigger : out STD_LOGIC_VECTOR (1 downto 0);
 			  ip_addr : out STD_LOGIC_VECTOR (7 downto 0);
 			  led_status : out STD_LOGIC_VECTOR (7 downto 0);
 			  
@@ -97,13 +99,33 @@ signal de_backlash_duration : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
 signal de_counter_load 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
 signal de_counter_max 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
 signal de_trackctrl 			 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
-signal ip_addr_buf 			 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+signal ip_addr_buf, led_brightness, camera_trig : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+signal led_count : STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
+signal led_out : STD_LOGIC := '0';
 begin
-
+  camera_trigger <= camera_trig(1 downto 0);
   ip_addr <= ip_addr_buf(7 downto 0);
+  led_pwm <= led_out;
 bus_imp : block
 signal sts_ack, ctrl_ack : std_logic := '0';
 begin
+	process (clk_50, rstn_50) 
+	begin
+		if (rstn_50 = '0') then
+			led_out <= '0';
+			led_count <= (others => '0');
+		elsif (rising_edge(clk_50)) then
+			led_count <= std_logic_vector(unsigned(led_count) + 1);
+			led_out <= led_out;
+			if (led_count = "00000000") then
+				led_out <= '1';
+			end if;
+			if (led_count = led_brightness(7 downto 0)) then
+				led_out <= '0';
+			end if;
+		end if;
+	end process;
+	
 	ctrl_irq <= '0';
 	sts_irq <= '0';
 --	
@@ -472,6 +494,37 @@ begin
 						end loop;
 					end if;
 					ctrl_ack <= '1';
+				when "10001" => 
+					if ctrl_rw = '1' then
+						for byte_index in 0 to (32/8-1) loop
+							if (ctrl_byte_enable(byte_index) = '1') then
+						    ctrl_read_data(byte_index*8+7 downto byte_index*8) <= led_brightness(byte_index*8+7 downto byte_index*8);
+							end if;
+						end loop;
+					else
+						for byte_index in 0 to (32/8-1) loop
+							if (ctrl_byte_enable(byte_index) = '1') then
+								led_brightness(byte_index*8+7 downto byte_index*8) <= ctrl_write_data(byte_index*8+7 downto byte_index*8);
+							end if;
+						end loop;
+					end if;
+					ctrl_ack <= '1';
+				when "10010" => 
+					if ctrl_rw = '1' then
+						for byte_index in 0 to (32/8-1) loop
+							if (ctrl_byte_enable(byte_index) = '1') then
+						    ctrl_read_data(byte_index*8+7 downto byte_index*8) <= camera_trig(byte_index*8+7 downto byte_index*8);
+							end if;
+						end loop;
+					else
+						for byte_index in 0 to (32/8-1) loop
+							if (ctrl_byte_enable(byte_index) = '1') then
+								camera_trig(byte_index*8+7 downto byte_index*8) <= ctrl_write_data(byte_index*8+7 downto byte_index*8);
+							end if;
+						end loop;
+					end if;
+					ctrl_ack <= '1';
+					
 					
 				when others =>
 					if ctrl_rw = '1' then

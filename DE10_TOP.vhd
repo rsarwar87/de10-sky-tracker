@@ -566,7 +566,7 @@ begin
 	 GPIO_0(29) <= de_direction;-- pin 34
 	 
 	 GPIO_0(35) <= camera_trigger(0);
-	 GPIO_0(33) <= camera_trigger(1);
+	 GPIO_0(34) <= camera_trigger(1);
 	 
 	 SKYTRACKER :  entity work.sky_tracker	
 		port map (

@@ -97,8 +97,8 @@ look here: https://github.com/rsarwar87/de10-sky-tracker/blob/master/koheron-ser
 The stutus and the control `altera_up_avalon_to_external_bus_bridge`s. The offsets for these are `0xFF250000` and `0xFF260000`.
 
 The following are the status registers in the 
-|Ports |Offset w.r.t. 0xFF250000 | Offset | size | Description 
-|----------------|------------------------------
+| Ports | Offset w.r.t. 0xFF250000   | size | Description  
+|--|--|--| -- |
 | dna            | 0x0 | 64-bit word | Returns fixed value, design ID
 | step_count[0]   | 0x8 | 32-bit word | Current RA step count
 | step_count[1]   | 0xC | 32-bit word | Current DE step count
@@ -107,8 +107,8 @@ The following are the status registers in the
 | forty_two      | 0x18 | 32-bit word | always returns 42, to check if device is working properly
 
 The following are the status registers in the 
-|Ports |Offset w.r.t. 0xFF260000 | Offset | size | Description 
-|----------------|------------------------------
+|Ports |Offset w.r.t. 0xFF260000  | size | Description 
+|----------------|--------|--------|--------------
 | counter_load[0] | 0x0 | 32-bit word | RA load counter
 | counter_load[1] | 0x4 | 32-bit word | DE load counter
 | counter_max[0]   | 0x8 | 32-bit word | RA max count

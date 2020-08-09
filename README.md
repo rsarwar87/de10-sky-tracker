@@ -43,17 +43,91 @@ The goto commands can contain acceleration flag which will accelerate the motor 
 | ctrl_trackctrl [5 downto 2] | Define slew to/tracking parameters. Bit 2-5 defines the motor mode
 | ctrl_trackctrl [31 downto 6] | Define slew to/tracking parameters. remaining bits defines the speed/period is number of 20 ns ticks.
 
+The following shows the pinmap on the board:
+
+    GPIO_0(1) <= ra_enable_n; -- pin 2
+    GPIO_0(3) <= ra_mode(0); -- pin 4
+    GPIO_0(5) <= ra_mode(1); -- pin 6
+    GPIO_0(7) <= ra_mode(2); -- pin 8
+    GPIO_0(9) <= ra_rst_n; -- pin 10
+    GPIO_0(8) <= ra_sleep_n; -- pin 9
+    GPIO_0(11) <= ra_step; -- pin 14
+    GPIO_0(13) <= ra_direction;-- pin 16
+    GPIO_0(17) <= de_enable_n;-- pin 20
+    GPIO_0(19) <= de_mode(0); -- pin 22
+    GPIO_0(21) <= de_mode(1); -- pin 24
+    GPIO_0(23) <= de_mode(2); -- pin 26
+    GPIO_0(25) <= de_rst_n; -- pin 28
+    GPIO_0(24) <= de_sleep_n; -- pin 27
+    GPIO_0(27) <= de_step; -- pin 32
+    GPIO_0(29) <= de_direction;-- pin 34
+
 ### Top Level
+The two ips are controllerd from the ARM core. The Avalon MM bus is passed through two `altera_up_avalon_to_external_bus_bridge`, one for status and one for control. The are mapped onto the registers which feed the two ips.
+
 
 #### Camera Triggers
+To facilitate the use of older cameras which cannot be triggered in bulb mode over the usb, there are two gpios which are used to send triggers. they can be passed to an optoisolator to connect to the camera remote trigger ports.
+
+       GPIO_0(35) <= camera_trigger(0); -- pin 40
+       GPIO_0(34) <= camera_trigger(1); -- pin 39
 
 #### Polar LED
+A 8 bit std_logic_vector can be set to a value which is used to generate a PWM signal in order to connect to an LED to be used as a polar illuminator
 
 #### LED Status
+DE10-NANO has 8 leds which are used to show the status of the device. There are four state of operation
+1.	during startup, the first led will be flashing whilst all the other leds will be on solid. This indicates that the linux software is yet to start.
+2.	upon the start of the linux software, the led will display the IP address of the device. This is the default state when the motors are not spinning
+3.	if ethernet fails to set up a link. all leds will blink in sync indicating a communication fault.
+4.	 when motors are spinning, ->
+	a. led_status(0) -> RA motor active
+	b. led_status(1) <= RA motor direction;
+	c. led_status(2) <= RA motor has valid signals;
+	d. led_status(3) <= the 9th bit of the RA current count;
+	a. led_status(4) -> DE motor active
+	b. led_status(5) <= DE motor direction;
+	c. led_status(6) <= DE motor has valid signals;
+	d. led_status(7) <= the 9th bit of the DE current count;
 
 ## Software design
-
+The software uses koheron-server to commincate with a client over the ethernet/wifi.
+look here: https://github.com/rsarwar87/de10-sky-tracker/blob/master/koheron-server/README.md
 ### Register Map
+The stutus and the control `altera_up_avalon_to_external_bus_bridge`s. The offsets for these are `0xFF250000` and `0xFF260000`.
+
+The following are the status registers in the 
+|Ports |Offset w.r.t. 0xFF250000 | Offset | size | Description 
+|----------------|------------------------------
+| dna            | 0x0 | 64-bit word | Returns fixed value, design ID
+| step_count[0]   | 0x8 | 32-bit word | Current RA step count
+| step_count[1]   | 0xC | 32-bit word | Current DE step count
+| status[0]  | 0x10 | 32-bit word | Current RA status
+| status[1]      | 0x14 | 32-bit word | Current DE status
+| forty_two      | 0x18 | 32-bit word | always returns 42, to check if device is working properly
+
+The following are the status registers in the 
+|Ports |Offset w.r.t. 0xFF260000 | Offset | size | Description 
+|----------------|------------------------------
+| counter_load[0] | 0x0 | 32-bit word | RA load counter
+| counter_load[1] | 0x4 | 32-bit word | DE load counter
+| counter_max[0]   | 0x8 | 32-bit word | RA max count
+| counter_max[1]   | 0xC | 32-bit word | DE max count
+| cmdcontrol[0]  | 0x10 | 32-bit word | RA Command control
+| cmdcontrol[1]      | 0x14 | 32-bit word | DE  Command control
+| cmdduration[0]  | 0x18 | 32-bit word | RA Command duration
+| cmdduration[1]      | 0x1C | 32-bit word | DE Command duration
+| trackctrl[0]  | 0x20 | 32-bit word | RA tracking control
+| trackctrl[1]      | 0x24 | 32-bit word | DE tracking control
+| cmdtick[0]  | 0x28 | 32-bit word | RA Command period
+| cmdtick[1]      | 0x2C | 32-bit word | DE Command period
+| backlash_tick[0]  | 0x30 | 32-bit word | RA Backlash period
+| backlash_tick[1]      | 0x34 | 32-bit word | DE Backlash period
+| backlash_duration[0]  | 0x38 | 32-bit word | RA Backlash duration
+| backlash_duration[1]      | 0x3c | 32-bit word | DE Backlash duration
+| led  | 0x40 | 32-bit word | IP address of the device
+| led_pwm      | 0x44 | 32-bit word | Polar LED
+| camera_trigger      | 0x48 | 32-bit word | Current RA status
 
 The registers are deviced into two grous
 

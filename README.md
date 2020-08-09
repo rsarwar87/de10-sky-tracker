@@ -96,6 +96,8 @@ look here: https://github.com/rsarwar87/de10-sky-tracker/blob/master/koheron-ser
 ### Register Map
 The stutus and the control `altera_up_avalon_to_external_bus_bridge`s. The offsets for these are `0xFF250000` and `0xFF260000`.
 
+#### Status
+
 The following are the status registers in the 
 | Ports | Offset w.r.t. 0xFF250000   | size | Description  
 |--|--|--| -- |
@@ -105,6 +107,8 @@ The following are the status registers in the
 | status[0]  | 0x10 | 32-bit word | Current RA status
 | status[1]      | 0x14 | 32-bit word | Current DE status
 | forty_two      | 0x18 | 32-bit word | always returns 42, to check if device is working properly
+
+#### Control
 
 The following are the status registers in the 
 |Ports |Offset w.r.t. 0xFF260000  | size | Description 
@@ -129,11 +133,10 @@ The following are the status registers in the
 | led_pwm      | 0x44 | 32-bit word | Polar LED
 | camera_trigger      | 0x48 | 32-bit word | Current RA status
 
-The registers are deviced into two grous
 
-#### Status
 
-#### Control
+
+
 
 ## Reference design:
 

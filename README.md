@@ -135,7 +135,9 @@ The following are the status registers in the
 
 
 
-
+## Linux rootfs:
+this repo tells how to make the 5.4 kernel and subsequent rootfs
+https://github.com/rsarwar87/altera-soc-rootfs
 
 
 ## Reference design:

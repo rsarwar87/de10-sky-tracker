@@ -1,6 +1,10 @@
 
 # StarTracker for DE10-Nano Board.
 
+One device to control and track a equatorial mount. I use it with Skywatcher EQ5 with two NEMA 17 2A 200 step motors, two DRV8825, two 12--teeth timing pully, two 60-teeth timing pully and two 152mm timing belts. It was controlled from the Ekos telescope ecosystem with indi_eqmod_telescope and indi_nikon_ccd running on the ARM core. 
+
+DE10-nano has one USB OTG. I connected it to a usb hub and then to the nikon camera and a wifi dongle.
+
 ## Hardware Design
 
 ### RA/DE DRV8825 controller
@@ -138,6 +142,134 @@ The following are the status registers in the
 ## Linux rootfs:
 this repo tells how to make the 5.4 kernel and subsequent rootfs
 https://github.com/rsarwar87/altera-soc-rootfs
+ 
+### Installing server on the ARM
+Clone the repo on the DE10 running linux. 
+```
+cd 
+git clone https://github.com/rsarwar87/de10-sky-tracker --depth=1
+cd de10-sky-tracker/koheron-server
+make server
+mkdir build
+cd build
+cmake ../
+make
+sudo cp serverd /usr/local/bin/.
+```
+Create a file in ```/etc/systemd/system/koheron-server.service``` and fill it with:
+```
+[Unit]
+Description=Koheron TCP/Websocket server
+After=network.target unzip-default-instrument.service
+[Service]
+Type=notify
+NotifyAccess=all
+ExecStart=/use/local/bin/serverd
+ExecStop=/usr/bin/pkill -SIGINT serverd
+KillSignal=SIGKILL
+# No limitation in the number of restarts per time interval
+StartLimitInterval=0
+[Install]
+WantedBy=multi-user.target
+```
+Finally run:
+```
+systemctl enable koheron-server.service
+systemctl start koheron-server.service
+```
+
+
+### Indilib software stack on the ARM
+You only need to do this is you wish to run indiserver on the DE10-nano, either because it can, or because you need to use the camera triggers or because you wish to connect to the camera using the DE10 USB OTG.
+
+First install the full repo of indi-lib
+```
+cd 
+sudo apt-get install -y libnova-dev libcfitsio-dev libusb-1.0-0-dev zlib1g-dev libgsl-dev build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev libfftw3-dev
+git clone --depth 1 https://github.com/indilib/indi.git
+cd  indi
+mkdir build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../
+make -j4
+sudo make install
+```
+
+The device needs some modified indi-3rd party drivers as well to enable controlling the mount and the camera triggers on the FPGA.
+
+```
+cd 
+git clone https://github.com/rsarwar87/de10-sky-tracker --depth=1
+cd de10-sky-tracker/koheron-server/
+make server
+cd libclient
+mkdir build
+cd build
+cmake ../ -DCMAKE_INSTALL_PREFIX=/usr ../
+make
+sudo make install
+```
+
+On the device:
+
+```
+sudo apt-get install libnova-dev libcfitsio-dev libusb-1.0-0-dev zlib1g-dev libgsl-dev build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev libftdi-dev libgps-dev libraw-dev libdc1394-22-dev libgphoto2-dev libboost-dev libboost-regex-dev librtlsdr-dev liblimesuite-dev libftdi1-dev
+cd
+git clone https://github.com/rsarwar87/indi-3rdparty --depth=1
+cd indi-3rdparty/indi-eqmod
+mkdir build
+cd  build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../
+make
+sudo make install
+cd 
+cd indi-3rdparty/indi-gphoto
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../
+make
+sudo make install
+```
+To run the device, connect everything and then from the terminal:
+```
+export SKY_IP="127.0.0.1"
+indiserver indi_nikon_ccd indi_eqmod_telescope
+```
+
+### Installing/configuring EKOS linux binaries on laptop.
+
+Installation:
+```
+sudo apt-add-repository ppa:mutlaqja/ppa
+sudo apt-get update
+sudo apt-get install indi-full kstars-bleeding
+```
+Custom driver if indiserver is to run locally on the laptop/PC.
+```
+sudo apt-get install libnova-dev libcfitsio-dev libusb-1.0-0-dev zlib1g-dev libgsl-dev build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev libftdi-dev libgps-dev libraw-dev libdc1394-22-dev libgphoto2-dev libboost-dev libboost-regex-dev librtlsdr-dev liblimesuite-dev libftdi1-dev
+cd
+git clone https://github.com/rsarwar87/indi-3rdparty --depth=1
+cd indi-3rdparty/indi-eqmod
+mkdir build
+cd  build
+make
+sudo make install
+cd 
+## Do this if you wish to use the camera triggers only, otherwise not needed
+cd indi-3rdparty/indi-gphoto
+mkdir build
+cd build
+cmake ../
+sudo make install
+```
+
+Running
+```
+export SKY_IP="192.168.1.122" # only if you are runing indiserver locally and not on the DE10_nano -- update ip as appropiate
+kstars
+```
+after first connect make the following changes:
+1. EQ mod - change device port from /dev/ttyUSB0 to /dev/ttyS0. -- this is irralevent to out system, but it is just to stop indiserver from complaining
+2. If you wish to use the FPGA to trigger the camera, in the nikon camera setting, set port to "KFPGA"
 
 
 ## Reference design:

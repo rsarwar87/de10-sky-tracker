@@ -180,13 +180,18 @@ systemctl start koheron-server.service
 
 
 ### Indilib software stack on the ARM
-You only need to do this is you wish to run indiserver on the DE10-nano, either because it can, or because you need to use the camera triggers.
+You only need to do this is you wish to run indiserver on the DE10-nano, either because it can, or because you need to use the camera triggers or because you wish to connect to the camera using the DE10 USB OTG.
 
 First install the full repo of indi-lib
 ```
-sudo apt-add-repository ppa:mutlaqja/ppa
-sudo apt-get update
-sudo apt-get install indi-full
+cd 
+sudo apt-get install -y libnova-dev libcfitsio-dev libusb-1.0-0-dev zlib1g-dev libgsl-dev build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev libfftw3-dev
+git clone --depth 1 https://github.com/indilib/indi.git
+cd  indi
+mkdir build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../
+make -j4
+sudo make install
 ```
 
 The device needs some modified indi-3rd party drivers as well to enable controlling the mount and the camera triggers on the FPGA.
@@ -199,14 +204,15 @@ git clone https://github.com/rsarwar87/indi-3rdparty --depth=1
 cd indi-3rdparty/indi-eqmod
 mkdir build
 cd  build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../
 make
 sudo make install
 cd 
-## Do this if you wish to use the camera triggers only, otherwise not needed
 cd indi-3rdparty/indi-gphoto
 mkdir build
 cd build
-cmake ../
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../
+make
 sudo make install
 ```
 To run the device, connect everything and then from the terminal:

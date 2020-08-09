@@ -244,7 +244,7 @@ sudo make install
 
 Running
 ```
-export SKY_IP="127.0.0.1" # only if you are runing indiserver locally and not on the DE10_nano
+export SKY_IP="192.168.1.122" # only if you are runing indiserver locally and not on the DE10_nano -- update ip as appropiate
 kstars
 ```
 after first connect make the following changes:

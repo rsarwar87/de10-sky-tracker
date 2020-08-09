@@ -300,7 +300,7 @@ class SkyTrackerInterface {
   bool set_backlash_period(uint8_t axis, uint32_t ticks)
   {
     if (!check_axis_id(axis, __func__)) return false;
-    uint32_t period_usec = (uint32_t)((period_usec  * fclk0_period_us) );
+    uint32_t period_usec = (uint32_t)((ticks  * fclk0_period_us) );
     if (ticks > m_params.maxPeriod[axis] ||
         ticks < m_params.minPeriod[axis]) {
       ctx.log<ERROR>("%s(%u): period out of range %9.5f usec (%u ticks)\n",

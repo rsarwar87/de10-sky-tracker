@@ -154,8 +154,30 @@ mkdir build
 cd build
 cmake ../
 make
-sudo make install
+sudo cp serverd /usr/local/bin/.
 ```
+Create a file in ```/etc/systemd/system/koheron-server.service``` and fill it with:
+```
+[Unit]
+Description=Koheron TCP/Websocket server
+After=network.target unzip-default-instrument.service
+[Service]
+Type=notify
+NotifyAccess=all
+ExecStart=/tmp/live-instrument/serverd
+ExecStop=/usr/bin/pkill -SIGINT serverd
+KillSignal=SIGKILL
+# No limitation in the number of restarts per time interval
+StartLimitInterval=0
+[Install]
+WantedBy=multi-user.target
+```
+Finally run:
+```
+systemctl enable koheron-server.service
+systemctl start koheron-server.service
+```
+
 
 ### Indilib software stack on the ARM
 You only need to do this is you wish to run indiserver on the DE10-nano, either because it can, or because you need to use the camera triggers.
@@ -201,6 +223,25 @@ sudo apt-add-repository ppa:mutlaqja/ppa
 sudo apt-get update
 sudo apt-get install indi-full kstars-bleeding
 ```
+Custom driver if indiserver is to run locally on the laptop/PC.
+```
+sudo apt-get install libnova-dev libcfitsio-dev libusb-1.0-0-dev zlib1g-dev libgsl-dev build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev libftdi-dev libgps-dev libraw-dev libdc1394-22-dev libgphoto2-dev libboost-dev libboost-regex-dev librtlsdr-dev liblimesuite-dev libftdi1-dev
+cd
+git clone https://github.com/rsarwar87/indi-3rdparty --depth=1
+cd indi-3rdparty/indi-eqmod
+mkdir build
+cd  build
+make
+sudo make install
+cd 
+## Do this if you wish to use the camera triggers only, otherwise not needed
+cd indi-3rdparty/indi-gphoto
+mkdir build
+cd build
+cmake ../
+sudo make install
+```
+
 Running
 ```
 export SKY_IP="127.0.0.1" # only if you are runing indiserver locally and not on the DE10_nano

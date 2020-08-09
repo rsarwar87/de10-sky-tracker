@@ -195,6 +195,20 @@ sudo make install
 ```
 
 The device needs some modified indi-3rd party drivers as well to enable controlling the mount and the camera triggers on the FPGA.
+
+```
+cd 
+git clone https://github.com/rsarwar87/de10-sky-tracker --depth=1
+cd de10-sky-tracker/koheron-server/
+make server
+cd libclient
+mkdir build
+cd build
+cmake ../ -DCMAKE_INSTALL_PREFIX=/usr ../
+make
+sudo make install
+```
+
 On the device:
 
 ```

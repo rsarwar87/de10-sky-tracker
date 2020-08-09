@@ -164,7 +164,7 @@ After=network.target unzip-default-instrument.service
 [Service]
 Type=notify
 NotifyAccess=all
-ExecStart=/tmp/live-instrument/serverd
+ExecStart=/use/local/bin/serverd
 ExecStop=/usr/bin/pkill -SIGINT serverd
 KillSignal=SIGKILL
 # No limitation in the number of restarts per time interval

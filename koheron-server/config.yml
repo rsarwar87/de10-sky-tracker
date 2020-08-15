@@ -38,8 +38,8 @@ parameters:
 
 drivers:
   - ./drivers/common.hpp
-  - ./drv8825.hpp
-  - ./sky-tracker.hpp
-  - ./ascom_interface.hpp
-  - ./camera.hpp
+  - ./drivers/drv8825.hpp
+  - ./drivers/sky-tracker.hpp
+  - ./drivers/ascom_interface.hpp
+  - ./drivers/camera.hpp
 

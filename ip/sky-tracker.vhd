@@ -99,7 +99,7 @@ signal de_backlash_duration : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
 signal de_counter_load 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
 signal de_counter_max 		 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0'); -- duration of backlash
 signal de_trackctrl 			 : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
-signal ip_addr_buf, led_brightness, camera_trig : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+signal is_tmc_buf, ip_addr_buf, led_brightness, camera_trig : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
 signal led_count : STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
 signal led_out : STD_LOGIC := '0';
 begin
@@ -524,7 +524,22 @@ begin
 						end loop;
 					end if;
 					ctrl_ack <= '1';
-					
+				
+				when "10011" => 
+					if ctrl_rw = '1' then
+						for byte_index in 0 to (32/8-1) loop
+							if (ctrl_byte_enable(byte_index) = '1') then
+						    ctrl_read_data(byte_index*8+7 downto byte_index*8) <= is_tmc_buf(byte_index*8+7 downto byte_index*8);
+							end if;
+						end loop;
+					else
+						for byte_index in 0 to (32/8-1) loop
+							if (ctrl_byte_enable(byte_index) = '1') then
+								is_tmc_buf(byte_index*8+7 downto byte_index*8) <= ctrl_write_data(byte_index*8+7 downto byte_index*8);
+							end if;
+						end loop;
+					end if;
+					ctrl_ack <= '1';
 					
 				when others =>
 					if ctrl_rw = '1' then
@@ -588,6 +603,7 @@ DRV_RA :  entity work.drv8825
 		ctrl_status => ra_status,
 		ctrl_step_count(31 downto 0) => ra_step_count(31 downto 0),
 		ctrl_trackctrl(31 downto 0) => ra_trackctrl(31 downto 0),
+		is_tmc2226 => is_tmc_buf(1),
 		drv8825_direction => ra_direction_b,
 		drv8825_enable_n => ra_enable_n,
 		drv8825_fault_n => ra_fault_n,
@@ -613,6 +629,7 @@ DRV_RA :  entity work.drv8825
 		ctrl_status => de_status,
 		ctrl_step_count(31 downto 0) => de_step_count(31 downto 0),
 		ctrl_trackctrl(31 downto 0) => de_trackctrl(31 downto 0),
+		is_tmc2226 => is_tmc_buf(0),
 		drv8825_direction => de_direction_b,
 		drv8825_enable_n => de_enable_n,
 		drv8825_fault_n => de_fault_n,
